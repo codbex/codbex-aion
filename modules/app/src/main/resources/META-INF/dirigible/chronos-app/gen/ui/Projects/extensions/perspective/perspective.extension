@@ -1,0 +1,5 @@
+{
+	"description": "Projects perspective",
+	"extensionPoint": "launchpad-chronos-perspective",
+	"module": "chronos-app/gen/ui/Projects/extensions/perspective/perspective.js"
+}

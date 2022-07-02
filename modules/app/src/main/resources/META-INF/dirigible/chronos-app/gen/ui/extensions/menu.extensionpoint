@@ -1,0 +1,4 @@
+{
+	"description": "Extension Point for the chronos-app Menu Providers",
+	"name": "launchpad-chronos-app-menu"
+}

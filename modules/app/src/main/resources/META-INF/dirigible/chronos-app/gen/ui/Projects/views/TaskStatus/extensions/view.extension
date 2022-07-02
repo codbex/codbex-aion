@@ -1,0 +1,5 @@
+{
+	"description": "TaskStatus view",
+	"extensionPoint": "launchpad-chronos-Projects-view",
+	"module": "chronos-app/gen/ui/Projects/views/TaskStatus/extensions/view.js"
+}

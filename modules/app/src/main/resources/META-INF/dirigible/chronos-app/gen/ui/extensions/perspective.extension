@@ -1,0 +1,5 @@
+{
+	"description": "Home perspective",
+	"extensionPoint": "launchpad-chronos-perspective",
+	"module": "chronos-app/gen/ui/extensions/perspective.js"
+}
