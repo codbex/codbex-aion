@@ -1,0 +1,5 @@
+{
+	"description": "Employees perspective",
+	"extensionPoint": "launchpad-chronos-perspective",
+	"module": "chronos-app/gen/ui/Employees/extensions/perspective/perspective.js"
+}

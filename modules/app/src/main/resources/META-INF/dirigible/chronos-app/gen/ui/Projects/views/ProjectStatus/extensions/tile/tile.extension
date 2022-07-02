@@ -1,0 +1,5 @@
+{
+	"description": "Projects tiles",
+	"extensionPoint": "launchpad-chronos-tiles",
+	"module": "chronos-app/gen/ui/Projects/views/ProjectStatus/extensions/tile/tile.js"
+}

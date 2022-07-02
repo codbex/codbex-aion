@@ -1,0 +1,5 @@
+{
+	"description": "ProjectStatus menu",
+	"extensionPoint": "shell-chronos-app-menu",
+	"module": "chronos-app/gen/ui/Projects/views/ProjectStatus/extensions/menu/item.js"
+}

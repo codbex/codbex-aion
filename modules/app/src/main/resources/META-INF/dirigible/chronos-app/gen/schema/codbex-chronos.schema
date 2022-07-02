@@ -1,0 +1,343 @@
+{
+    "schema": {
+        "structures": [
+            {
+                "name": "EMPLOYEE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "EMPLOYEE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "EMPLOYEE_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "EMPLOYEE_EMAIL"
+                    }
+                ]
+            },
+            {
+                "name": "PROJECT",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PROJECT_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "PROJECT_NAME"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "PROJECT_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "PROJECT_END"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "PROJECT_EMPLOYEEID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "PROJECT_PROJECTSTATUSID"
+                    }
+                ]
+            },
+            {
+                "name": "ASSIGNMENT",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_EMPLOYEEID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_PROJECTID"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_END"
+                    }
+                ]
+            },
+            {
+                "name": "TASK",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TASK_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 255,
+                        "nullable": true,
+                        "name": "TASK_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 255,
+                        "nullable": true,
+                        "name": "TASK_LINK"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "TASK_PROJECTID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "TASK_TASKSTATUSID"
+                    }
+                ]
+            },
+            {
+                "name": "TIMESHEET",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TIMESHEET_ID"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "TIMESHEET_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "TIMESHEET_END"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "TIMESHEET_PROJECTID"
+                    }
+                ]
+            },
+            {
+                "name": "TASKSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TASKSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 50,
+                        "nullable": true,
+                        "name": "TASKSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "PROJECTSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PROJECTSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 50,
+                        "nullable": true,
+                        "name": "PROJECTSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "ITEM",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ITEM_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ITEM_TIMESHEETID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ITEM_TASKID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 2000,
+                        "nullable": true,
+                        "name": "ITEM_DESCRIPTION"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ITEM_HOURS"
+                    }
+                ]
+            },
+            {
+                "name": "Project_Employee",
+                "type": "foreignKey",
+                "table": "PROJECT",
+                "constraintName": "Project_Employee",
+                "columns": "PROJECT_EMPLOYEEID",
+                "referencedTable": "EMPLOYEE",
+                "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Project_ProjectStatus",
+                "type": "foreignKey",
+                "table": "PROJECT",
+                "constraintName": "Project_ProjectStatus",
+                "columns": "PROJECT_PROJECTSTATUSID",
+                "referencedTable": "PROJECTSTATUS",
+                "referencedColumns": "PROJECTSTATUS_ID"
+            },
+            {
+                "name": "Assignment_Employee",
+                "type": "foreignKey",
+                "table": "ASSIGNMENT",
+                "constraintName": "Assignment_Employee",
+                "columns": "ASSIGNMENT_EMPLOYEEID",
+                "referencedTable": "EMPLOYEE",
+                "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Assignment_Project",
+                "type": "foreignKey",
+                "table": "ASSIGNMENT",
+                "constraintName": "Assignment_Project",
+                "columns": "ASSIGNMENT_PROJECTID",
+                "referencedTable": "PROJECT",
+                "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Task_Project",
+                "type": "foreignKey",
+                "table": "TASK",
+                "constraintName": "Task_Project",
+                "columns": "TASK_PROJECTID",
+                "referencedTable": "PROJECT",
+                "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Task_TaskStatus",
+                "type": "foreignKey",
+                "table": "TASK",
+                "constraintName": "Task_TaskStatus",
+                "columns": "TASK_TASKSTATUSID",
+                "referencedTable": "TASKSTATUS",
+                "referencedColumns": "TASKSTATUS_ID"
+            },
+            {
+                "name": "Timesheet_Project",
+                "type": "foreignKey",
+                "table": "TIMESHEET",
+                "constraintName": "Timesheet_Project",
+                "columns": "TIMESHEET_PROJECTID",
+                "referencedTable": "PROJECT",
+                "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Item_Timesheet",
+                "type": "foreignKey",
+                "table": "ITEM",
+                "constraintName": "Item_Timesheet",
+                "columns": "ITEM_TIMESHEETID",
+                "referencedTable": "TIMESHEET",
+                "referencedColumns": "TIMESHEET_ID"
+            },
+            {
+                "name": "Item_Task",
+                "type": "foreignKey",
+                "table": "ITEM",
+                "constraintName": "Item_Task",
+                "columns": "ITEM_TASKID",
+                "referencedTable": "TASK",
+                "referencedColumns": "TASK_ID"
+            }
+        ]
+    }
+}
