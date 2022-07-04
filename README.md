@@ -1,2 +1,12 @@
 # codbex-chronos
-Timesheet Application
+
+Timesheets Management Application
+
+## Model
+
+![model](images/chronos-model.png)
+
+## Application
+
+![model](images/chronos-app.png)
+
