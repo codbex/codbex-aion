@@ -30,6 +30,7 @@
 					<th class="text-capitalize">Start</th>
 					<th class="text-capitalize">End</th>
 					<th class="text-capitalize">ProjectId</th>
+					<th class="text-capitalize">EmployeeId</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -40,6 +41,7 @@
 					<td>{{next.Start | date:dateFormat}}</td>
 					<td>{{next.End | date:dateFormat}}</td>
 					<td>{{projectidOptionValue(next.ProjectId)}}</td>
+					<td>{{employeeidOptionValue(next.EmployeeId)}}</td>
 					<td>
 						<i class="close fa fa-remove" ng-click="openDeleteDialog(next)" style="font-size: 1.4em"></i>
 						<i class="close fa fa-bars" ng-click="openEditDialog(next)" style="margin-right: 0.5em; font-size: 1.4em"></i>
@@ -109,6 +111,10 @@
 						<div class="form-group">
 							<label>ProjectId</label>
 							<select  class="form-control" ng-options="o.Id as o.Name for o in projectidOptions" ng-model="entity.ProjectId" ng-change="updateCalculatedProperties()"></select>
+						</div>
+						<div class="form-group">
+							<label>EmployeeId</label>
+							<select  class="form-control" ng-options="o.Id as o.Name for o in employeeidOptions" ng-model="entity.EmployeeId" ng-change="updateCalculatedProperties()"></select>
 						</div>
 						<div class="modal-footer">
 							<input type="submit" value="Save" class="btn btn-primary btn-lg" ng-show="actionType === 'new'" ng-click="create()">

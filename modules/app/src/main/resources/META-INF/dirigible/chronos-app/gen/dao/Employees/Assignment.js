@@ -4,7 +4,7 @@ var daoApi = require("db/v4/dao");
 var EntityUtils = require("chronos-app/gen/dao/utils/EntityUtils");
 
 var dao = daoApi.create({
-	table: "ASSIGNMENT",
+	table: "CHRONOS_ASSIGNMENT",
 	properties: [
 		{
 			name: "Id",
@@ -51,7 +51,7 @@ exports.create = function(entity) {
 	EntityUtils.setLocalDate(entity, "End");
 	var id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "ASSIGNMENT",
+		table: "CHRONOS_ASSIGNMENT",
 		key: {
 			name: "Id",
 			column: "ASSIGNMENT_ID",
@@ -66,7 +66,7 @@ exports.update = function(entity) {
 	EntityUtils.setLocalDate(entity, "End");
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "ASSIGNMENT",
+		table: "CHRONOS_ASSIGNMENT",
 		key: {
 			name: "Id",
 			column: "ASSIGNMENT_ID",
@@ -78,7 +78,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "ASSIGNMENT",
+		table: "CHRONOS_ASSIGNMENT",
 		key: {
 			name: "Id",
 			column: "ASSIGNMENT_ID",
@@ -92,7 +92,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM ASSIGNMENT");
+	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_ASSIGNMENT");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

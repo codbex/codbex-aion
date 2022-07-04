@@ -40,6 +40,9 @@ angular.module('page')
 		onProjectModified: function(callback) {
 			on('chronos-app.Timesheets.Project.modified', callback);
 		},
+		onEmployeeModified: function(callback) {
+			on('chronos-app.Timesheets.Employee.modified', callback);
+		},
 		messageEntityModified: function() {
 			message('modified');
 		},
@@ -52,8 +55,11 @@ angular.module('page')
 
 	var api = '/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js';
 	var projectidOptionsApi = '/services/v4/js/chronos-app/gen/api/Projects/Project.js';
+	var employeeidOptionsApi = '/services/v4/js/chronos-app/gen/api/Employees/Employee.js';
 
 	$scope.projectidOptions = [];
+
+	$scope.employeeidOptions = [];
 
 	$scope.dateOptions = {
 		startingDay: 1
@@ -72,6 +78,14 @@ angular.module('page')
 		});
 	}
 	projectidOptionsLoad();
+
+	function employeeidOptionsLoad() {
+		$http.get(employeeidOptionsApi)
+		.then(function(data) {
+			$scope.employeeidOptions = data.data;
+		});
+	}
+	employeeidOptionsLoad();
 
 	$scope.dataPage = 1;
 	$scope.dataCount = 0;
@@ -198,8 +212,18 @@ angular.module('page')
 		return null;
 	};
 
+	$scope.employeeidOptionValue = function(optionKey) {
+		for (var i = 0 ; i < $scope.employeeidOptions.length; i ++) {
+			if ($scope.employeeidOptions[i].Id === optionKey) {
+				return $scope.employeeidOptions[i].Name;
+			}
+		}
+		return null;
+	};
+
 	$messageHub.onEntityRefresh($scope.loadPage($scope.dataPage));
 	$messageHub.onProjectModified(projectidOptionsLoad);
+	$messageHub.onEmployeeModified(employeeidOptionsLoad);
 
 	$scope.selectEntity = function(entity) {
 		$scope.selectedEntity = entity;

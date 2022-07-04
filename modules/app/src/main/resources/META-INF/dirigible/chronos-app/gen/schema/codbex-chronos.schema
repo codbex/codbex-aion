@@ -2,7 +2,7 @@
     "schema": {
         "structures": [
             {
-                "name": "EMPLOYEE",
+                "name": "CHRONOS_EMPLOYEE",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -28,7 +28,7 @@
                 ]
             },
             {
-                "name": "PROJECT",
+                "name": "CHRONOS_PROJECT",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -72,7 +72,7 @@
                 ]
             },
             {
-                "name": "ASSIGNMENT",
+                "name": "CHRONOS_ASSIGNMENT",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -110,7 +110,7 @@
                 ]
             },
             {
-                "name": "TASK",
+                "name": "CHRONOS_TASK",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -148,7 +148,7 @@
                 ]
             },
             {
-                "name": "TIMESHEET",
+                "name": "CHRONOS_TIMESHEET",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -176,11 +176,17 @@
                         "length": 0,
                         "nullable": true,
                         "name": "TIMESHEET_PROJECTID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "TIMESHEET_EMPLOYEEID"
                     }
                 ]
             },
             {
-                "name": "TASKSTATUS",
+                "name": "CHRONOS_TASKSTATUS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -200,7 +206,7 @@
                 ]
             },
             {
-                "name": "PROJECTSTATUS",
+                "name": "CHRONOS_PROJECTSTATUS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -220,7 +226,7 @@
                 ]
             },
             {
-                "name": "ITEM",
+                "name": "CHRONOS_ITEM",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -260,82 +266,91 @@
             {
                 "name": "Project_Employee",
                 "type": "foreignKey",
-                "table": "PROJECT",
+                "table": "CHRONOS_PROJECT",
                 "constraintName": "Project_Employee",
                 "columns": "PROJECT_EMPLOYEEID",
-                "referencedTable": "EMPLOYEE",
+                "referencedTable": "CHRONOS_EMPLOYEE",
                 "referencedColumns": "EMPLOYEE_ID"
             },
             {
                 "name": "Project_ProjectStatus",
                 "type": "foreignKey",
-                "table": "PROJECT",
+                "table": "CHRONOS_PROJECT",
                 "constraintName": "Project_ProjectStatus",
                 "columns": "PROJECT_PROJECTSTATUSID",
-                "referencedTable": "PROJECTSTATUS",
+                "referencedTable": "CHRONOS_PROJECTSTATUS",
                 "referencedColumns": "PROJECTSTATUS_ID"
             },
             {
                 "name": "Assignment_Employee",
                 "type": "foreignKey",
-                "table": "ASSIGNMENT",
+                "table": "CHRONOS_ASSIGNMENT",
                 "constraintName": "Assignment_Employee",
                 "columns": "ASSIGNMENT_EMPLOYEEID",
-                "referencedTable": "EMPLOYEE",
+                "referencedTable": "CHRONOS_EMPLOYEE",
                 "referencedColumns": "EMPLOYEE_ID"
             },
             {
                 "name": "Assignment_Project",
                 "type": "foreignKey",
-                "table": "ASSIGNMENT",
+                "table": "CHRONOS_ASSIGNMENT",
                 "constraintName": "Assignment_Project",
                 "columns": "ASSIGNMENT_PROJECTID",
-                "referencedTable": "PROJECT",
+                "referencedTable": "CHRONOS_PROJECT",
                 "referencedColumns": "PROJECT_ID"
             },
             {
                 "name": "Task_Project",
                 "type": "foreignKey",
-                "table": "TASK",
+                "table": "CHRONOS_TASK",
                 "constraintName": "Task_Project",
                 "columns": "TASK_PROJECTID",
-                "referencedTable": "PROJECT",
+                "referencedTable": "CHRONOS_PROJECT",
                 "referencedColumns": "PROJECT_ID"
             },
             {
                 "name": "Task_TaskStatus",
                 "type": "foreignKey",
-                "table": "TASK",
+                "table": "CHRONOS_TASK",
                 "constraintName": "Task_TaskStatus",
                 "columns": "TASK_TASKSTATUSID",
-                "referencedTable": "TASKSTATUS",
+                "referencedTable": "CHRONOS_TASKSTATUS",
                 "referencedColumns": "TASKSTATUS_ID"
             },
             {
                 "name": "Timesheet_Project",
                 "type": "foreignKey",
-                "table": "TIMESHEET",
+                "table": "CHRONOS_TIMESHEET",
                 "constraintName": "Timesheet_Project",
                 "columns": "TIMESHEET_PROJECTID",
-                "referencedTable": "PROJECT",
+                "referencedTable": "CHRONOS_PROJECT",
                 "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Timesheet_Employee",
+                "type": "foreignKey",
+                "table": "CHRONOS_TIMESHEET",
+                "constraintName": "Timesheet_Employee",
+                "columns": "TIMESHEET_EMPLOYEEID",
+                "referencedTable": "CHRONOS_EMPLOYEE",
+                "referencedColumns": "EMPLOYEE_ID"
             },
             {
                 "name": "Item_Timesheet",
                 "type": "foreignKey",
-                "table": "ITEM",
+                "table": "CHRONOS_ITEM",
                 "constraintName": "Item_Timesheet",
                 "columns": "ITEM_TIMESHEETID",
-                "referencedTable": "TIMESHEET",
+                "referencedTable": "CHRONOS_TIMESHEET",
                 "referencedColumns": "TIMESHEET_ID"
             },
             {
                 "name": "Item_Task",
                 "type": "foreignKey",
-                "table": "ITEM",
+                "table": "CHRONOS_ITEM",
                 "constraintName": "Item_Task",
                 "columns": "ITEM_TASKID",
-                "referencedTable": "TASK",
+                "referencedTable": "CHRONOS_TASK",
                 "referencedColumns": "TASK_ID"
             }
         ]

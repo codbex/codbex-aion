@@ -1,0 +1,24 @@
+[
+  {
+    "table": "CHRONOS_PROJECTSTATUS",
+    "schema": "PUBLIC",
+    "file": "/chronos-data/data/CHRONOS_PROJECTSTATUS.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  },
+  {
+    "table": "CHRONOS_TASKSTATUS",
+    "schema": "PUBLIC",
+    "file": "/chronos-data/data/CHRONOS_TASKSTATUS.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  }
+]

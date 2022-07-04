@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2022 codbex and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v2.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.eclipse.org/legal/epl-v20.html
+  ~ Contributors:
+  ~ codbex - initial API and implementation
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="controller">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
+
+        <!-- Title directive -->
+        <title dg-view-title></title>
+
+        <script type="text/javascript" src="/services/v4/js/ide-core/services/loader.js?id=ide-view-js"></script>
+
+        <script type="text/javascript" src="fillouttimesheet.js"></script>
+
+        <link type="text/css" rel="stylesheet" href="/services/v4/js/ide-core/services/loader.js?id=ide-view-css" />
+        <theme></theme>
+
+    </head>
+
+    <body class="page">
+        <section class="fd-section">
+            <div class="fd-section__header">
+                <h3 class="fd-section__title">Chronos / Fill Out the Timesheet</h3>
+            </div>
+            <p><a href='index.html'>back</a> to launchpad</p>
+            <br>
+            <div class="fd-panel fd-panel--fixed">
+                <div class="fd-panel__header">
+                    <h4 class="fd-panel__title">Activities for week: {{week.start}} - {{week.end}}</h4>
+                    <fd-toolbar dg-type="transparent" no-bottom-border="true" class="search-toolbar">
+                        <fd-toolbar-spacer></fd-toolbar-spacer>
+                    </fd-toolbar>
+                </div>
+                <div role="region" aria-labelledby="jhqDKYrt" class="fd-panel__content">
+                    <div class="fd-container">
+                        <div class="fd-margin--md">
+
+                            <fd-fieldset ng-hide="isProjectFormDisabled()">
+                                <fd-form-group dg-header="Timesheet">
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="project" dg-required="true" dg-colon="true">Project
+                                        </fd-form-label>
+                                        <select id="project" ng-model="timesheet.project"
+                                            ng-options="project as project.Name for project in projects track by project.Id"
+                                            class="fd-combobox-input"></select>
+                                    </fd-form-item>
+
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="start" dg-required="true" dg-colon="true">Start
+                                        </fd-form-label>
+                                        <fd-input id="start" class="fd-input--compact" type="date"
+                                            placeholder="Enter start date" ng-model="timesheet.Start"
+                                            required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="end" dg-required="true" dg-colon="true">End
+                                        </fd-form-label>
+                                        <fd-input id="end" class="fd-input--compact" type="date"
+                                            placeholder="Enter end date" ng-model="timesheet.End" required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+                                </fd-form-group>
+                            </fd-fieldset>
+
+                            <fd-fieldset ng-hide="isItemsFormDisabled()">
+                                <fd-form-group dg-header="Timesheet for: {{timesheet.project.Name}}">
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="task" dg-required="true" dg-colon="true">Task
+                                        </fd-form-label>
+                                        <select id="task" ng-model="item.task"
+                                            ng-options="task as task.Name for task in tasks track by task.Id"
+                                            class="fd-combobox-input"></select>
+                                    </fd-form-item>
+
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="hours" dg-required="true" dg-colon="true">Hours
+                                        </fd-form-label>
+                                        <fd-input id="hours" class="fd-input--compact" type="number"
+                                            placeholder="Enter hours spent" ng-model="item.Hours" required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="description" dg-required="false" dg-colon="true">Description
+                                        </fd-form-label>
+                                        <fd-input id="description" class="fd-input--compact" type="text"
+                                            placeholder="Enter description" ng-model="item.Description"
+                                            required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+
+                                </fd-form-group>
+                            </fd-fieldset>
+
+                            <br>
+
+                            <div ng-hide="isAddDisabled()">
+                                <div>
+                                    <button class="fd-button fd-button--compact is-selected"
+                                        ng-click="addItem()">Add</button>
+                                </div>
+
+                                <br>
+
+                                <div>
+                                    <div>
+                                        <fd-scrollbar>
+                                            <table fd-table display-mode="compact">
+                                                <thead fd-table-header sticky="true">
+                                                    <tr fd-table-row>
+                                                        <th fd-table-header-cell>Task</th>
+                                                        <th fd-table-header-cell>Hours</th>
+                                                        <th fd-table-header-cell>Description</th>
+                                                        <th fd-table-header-cell width="50px">Remove</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody fd-table-body>
+                                                    <tr fd-table-row ng-repeat="next in items" hoverable="true"
+                                                        activable="false">
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.task.Name}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Hours}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Description}}</div>
+                                                        </td>
+                                                        <td fd-table-cell width="50px">
+                                                            <div class="tdSingleLine">
+                                                                <fd-button dg-type="transparent"
+                                                                    glyph="sap-icon--delete" title="Remove"
+                                                                    aria-label="Remove" ng-click="removeItem(next.Id)"
+                                                                    aria-hidden="true">
+                                                                </fd-button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </fd-scrollbar>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div ng-hide="isSaveDisabled()">
+
+                                <h3>Timesheet for project: '{{timesheet.project.Name}}' and for the period:
+                                    <b><i>{{timesheet.Start.toLocaleDateString("en-US", options)}}</i></b> -
+                                    <b><i>{{timesheet.End.toLocaleDateString("en-US", options)}}</i></b>
+                                </h3>
+
+                                <br>
+                                <br>
+
+                                <div>
+                                    <div>
+                                        <fd-scrollbar dg-header="Timesheet for: {{timesheet.project.Name}}">
+                                            <table fd-table display-mode="compact">
+                                                <thead fd-table-header sticky="true">
+                                                    <tr fd-table-row>
+                                                        <th fd-table-header-cell>Task</th>
+                                                        <th fd-table-header-cell>Hours</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody fd-table-body>
+                                                    <tr fd-table-row ng-repeat="next in items" hoverable="true"
+                                                        activable="false">
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.task.Name}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Hours}}</div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </fd-scrollbar>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+
+                            <div>
+                                <button class="fd-button fd-button--compact" ng-click="nextPage()"
+                                    ng-disabled="isNextDisabled()">Next</button>
+                                <button class="fd-button fd-button--compact" ng-click="previousPage()"
+                                    ng-disabled="isBackDisabled()">Back</button>
+                                <button class="fd-button fd-button--compact is-selected" ng-click="saveTimesheet()"
+                                    ng-hide="isSaveDisabled()">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p class="fd-text">The technology platform used for project <b>Chronos</b> is <a
+                    href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
+                <br>
+                All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
+                    target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
+                maintained at <a href="https://github.com/eclipse/dirigible" target="_blank" class="fd-link">GitHub</a>.
+            </p>
+        </section>
+
+    </body>
+
+</html>

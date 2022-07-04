@@ -49,8 +49,8 @@
                         "widgetType": "TEXTBOX"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM EMPLOYEE",
-                "dataName": "EMPLOYEE",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_EMPLOYEE",
+                "dataName": "CHRONOS_EMPLOYEE",
                 "dataQuery": "",
                 "icon": "users",
                 "layoutType": "MANAGE_MASTER",
@@ -169,8 +169,8 @@
                         "relationshipEntityPerspectiveName": "Projects"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM PROJECT",
-                "dataName": "PROJECT",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_PROJECT",
+                "dataName": "CHRONOS_PROJECT",
                 "dataQuery": "",
                 "icon": "edit",
                 "layoutType": "MANAGE_MASTER",
@@ -275,8 +275,8 @@
                         "widgetType": "DATE"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM ASSIGNMENT",
-                "dataName": "ASSIGNMENT",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_ASSIGNMENT",
+                "dataName": "CHRONOS_ASSIGNMENT",
                 "dataQuery": "",
                 "icon": "lock",
                 "layoutType": "MANAGE_DETAILS",
@@ -379,8 +379,8 @@
                         "relationshipEntityPerspectiveName": "Projects"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM TASK",
-                "dataName": "TASK",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK",
+                "dataName": "CHRONOS_TASK",
                 "dataQuery": "",
                 "icon": "tasks",
                 "layoutType": "MANAGE_DETAILS",
@@ -461,10 +461,30 @@
                         "relationshipName": "Timesheet_Project",
                         "relationshipEntityName": "Project",
                         "relationshipEntityPerspectiveName": "Projects"
+                    },
+                    {
+                        "calculatedPropertyExpression": "",
+                        "dataAutoIncrement": "false",
+                        "dataLength": "0",
+                        "dataName": "TIMESHEET_EMPLOYEEID",
+                        "dataNullable": "true",
+                        "dataPrimaryKey": "false",
+                        "dataType": "INTEGER",
+                        "dataUnique": "false",
+                        "isCalculatedProperty": "false",
+                        "name": "EmployeeId",
+                        "widgetDropDownKey": "Id",
+                        "widgetDropDownValue": "Name",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetType": "DROPDOWN",
+                        "relationshipName": "Timesheet_Employee",
+                        "relationshipEntityName": "Employee",
+                        "relationshipEntityPerspectiveName": "Employees"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM TIMESHEET",
-                "dataName": "TIMESHEET",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_TIMESHEET",
+                "dataName": "CHRONOS_TIMESHEET",
                 "dataQuery": "",
                 "icon": "calendar",
                 "layoutType": "MANAGE_MASTER",
@@ -512,8 +532,8 @@
                         "widgetType": "TEXTBOX"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM TASKSTATUS",
-                "dataName": "TASKSTATUS",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_TASKSTATUS",
+                "dataName": "CHRONOS_TASKSTATUS",
                 "dataQuery": "",
                 "icon": "file-o",
                 "layoutType": "MANAGE",
@@ -561,8 +581,8 @@
                         "widgetType": "TEXTBOX"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM PROJECTSTATUS",
-                "dataName": "PROJECTSTATUS",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_PROJECTSTATUS",
+                "dataName": "CHRONOS_PROJECTSTATUS",
                 "dataQuery": "",
                 "icon": "file-o",
                 "layoutType": "MANAGE",
@@ -665,8 +685,8 @@
                         "widgetType": "NUMBER"
                     }
                 ],
-                "dataCount": "SELECT COUNT(*) AS COUNT FROM ITEM",
-                "dataName": "ITEM",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_ITEM",
+                "dataName": "CHRONOS_ITEM",
                 "dataQuery": "",
                 "icon": "history",
                 "layoutType": "MANAGE_DETAILS",

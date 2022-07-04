@@ -3,7 +3,7 @@ var producer = require("messaging/v4/producer");
 var daoApi = require("db/v4/dao");
 
 var dao = daoApi.create({
-	table: "TASK",
+	table: "CHRONOS_TASK",
 	properties: [
 		{
 			name: "Id",
@@ -41,7 +41,7 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	var id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "TASK",
+		table: "CHRONOS_TASK",
 		key: {
 			name: "Id",
 			column: "TASK_ID",
@@ -54,7 +54,7 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "TASK",
+		table: "CHRONOS_TASK",
 		key: {
 			name: "Id",
 			column: "TASK_ID",
@@ -66,7 +66,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "TASK",
+		table: "CHRONOS_TASK",
 		key: {
 			name: "Id",
 			column: "TASK_ID",
@@ -80,7 +80,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM TASK");
+	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
