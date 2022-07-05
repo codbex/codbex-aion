@@ -25,15 +25,21 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
     $scope.timesheet.Start = getMonday(new Date());
     $scope.timesheet.End = getFriday(new Date());
 
-    $http.get('/services/v4/js/chronos-app/gen/api/Projects/Project.js').then(function (response) {
+    $scope.projects = [];
+    $scope.tasks = [];
+
+    $http.get('/services/v4/js/chronos-ext/ui/developer/myprojects.js').then(function (response) {
         $scope.projects = response.data;
     });
 
-    $http.get('/services/v4/js/chronos-app/gen/api/Projects/Task.js').then(function (response) {
-        $scope.tasks = response.data;
+    $scope.$watch('timesheet.project', function (newProject) {
+        $http.get('/services/v4/js/chronos-ext/ui/developer/mytasks.js?ProjectId=' + newProject.Id).then(function (response) {
+            $scope.tasks = response.data;
+            $scope.items = [];
+        });
     });
 
-    $http.get('/services/v4/js/chronos-ext/ui/developer/lookupuser.js').then(function (response) {
+    $http.get('/services/v4/js/chronos-ext/ui/developer/myuser.js').then(function (response) {
         $scope.userid = response.data;
     });
 
