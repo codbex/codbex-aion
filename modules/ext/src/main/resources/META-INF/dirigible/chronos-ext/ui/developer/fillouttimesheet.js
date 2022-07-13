@@ -6,15 +6,6 @@ app.config(["messageHubProvider", function (messageHubProvider) {
 
 app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope, $http, messageHub) {
 
-    $scope.activities = [
-        {
-            id: 'filloutTimesheet',
-            name: 'Fill out the Weekly Timesheet',
-            description: 'Enter the corresponding hours spent daily for a given project',
-            link: 'fillouttimesheet.html'
-        }
-    ];
-
     $scope.options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
     $scope.week = {};
@@ -28,18 +19,20 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
     $scope.projects = [];
     $scope.tasks = [];
 
-    $http.get('/services/v4/js/chronos-ext/ui/developer/myprojects.js').then(function (response) {
+    $http.get('/services/v4/js/chronos-ext/ui/common/myprojects.js').then(function (response) {
         $scope.projects = response.data;
     });
 
     $scope.$watch('timesheet.project', function (newProject) {
-        $http.get('/services/v4/js/chronos-ext/ui/developer/mytasks.js?ProjectId=' + newProject.Id).then(function (response) {
-            $scope.tasks = response.data;
-            $scope.items = [];
-        });
+        if (newProject) {
+            $http.get('/services/v4/js/chronos-ext/ui/developer/mytasks.js?ProjectId=' + newProject.Id).then(function (response) {
+                $scope.tasks = response.data;
+                $scope.items = [];
+            });
+        }
     });
 
-    $http.get('/services/v4/js/chronos-ext/ui/developer/myuser.js').then(function (response) {
+    $http.get('/services/v4/js/chronos-ext/ui/common/myuser.js').then(function (response) {
         $scope.userid = response.data;
     });
 

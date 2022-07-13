@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2022 codbex and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v2.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.eclipse.org/legal/epl-v20.html
+  ~ Contributors:
+  ~ codbex - initial API and implementation
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="controller">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
+
+        <!-- Title directive -->
+        <title dg-view-title></title>
+
+        <script type="text/javascript" src="/services/v4/js/ide-core/services/loader.js?id=ide-view-js"></script>
+
+        <script type="text/javascript" src="manageproject.js"></script>
+
+        <link type="text/css" rel="stylesheet" href="/services/v4/js/ide-core/services/loader.js?id=ide-view-css" />
+        <theme></theme>
+
+    </head>
+
+    <body class="page">
+        <section class="fd-section">
+            <div class="fd-section__header">
+                <h3 class="fd-section__title">Chronos / Manage Project Tasks</h3>
+            </div>
+            <p><a href='index.html'>back</a> to launchpad</p>
+            <br>
+            <div class="fd-panel fd-panel--fixed">
+                <div class="fd-panel__header">
+                    <h4 class="fd-panel__title">Project Tasks Management</h4>
+                    <fd-toolbar dg-type="transparent" no-bottom-border="true" class="search-toolbar">
+                        <fd-toolbar-spacer></fd-toolbar-spacer>
+                    </fd-toolbar>
+                </div>
+                <div role="region" aria-labelledby="jhqDKYrt" class="fd-panel__content">
+                    <div class="fd-container">
+                        <div class="fd-margin--md">
+
+                            <fd-fieldset ng-hide="isProjectFormDisabled()">
+                                <fd-form-group dg-header="Project">
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="project" dg-required="true" dg-colon="true">Project
+                                        </fd-form-label>
+                                        <select id="project" ng-model="manage.project"
+                                            ng-options="project as project.Name for project in projects track by project.Id"
+                                            class="fd-combobox-input"></select>
+                                    </fd-form-item>
+
+                                </fd-form-group>
+                            </fd-fieldset>
+
+                            <fd-fieldset ng-hide="isItemsFormDisabled()">
+                                <fd-form-group dg-header="Tasks for: {{manage.project.Name}}">
+
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="name" dg-required="false" dg-colon="true">Name
+                                        </fd-form-label>
+                                        <fd-input id="name" class="fd-input--compact" type="text"
+                                            placeholder="Enter name" ng-model="manage.task.Name" required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="link" dg-required="false" dg-colon="true">Link
+                                        </fd-form-label>
+                                        <fd-input id="link" class="fd-input--compact" type="text"
+                                            placeholder="Enter link" ng-model="manage.task.Link" required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="status" dg-required="true" dg-colon="true">Status
+                                        </fd-form-label>
+                                        <select id="status" ng-model="manage.task.Status"
+                                            ng-options="status as status.Name for status in statuses track by status.Id"
+                                            class="fd-combobox-input"></select>
+                                    </fd-form-item>
+
+
+
+                                </fd-form-group>
+                            </fd-fieldset>
+
+                            <br>
+
+                            <div ng-hide="isAddDisabled()">
+                                <div>
+                                    <button class="fd-button fd-button--compact is-selected"
+                                        ng-click="addTask()">Add</button>
+                                </div>
+
+                                <br>
+
+                                <div>
+                                    <div>
+                                        <fd-scrollbar>
+                                            <table fd-table display-mode="compact">
+                                                <thead fd-table-header sticky="true">
+                                                    <tr fd-table-row>
+                                                        <th fd-table-header-cell>Task</th>
+                                                        <th fd-table-header-cell>Link</th>
+                                                        <th fd-table-header-cell>Status</th>
+                                                        <th fd-table-header-cell width="50px">Remove</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody fd-table-body>
+                                                    <tr fd-table-row ng-repeat="next in tasks" hoverable="true"
+                                                        activable="false">
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Name}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Link}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Status}}</div>
+                                                        </td>
+                                                        <td fd-table-cell width="50px">
+                                                            <div class="tdSingleLine">
+                                                                <fd-button dg-type="transparent"
+                                                                    glyph="sap-icon--delete" title="Remove"
+                                                                    aria-label="Remove" ng-click="removeTask(next.Id)"
+                                                                    aria-hidden="true">
+                                                                </fd-button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </fd-scrollbar>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div ng-hide="isFinishDisabled()">
+
+                                <h3>Project tasks: '{{manage.project.Name}}'
+                                </h3>
+
+                                <br>
+                                <br>
+
+                                <div>
+                                    <div>
+                                        <fd-scrollbar dg-header="Tasks details: {{manage.project.Name}}">
+                                            <table fd-table display-mode="compact">
+                                                <thead fd-table-header sticky="true">
+                                                    <tr fd-table-row>
+                                                        <th fd-table-header-cell>Task</th>
+                                                        <th fd-table-header-cell>Link</th>
+                                                        <th fd-table-header-cell>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody fd-table-body>
+                                                    <tr fd-table-row ng-repeat="next in tasks" hoverable="true"
+                                                        activable="false">
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Name}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Link}}</div>
+                                                        </td>
+                                                        <td fd-table-cell>
+                                                            <div class="tdSingleLine">{{next.Status}}</div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </fd-scrollbar>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+
+                            <div>
+                                <button class="fd-button fd-button--compact" ng-click="nextPage()"
+                                    ng-disabled="isNextDisabled()">Next</button>
+                                <button class="fd-button fd-button--compact" ng-click="previousPage()"
+                                    ng-disabled="isBackDisabled()">Back</button>
+                                <button class="fd-button fd-button--compact is-selected" ng-click="finishProject()"
+                                    ng-hide="isFinishDisabled()">Finish</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p class="fd-text">The technology platform used for project <b>Chronos</b> is <a
+                    href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
+                <br>
+                All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
+                    target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
+                maintained at <a href="https://github.com/eclipse/dirigible" target="_blank" class="fd-link">GitHub</a>.
+            </p>
+        </section>
+
+    </body>
+
+</html>
