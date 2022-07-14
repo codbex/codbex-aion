@@ -481,6 +481,21 @@
                         "relationshipName": "Timesheet_Employee",
                         "relationshipEntityName": "Employee",
                         "relationshipEntityPerspectiveName": "Employees"
+                    },
+                    {
+                        "calculatedPropertyExpression": "",
+                        "dataAutoIncrement": "false",
+                        "dataLength": "20",
+                        "dataName": "TIMESHEET_APPROVED",
+                        "dataNullable": "true",
+                        "dataPrimaryKey": "false",
+                        "dataType": "SMALLINT",
+                        "dataUnique": "false",
+                        "isCalculatedProperty": "false",
+                        "name": "Approved",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetType": "CHECKBOX"
                     }
                 ],
                 "dataCount": "SELECT COUNT(*) AS COUNT FROM CHRONOS_TIMESHEET",

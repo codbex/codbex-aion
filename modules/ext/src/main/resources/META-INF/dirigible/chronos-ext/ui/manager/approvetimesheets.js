@@ -7,21 +7,17 @@ app.config(["messageHubProvider", function (messageHubProvider) {
 app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope, $http, messageHub) {
 
     $scope.projects = [];
-    $scope.tasks = [];
+    $scope.timesheets = [];
     $scope.manage = {};
 
     $http.get('/services/v4/js/chronos-ext/services/common/myprojects.js').then(function (response) {
         $scope.projects = response.data;
     });
 
-    $http.get('/services/v4/js/chronos-app/gen/api/Projects/TaskStatus.js').then(function (response) {
-        $scope.statuses = response.data;
-    });
-
     $scope.$watch('manage.project', function (newProject) {
         if (newProject) {
-            $http.get('/services/v4/js/chronos-ext/services/manager/mytasks.js?ProjectId=' + newProject.Id).then(function (response) {
-                $scope.tasks = response.data;
+            $http.get('/services/v4/js/chronos-ext/services/manager/mytimesheets.js?ProjectId=' + newProject.Id).then(function (response) {
+                $scope.timesheets = response.data;
             });
         }
     });
@@ -29,34 +25,6 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
     $http.get('/services/v4/js/chronos-ext/services/common/myuser.js').then(function (response) {
         $scope.userid = response.data;
     });
-
-    $scope.addTask = function () {
-        $scope.manage.task.ProjectId = $scope.manage.project.Id;
-        $scope.manage.task.TaskStatusId = $scope.manage.task.Status.Id;
-        $http.post('/services/v4/js/chronos-app/gen/api/Projects/Task.js', JSON.stringify($scope.manage.task))
-            .then(function (data) {
-                $http.get('/services/v4/js/chronos-ext/services/manager/mytasks.js?ProjectId=' + $scope.manage.project.Id).then(function (response) {
-                    $scope.tasks = response.data;
-                });
-                $scope.manage.task = {};
-            }, function (data) {
-                alert(JSON.stringify(data.data));
-            });
-
-    }
-
-    $scope.removeTask = function (id) {
-        if (confirm("Are you sure you want to delete this task")) {
-            $http.delete('/services/v4/js/chronos-app/gen/api/Projects/Task.js/' + id)
-                .then(function (data) {
-                    $http.get('/services/v4/js/chronos-ext/services/manager/mytasks.js?ProjectId=' + $scope.manage.project.Id).then(function (response) {
-                        $scope.tasks = response.data;
-                    });
-                }, function (data) {
-                    alert(JSON.stringify(data));
-                });
-        }
-    }
 
     $scope.page = {};
     $scope.page.number = 1;
@@ -95,6 +63,46 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
 
     $scope.finishProject = function () {
         window.location = "index.html";
+    }
+
+    $scope.approveTimesheet = function (timesheet) {
+        $http.post('/services/v4/js/chronos-ext/services/manager/approvetimesheet.js/' + timesheet.Id)
+            .then(function (data) {
+                timesheet.Approved = 1;
+            }, function (data) {
+                alert('Error: ' + JSON.stringify(data.data));
+            });
+
+    }
+
+    $scope.rejectTimesheet = function (timesheet) {
+        $http.post('/services/v4/js/chronos-ext/services/manager/rejecttimesheet.js/' + timesheet.Id)
+            .then(function (data) {
+                timesheet.Approved = 0;
+            }, function (data) {
+                alert('Error: ' + JSON.stringify(data.data));
+            });
+
+    }
+
+    $scope.options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+    $scope.week = {};
+    $scope.week.start = getMonday(new Date()).toLocaleDateString("en-US", $scope.options);
+    $scope.week.end = getFriday(new Date()).toLocaleDateString("en-US", $scope.options);
+
+    function getMonday(d) {
+        d = new Date(d);
+        var day = d.getDay(),
+            diff = d.getDate() - day + (day == 0 ? -6 : 1);
+        return new Date(d.setDate(diff));
+    }
+
+    function getFriday(d) {
+        d = new Date(d);
+        var day = d.getDay(),
+            diff = d.getDate() - day + (day == 0 ? -6 : 1);
+        return new Date(d.setDate(diff + 4));
     }
 
 }]);

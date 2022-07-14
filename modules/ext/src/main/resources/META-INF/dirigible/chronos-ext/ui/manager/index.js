@@ -12,6 +12,12 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
             name: 'Manage Project Tasks',
             description: 'Add, remove or edit project tasks',
             link: 'manageproject.html'
+        },
+        {
+            id: 'approveTimesheets',
+            name: 'Approve Timesheets',
+            description: 'Approve timesheets of direct reports for the current week',
+            link: 'approvetimesheets.html'
         }
     ];
 

@@ -19,20 +19,20 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
     $scope.projects = [];
     $scope.tasks = [];
 
-    $http.get('/services/v4/js/chronos-ext/ui/common/myprojects.js').then(function (response) {
+    $http.get('/services/v4/js/chronos-ext/services/common/myprojects.js').then(function (response) {
         $scope.projects = response.data;
     });
 
     $scope.$watch('timesheet.project', function (newProject) {
         if (newProject) {
-            $http.get('/services/v4/js/chronos-ext/ui/developer/mytasks.js?ProjectId=' + newProject.Id).then(function (response) {
+            $http.get('/services/v4/js/chronos-ext/services/developer/mytasks.js?ProjectId=' + newProject.Id).then(function (response) {
                 $scope.tasks = response.data;
                 $scope.items = [];
             });
         }
     });
 
-    $http.get('/services/v4/js/chronos-ext/ui/common/myuser.js').then(function (response) {
+    $http.get('/services/v4/js/chronos-ext/services/common/myuser.js').then(function (response) {
         $scope.userid = response.data;
     });
 

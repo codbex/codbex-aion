@@ -28,6 +28,10 @@ var dao = daoApi.create({
 			name: "EmployeeId",
 			column: "TIMESHEET_EMPLOYEEID",
 			type: "INTEGER",
+		}, {
+			name: "Approved",
+			column: "TIMESHEET_APPROVED",
+			type: "SMALLINT",
 		}]
 });
 

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2022 codbex and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v2.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.eclipse.org/legal/epl-v20.html
+  ~ Contributors:
+  ~ codbex - initial API and implementation
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="controller">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
+
+        <!-- Title directive -->
+        <title dg-view-title></title>
+
+        <script type="text/javascript" src="/services/v4/js/ide-core/services/loader.js?id=ide-view-js"></script>
+
+        <script type="text/javascript" src="approvetimesheets.js"></script>
+
+        <link type="text/css" rel="stylesheet" href="/services/v4/js/ide-core/services/loader.js?id=ide-view-css" />
+        <theme></theme>
+
+    </head>
+
+    <body class="page">
+        <section class="fd-section">
+            <div class="fd-section__header">
+                <h3 class="fd-section__title">Chronos / Approve Timesheets</h3>
+            </div>
+            <p><a href='index.html'>back</a> to launchpad</p>
+            <br>
+            <div class="fd-panel fd-panel--fixed">
+                <div class="fd-panel__header">
+                    <h4 class="fd-panel__title">Timesheets approval for week: {{week.start}} - {{week.end}}</h4>
+                    <fd-toolbar dg-type="transparent" no-bottom-border="true" class="search-toolbar">
+                        <fd-toolbar-spacer></fd-toolbar-spacer>
+                    </fd-toolbar>
+                </div>
+                <div role="region" aria-labelledby="jhqDKYrt" class="fd-panel__content">
+                    <div class="fd-container">
+                        <div class="fd-margin--md">
+
+                            <fd-fieldset ng-hide="isProjectFormDisabled()">
+                                <fd-form-group dg-header="Project">
+                                    <fd-form-item horizontal="true">
+                                        <fd-form-label for="project" dg-required="true" dg-colon="true">Project
+                                        </fd-form-label>
+                                        <select id="project" ng-model="manage.project"
+                                            ng-options="project as project.Name for project in projects track by project.Id"
+                                            class="fd-combobox-input"></select>
+                                    </fd-form-item>
+
+                                </fd-form-group>
+                            </fd-fieldset>
+
+                            <div ng-hide="isAddDisabled()">
+                                <div>
+                                    <div>
+                                        <fd-scrollbar>
+                                            <table fd-table fd-table-group style="margin-top: 20px">
+                                                <thead fd-table-header>
+                                                    <tr fd-table-row>
+                                                        <th fd-table-header-cell>#</th>
+                                                        <th fd-table-header-cell>Name</th>
+                                                        <th fd-table-header-cell>Hours</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody fd-table-body ng-repeat="next in timesheets">
+                                                    <tr fd-table-row>
+                                                        <td fd-table-group-cell nesting-level="1" expanded="true">
+                                                            <b>{{next.EmployeeName}}</b>:
+                                                            {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
+                                                            <button ng-show="next.Approved == 0"
+                                                                class="fd-button fd-button--compact is-selected fd-button--positive"
+                                                                ng-click="approveTimesheet(next)">Approve</button>
+                                                            <button ng-show="next.Approved == 1"
+                                                                class="fd-button fd-button--compact is-selected fd-button--negative"
+                                                                ng-click="rejectTimesheet(next)">Reject</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr fd-table-row ng-repeat="item in next.items">
+                                                        <td fd-table-cell nesting-level="2">{{$index + 1}}</td>
+                                                        <td fd-table-cell>{{item.Name}}</td>
+                                                        <td fd-table-cell>{{item.Hours}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </fd-scrollbar>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div ng-hide="isFinishDisabled()">
+
+                                <h3>Project timesheets: '{{manage.project.Name}}'
+                                </h3>
+
+                                <br>
+                                <br>
+
+                                <div>
+                                    <div>
+                                        <fd-scrollbar dg-header="Tasks details: {{manage.project.Name}}">
+                                            <table fd-table fd-table-group style="margin-top: 20px">
+                                                <thead fd-table-header>
+                                                    <tr fd-table-row>
+                                                        <th fd-table-header-cell>#</th>
+                                                        <th fd-table-header-cell>Name</th>
+                                                        <th fd-table-header-cell>Hours</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody fd-table-body ng-repeat="next in timesheets">
+                                                    <tr fd-table-row>
+                                                        <td fd-table-group-cell nesting-level="1" expanded="true">
+                                                            <b>{{next.EmployeeName}}</b>:
+                                                            {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
+                                                            <span ng-show="next.Approved == 1"
+                                                                class="fd-info-label fd-info-label--accent-color-8">
+                                                                <span class="fd-info-label__text">approved</span>
+                                                            </span>
+                                                            <span ng-show="next.Approved == 0"
+                                                                class="fd-info-label fd-info-label--accent-color-1">
+                                                                <span class="fd-info-label__text">not approved</span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr fd-table-row ng-repeat="item in next.items">
+                                                        <td fd-table-cell nesting-level="2">{{$index + 1}}</td>
+                                                        <td fd-table-cell>{{item.Name}}</td>
+                                                        <td fd-table-cell>{{item.Hours}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </fd-scrollbar>
+                                        </fd-scrollbar>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+
+                            <div>
+                                <button class="fd-button fd-button--compact" ng-click="nextPage()"
+                                    ng-disabled="isNextDisabled()">Next</button>
+                                <button class="fd-button fd-button--compact" ng-click="previousPage()"
+                                    ng-disabled="isBackDisabled()">Back</button>
+                                <button class="fd-button fd-button--compact is-selected" ng-click="finishProject()"
+                                    ng-hide="isFinishDisabled()">Finish</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p class="fd-text">The technology platform used for project <b>Chronos</b> is <a
+                    href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
+                <br>
+                All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
+                    target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
+                maintained at <a href="https://github.com/eclipse/dirigible" target="_blank" class="fd-link">GitHub</a>.
+            </p>
+        </section>
+
+    </body>
+
+</html>
