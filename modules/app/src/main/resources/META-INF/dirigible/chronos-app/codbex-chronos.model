@@ -521,7 +521,7 @@
                         "calculatedPropertyExpression": "",
                         "dataAutoIncrement": "false",
                         "dataLength": "0",
-                        "dataName": "CHRONOS_TIMESHEET_STATUS",
+                        "dataName": "TIMESHEET_STATUS",
                         "dataNullable": "true",
                         "dataPrimaryKey": "false",
                         "dataType": "INTEGER",

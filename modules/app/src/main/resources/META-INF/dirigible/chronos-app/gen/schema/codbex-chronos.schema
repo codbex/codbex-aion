@@ -199,7 +199,7 @@
                         "type": "INTEGER",
                         "length": 0,
                         "nullable": true,
-                        "name": "CHRONOS_TIMESHEET_STATUS"
+                        "name": "TIMESHEET_STATUS"
                     }
                 ]
             },
@@ -407,7 +407,7 @@
                 "type": "foreignKey",
                 "table": "CHRONOS_TIMESHEET",
                 "constraintName": "Timesheet_TimesheetStatus",
-                "columns": "CHRONOS_TIMESHEET_STATUS",
+                "columns": "TIMESHEET_STATUS",
                 "referencedTable": "CHRONOS_TIMESHEETSTATUS",
                 "referencedColumns": "TIMESHEETSTATUS_ID"
             },

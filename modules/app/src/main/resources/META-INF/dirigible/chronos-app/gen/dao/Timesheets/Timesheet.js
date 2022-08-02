@@ -34,7 +34,7 @@ var dao = daoApi.create({
 			type: "VARCHAR",
 		}, {
 			name: "Status",
-			column: "CHRONOS_TIMESHEET_STATUS",
+			column: "TIMESHEET_STATUS",
 			type: "INTEGER",
 		}]
 });
