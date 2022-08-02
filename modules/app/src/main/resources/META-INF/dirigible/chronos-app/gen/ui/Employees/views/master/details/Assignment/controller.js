@@ -43,6 +43,9 @@ angular.module('page')
 		onProjectModified: function(callback) {
 			on('chronos-app.Employees.Project.modified', callback);
 		},
+		onAssignmentRoleModified: function(callback) {
+			on('chronos-app.Employees.AssignmentRole.modified', callback);
+		},
 		onEmployeeSelected: function(callback) {
 			on('chronos-app.Employees.Employee.selected', callback);
 		},
@@ -56,6 +59,7 @@ angular.module('page')
 	var api = '/services/v4/js/chronos-app/gen/api/Employees/Assignment.js';
 	var employeeidOptionsApi = '/services/v4/js/chronos-app/gen/api/Employees/Employee.js';
 	var projectidOptionsApi = '/services/v4/js/chronos-app/gen/api/Projects/Project.js';
+	var roleOptionsApi = '/services/v4/js/chronos-app/gen/api/Employees/AssignmentRole.js';
 
 	$scope.dateOptions = {
 		startingDay: 1
@@ -70,6 +74,8 @@ angular.module('page')
 	$scope.employeeidOptions = [];
 
 	$scope.projectidOptions = [];
+
+	$scope.roleOptions = [];
 
 	function employeeidOptionsLoad() {
 		$http.get(employeeidOptionsApi)
@@ -86,6 +92,14 @@ angular.module('page')
 		});
 	}
 	projectidOptionsLoad();
+
+	function roleOptionsLoad() {
+		$http.get(roleOptionsApi)
+		.then(function(data) {
+			$scope.roleOptions = data.data;
+		});
+	}
+	roleOptionsLoad();
 
 	$scope.dataPage = 1;
 	$scope.dataCount = 0;
@@ -221,10 +235,19 @@ angular.module('page')
 		}
 		return null;
 	};
+	$scope.roleOptionValue = function(optionKey) {
+		for (var i = 0 ; i < $scope.roleOptions.length; i ++) {
+			if ($scope.roleOptions[i].Id === optionKey) {
+				return $scope.roleOptions[i].Name;
+			}
+		}
+		return null;
+	};
 
 	$messageHub.onEntityRefresh($scope.loadPage($scope.dataPage));
 	$messageHub.onEmployeeModified(employeeidOptionsLoad);
 	$messageHub.onProjectModified(projectidOptionsLoad);
+	$messageHub.onAssignmentRoleModified(roleOptionsLoad);
 
 	$messageHub.onEmployeeSelected(function(event) {
 		$scope.masterEntityId = event.data.id;

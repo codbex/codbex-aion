@@ -24,7 +24,7 @@ angular.module('page')
 	var messageHub = new FramesMessageHub();
 
 	var message = function(evtName, data){
-		messageHub.post({data: data}, 'chronos-app.Timesheets.Timesheet.' + evtName);
+		messageHub.post({data: data}, 'chronos-app.Employees.AssignmentRole.' + evtName);
 	};
 
 	var on = function(topic, callback){
@@ -35,37 +35,16 @@ angular.module('page')
 		message: message,
 		on: on,
 		onEntityRefresh: function(callback) {
-			on('chronos-app.Timesheets.Timesheet.refresh', callback);
-		},
-		onProjectModified: function(callback) {
-			on('chronos-app.Timesheets.Project.modified', callback);
-		},
-		onEmployeeModified: function(callback) {
-			on('chronos-app.Timesheets.Employee.modified', callback);
-		},
-		onTimesheetStatusModified: function(callback) {
-			on('chronos-app.Timesheets.TimesheetStatus.modified', callback);
+			on('chronos-app.Employees.AssignmentRole.refresh', callback);
 		},
 		messageEntityModified: function() {
 			message('modified');
-		},
-		messageEntitySelected: function(id) {
-			message('selected', id);
 		}
 	};
 }])
 .controller('PageController', function ($scope, $http, $messageHub) {
 
-	var api = '/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js';
-	var projectidOptionsApi = '/services/v4/js/chronos-app/gen/api/Projects/Project.js';
-	var employeeidOptionsApi = '/services/v4/js/chronos-app/gen/api/Employees/Employee.js';
-	var statusOptionsApi = '/services/v4/js/chronos-app/gen/api/Timesheets/TimesheetStatus.js';
-
-	$scope.projectidOptions = [];
-
-	$scope.employeeidOptions = [];
-
-	$scope.statusOptions = [];
+	var api = '/services/v4/js/chronos-app/gen/api/Employees/AssignmentRole.js';
 
 	$scope.dateOptions = {
 		startingDay: 1
@@ -76,30 +55,6 @@ angular.module('page')
 	$scope.dateFormat = $scope.dateFormats[0];
 	$scope.monthFormat = $scope.monthFormats[1];
 	$scope.weekFormat = $scope.weekFormats[3];
-
-	function projectidOptionsLoad() {
-		$http.get(projectidOptionsApi)
-		.then(function(data) {
-			$scope.projectidOptions = data.data;
-		});
-	}
-	projectidOptionsLoad();
-
-	function employeeidOptionsLoad() {
-		$http.get(employeeidOptionsApi)
-		.then(function(data) {
-			$scope.employeeidOptions = data.data;
-		});
-	}
-	employeeidOptionsLoad();
-
-	function statusOptionsLoad() {
-		$http.get(statusOptionsApi)
-		.then(function(data) {
-			$scope.statusOptions = data.data;
-		});
-	}
-	statusOptionsLoad();
 
 	$scope.dataPage = 1;
 	$scope.dataCount = 0;
@@ -176,6 +131,7 @@ angular.module('page')
 	$scope.update = function() {
 		if ($scope.entityForm.$valid) {
 			$http.put(api + '/' + $scope.entity.Id, JSON.stringify($scope.entity))
+
 			.then(function(data) {
 				$scope.loadPage($scope.dataPage);
 				toggleEntityModal();
@@ -193,7 +149,7 @@ angular.module('page')
 			toggleEntityModal();
 			$messageHub.messageEntityModified();
 		}, function(data) {
-			alert(JSON.stringify(data));
+			alert(JSON.stringify(data.data));
 		});
 	};
 
@@ -201,59 +157,8 @@ angular.module('page')
 		var entity = $scope.entity;
 	};
 
-	$scope.startOpenCalendar = function($event) {
-		$scope.startCalendarStatus.opened = true;
-	};
-
-	$scope.startCalendarStatus = {
-		opened: false
-	};
-
-	$scope.endOpenCalendar = function($event) {
-		$scope.endCalendarStatus.opened = true;
-	};
-
-	$scope.endCalendarStatus = {
-		opened: false
-	};
-
-	$scope.projectidOptionValue = function(optionKey) {
-		for (var i = 0 ; i < $scope.projectidOptions.length; i ++) {
-			if ($scope.projectidOptions[i].Id === optionKey) {
-				return $scope.projectidOptions[i].Name;
-			}
-		}
-		return null;
-	};
-
-	$scope.employeeidOptionValue = function(optionKey) {
-		for (var i = 0 ; i < $scope.employeeidOptions.length; i ++) {
-			if ($scope.employeeidOptions[i].Id === optionKey) {
-				return $scope.employeeidOptions[i].Name;
-			}
-		}
-		return null;
-	};
-
-	$scope.statusOptionValue = function(optionKey) {
-		for (var i = 0 ; i < $scope.statusOptions.length; i ++) {
-			if ($scope.statusOptions[i].Id === optionKey) {
-				return $scope.statusOptions[i].Name;
-			}
-		}
-		return null;
-	};
 
 	$messageHub.onEntityRefresh($scope.loadPage($scope.dataPage));
-	$messageHub.onProjectModified(projectidOptionsLoad);
-	$messageHub.onEmployeeModified(employeeidOptionsLoad);
-	$messageHub.onTimesheetStatusModified(statusOptionsLoad);
-
-	$scope.selectEntity = function(entity) {
-		$scope.selectedEntity = entity;
-		$messageHub.messageEntitySelected({
-			'id': entity.Id		})
-	};
 
 	function toggleEntityModal() {
 		$('#entityModal').modal('toggle');

@@ -1,0 +1,5 @@
+{
+	"description": "AssignmentRole view",
+	"extensionPoint": "launchpad-chronos-Employees-view",
+	"module": "chronos-app/gen/ui/Employees/views/AssignmentRole/extensions/view.js"
+}

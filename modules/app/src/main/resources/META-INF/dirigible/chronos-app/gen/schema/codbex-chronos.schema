@@ -106,6 +106,12 @@
                         "length": 20,
                         "nullable": true,
                         "name": "ASSIGNMENT_END"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_ROLE"
                     }
                 ]
             },
@@ -184,10 +190,16 @@
                         "name": "TIMESHEET_EMPLOYEEID"
                     },
                     {
-                        "type": "SMALLINT",
-                        "length": 20,
+                        "type": "VARCHAR",
+                        "length": 2000,
                         "nullable": true,
-                        "name": "TIMESHEET_APPROVED"
+                        "name": "TIMESHEET_REASON"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "CHRONOS_TIMESHEET_STATUS"
                     }
                 ]
             },
@@ -270,6 +282,46 @@
                 ]
             },
             {
+                "name": "CHRONOS_TIMESHEETSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TIMESHEETSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "TIMESHEETSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "CHRONOS_ASSIGNMENTROLE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ASSIGNMENTROLE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "nullable": true,
+                        "name": "ASSIGNMENTROLE_NAME"
+                    }
+                ]
+            },
+            {
                 "name": "Project_Employee",
                 "type": "foreignKey",
                 "table": "CHRONOS_PROJECT",
@@ -306,6 +358,15 @@
                 "referencedColumns": "PROJECT_ID"
             },
             {
+                "name": "Assignment_AssignmentRole",
+                "type": "foreignKey",
+                "table": "CHRONOS_ASSIGNMENT",
+                "constraintName": "Assignment_AssignmentRole",
+                "columns": "ASSIGNMENT_ROLE",
+                "referencedTable": "CHRONOS_ASSIGNMENTROLE",
+                "referencedColumns": "ASSIGNMENTROLE_ID"
+            },
+            {
                 "name": "Task_Project",
                 "type": "foreignKey",
                 "table": "CHRONOS_TASK",
@@ -340,6 +401,15 @@
                 "columns": "TIMESHEET_EMPLOYEEID",
                 "referencedTable": "CHRONOS_EMPLOYEE",
                 "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Timesheet_TimesheetStatus",
+                "type": "foreignKey",
+                "table": "CHRONOS_TIMESHEET",
+                "constraintName": "Timesheet_TimesheetStatus",
+                "columns": "CHRONOS_TIMESHEET_STATUS",
+                "referencedTable": "CHRONOS_TIMESHEETSTATUS",
+                "referencedColumns": "TIMESHEETSTATUS_ID"
             },
             {
                 "name": "Item_Timesheet",

@@ -28,6 +28,10 @@ var dao = daoApi.create({
 			name: "End",
 			column: "ASSIGNMENT_END",
 			type: "DATE",
+		}, {
+			name: "Role",
+			column: "ASSIGNMENT_ROLE",
+			type: "INTEGER",
 		}]
 });
 

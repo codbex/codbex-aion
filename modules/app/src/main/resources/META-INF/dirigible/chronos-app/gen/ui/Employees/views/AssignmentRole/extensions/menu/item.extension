@@ -1,0 +1,5 @@
+{
+	"description": "AssignmentRole menu",
+	"extensionPoint": "shell-chronos-app-menu",
+	"module": "chronos-app/gen/ui/Employees/views/AssignmentRole/extensions/menu/item.js"
+}

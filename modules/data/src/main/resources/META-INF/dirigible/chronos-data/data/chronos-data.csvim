@@ -20,5 +20,27 @@
     "delimEnclosing": "\"",
     "distinguishEmptyFromNull": true,
     "keys": []
+  },
+  {
+    "table": "CHRONOS_TIMESHEETSTATUS",
+    "schema": "PUBLIC",
+    "file": "/chronos-data/data/CHRONOS_TIMESHEETSTATUS.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  },
+  {
+    "table": "CHRONOS_ASSIGNMENTROLE",
+    "schema": "PUBLIC",
+    "file": "/chronos-data/data/CHRONOS_ASSIGNMENTROLE.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
   }
 ]

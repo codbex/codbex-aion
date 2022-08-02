@@ -1,5 +1,5 @@
 var rs = require("http/v4/rs");
-var dao = require("chronos-app/gen/dao/Timesheets/Timesheet");
+var dao = require("chronos-app/gen/dao/Employees/AssignmentRole");
 var http = require("chronos-app/gen/api/utils/http");
 
 rs.service()
@@ -43,7 +43,7 @@ rs.service()
 			if (entity) {
 			    http.sendResponseOk(entity);
 			} else {
-				http.sendResponseNotFound("Timesheet not found");
+				http.sendResponseNotFound("AssignmentRole not found");
 			}
 		})
 		.produces(["application/json"])
@@ -60,7 +60,7 @@ rs.service()
 		.post(function(ctx, request, response) {
 			var entity = request.getJSON();
 			entity.Id = dao.create(entity);
-			response.setHeader("Content-Location", "/services/v4/js/chronos-app/gen/api/Timesheet.js/" + entity.Id);
+			response.setHeader("Content-Location", "/services/v4/js/chronos-app/gen/api/AssignmentRole.js/" + entity.Id);
 			http.sendResponseCreated(entity);
 		})
 		.produces(["application/json"])
@@ -98,7 +98,7 @@ rs.service()
 				dao.delete(id);
 				http.sendResponseNoContent();
 			} else {
-				http.sendResponseNotFound("Timesheet not found");
+				http.sendResponseNotFound("AssignmentRole not found");
 			}
 		})
 		.catch(function(ctx, error) {

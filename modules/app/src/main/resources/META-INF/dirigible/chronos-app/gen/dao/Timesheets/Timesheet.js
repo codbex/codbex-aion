@@ -29,9 +29,13 @@ var dao = daoApi.create({
 			column: "TIMESHEET_EMPLOYEEID",
 			type: "INTEGER",
 		}, {
-			name: "Approved",
-			column: "TIMESHEET_APPROVED",
-			type: "SMALLINT",
+			name: "Reason",
+			column: "TIMESHEET_REASON",
+			type: "VARCHAR",
+		}, {
+			name: "Status",
+			column: "CHRONOS_TIMESHEET_STATUS",
+			type: "INTEGER",
 		}]
 });
 
