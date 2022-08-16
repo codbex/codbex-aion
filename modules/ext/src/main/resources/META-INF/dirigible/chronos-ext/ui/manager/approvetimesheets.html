@@ -18,159 +18,111 @@
 
         <link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
 
-        <!-- Title directive -->
-        <title dg-view-title></title>
-
         <script type="text/javascript" src="/services/v4/js/ide-core/services/loader.js?id=ide-view-js"></script>
 
         <script type="text/javascript" src="approvetimesheets.js"></script>
+        <script type="text/javascript" src="/services/v4/web/chronos-ext/services/common/utilities.js"></script>
 
         <link type="text/css" rel="stylesheet" href="/services/v4/js/ide-core/services/loader.js?id=ide-view-css" />
         <theme></theme>
 
+        <link type="text/css" rel="stylesheet" href="style.css" />
+
     </head>
 
-    <body class="page">
-        <section class="fd-section">
-            <div class="fd-section__header">
-                <h3 class="fd-section__title">Chronos / Approve Timesheets</h3>
-            </div>
-            <p><a href='index.html'>back</a> to launchpad</p>
-            <br>
-            <div class="fd-panel fd-panel--fixed">
-                <div class="fd-panel__header">
-                    <h4 class="fd-panel__title">Timesheets approval for week: {{week.start}} - {{week.end}}</h4>
-                    <fd-toolbar dg-type="transparent" no-bottom-border="true" class="search-toolbar">
-                        <fd-toolbar-spacer></fd-toolbar-spacer>
-                    </fd-toolbar>
-                </div>
-                <div role="region" aria-labelledby="jhqDKYrt" class="fd-panel__content">
-                    <div class="fd-container">
-                        <div class="fd-margin--md">
-
-                            <fd-fieldset ng-hide="isProjectFormDisabled()">
-                                <fd-form-group dg-header="Project">
-                                    <fd-form-item horizontal="true">
-                                        <fd-form-label for="project" dg-required="true" dg-colon="true">Project
-                                        </fd-form-label>
-                                        <select id="project" ng-model="manage.project"
-                                            ng-options="project as project.Name for project in projects track by project.Id"
-                                            class="fd-combobox-input"></select>
-                                    </fd-form-item>
-
-                                </fd-form-group>
-                            </fd-fieldset>
-
-                            <div ng-hide="isAddDisabled()">
-                                <div>
-                                    <div>
-                                        <fd-scrollbar>
-                                            <table fd-table fd-table-group style="margin-top: 20px">
-                                                <thead fd-table-header>
-                                                    <tr fd-table-row>
-                                                        <th fd-table-header-cell>#</th>
-                                                        <th fd-table-header-cell>Name</th>
-                                                        <th fd-table-header-cell>Hours</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody fd-table-body ng-repeat="next in timesheets">
-                                                    <tr fd-table-row>
-                                                        <td fd-table-group-cell nesting-level="1" expanded="true">
-                                                            <b>{{next.EmployeeName}}</b>:
-                                                            {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
-                                                            <button ng-show="next.Approved == 0"
-                                                                class="fd-button fd-button--compact is-selected fd-button--positive"
-                                                                ng-click="approveTimesheet(next)">Approve</button>
-                                                            <button ng-show="next.Approved == 1"
-                                                                class="fd-button fd-button--compact is-selected fd-button--negative"
-                                                                ng-click="rejectTimesheet(next)">Reject</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr fd-table-row ng-repeat="item in next.items">
-                                                        <td fd-table-cell nesting-level="2">{{$index + 1}}</td>
-                                                        <td fd-table-cell>{{item.Name}}</td>
-                                                        <td fd-table-cell>{{item.Hours}}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </fd-scrollbar>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div ng-hide="isFinishDisabled()">
-
-                                <h3>Project timesheets: '{{manage.project.Name}}'
-                                </h3>
-
-                                <br>
-                                <br>
-
-                                <div>
-                                    <div>
-                                        <fd-scrollbar dg-header="Tasks details: {{manage.project.Name}}">
-                                            <table fd-table fd-table-group style="margin-top: 20px">
-                                                <thead fd-table-header>
-                                                    <tr fd-table-row>
-                                                        <th fd-table-header-cell>#</th>
-                                                        <th fd-table-header-cell>Name</th>
-                                                        <th fd-table-header-cell>Hours</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody fd-table-body ng-repeat="next in timesheets">
-                                                    <tr fd-table-row>
-                                                        <td fd-table-group-cell nesting-level="1" expanded="true">
-                                                            <b>{{next.EmployeeName}}</b>:
-                                                            {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
-                                                            <span ng-show="next.Approved == 1"
-                                                                class="fd-info-label fd-info-label--accent-color-8">
-                                                                <span class="fd-info-label__text">approved</span>
-                                                            </span>
-                                                            <span ng-show="next.Approved == 0"
-                                                                class="fd-info-label fd-info-label--accent-color-1">
-                                                                <span class="fd-info-label__text">not approved</span>
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr fd-table-row ng-repeat="item in next.items">
-                                                        <td fd-table-cell nesting-level="2">{{$index + 1}}</td>
-                                                        <td fd-table-cell>{{item.Name}}</td>
-                                                        <td fd-table-cell>{{item.Hours}}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </fd-scrollbar>
-                                        </fd-scrollbar>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <br>
-
-                            <div>
-                                <button class="fd-button fd-button--compact" ng-click="nextPage()"
-                                    ng-disabled="isNextDisabled()">Next</button>
-                                <button class="fd-button fd-button--compact" ng-click="previousPage()"
-                                    ng-disabled="isBackDisabled()">Back</button>
-                                <button class="fd-button fd-button--compact is-selected" ng-click="finishProject()"
-                                    ng-hide="isFinishDisabled()">Finish</button>
-                            </div>
+    <body>
+        <main class="fd-page fd-page--solid">
+            <header>
+                <fd-bar bar-design="header" cozy="true" in-page="true" size="m_l">
+                    <fd-bar-left>
+                        <fd-bar-element>
+                            <a href="index.html" class="fd-button fd-button--transparent">
+                                <i class="sap-icon--navigation-left-arrow"></i>
+                            </a>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <h3 fd-title header-size="3">Chronos / Approve Timesheets</h3>
+                        </fd-bar-element>
+                    </fd-bar-left>
+                    <fd-bar-right>
+                        <fd-bar-element>
+                            <button class="fd-button fd-button--transparent" aria-label="See more">
+                                <i class="sap-icon--grid"></i>
+                            </button>
+                        </fd-bar-element>
+                    </fd-bar-right>
+                </fd-bar>
+            </header>
+            <div class="fd-page__content fd-page__content--m_l" role="region">
+                <div>
+                    <div class="dg-hbox page-container">
+                        <div class="dg-stretch dg-vbox">
+                            <fd-toolbar has-title="false" dg-size="cozy" dg-type="solid">
+                                <h4>Project</h4>
+                                <fd-select dropdown-fill="true" ng-model="manage.projectId" ng-change="loadTimesheets()"
+                                    dg-size="compact" dg-placeholder="Select project ...">
+                                    <fd-option ng-repeat="project in projects track by project.Id"
+                                        text="{{ project.Name }}" value="project.Id"></fd-option>
+                                </fd-select>
+                                <fd-toolbar-spacer></fd-toolbar-spacer>
+                                <fd-button dg-type="transparent" glyph="sap-icon--refresh" aria-label="Refresh"
+                                    ng-click="loadTimesheets()"
+                                    state="{{ hasSelectedProject() ? undefined : 'disabled'}}">
+                                </fd-button>
+                            </fd-toolbar>
+                            <fd-scrollbar class="dg-stretch">
+                                <table fd-table fd-table-group display-mode="standard" sticky="true">
+                                    <thead fd-table-header sticky="true">
+                                        <tr fd-table-row>
+                                            <th fd-table-header-cell>Name</th>
+                                            <th fd-table-header-cell width="100px">Hours</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody fd-table-body>
+                                        <tr fd-table-row ng-repeat-start="next in timesheets">
+                                            <td fd-table-group-cell nesting-level="1" expanded="true">
+                                                <b>{{next.EmployeeName}}</b>:
+                                                {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
+                                                <fd-toolbar has-title="false" dg-size="cozy" dg-type="transparent"
+                                                    class="group-cell-toolbar">
+                                                    <fd-button compact="true" dg-type="positive"
+                                                        ng-click="approveTimesheet(next, $event)" dg-label="Approve">
+                                                    </fd-button>
+                                                    <fd-button compact="true" dg-type="negative"
+                                                        ng-click="rejectTimesheet(next, $event)" dg-label="Reject">
+                                                    </fd-button>
+                                                </fd-toolbar>
+                                            </td>
+                                        </tr>
+                                        <tr fd-table-row ng-repeat-end ng-repeat="item in next.items">
+                                            <td fd-table-cell nesting-level="2">{{$index + 1}}. {{item.Name}}</td>
+                                            <td fd-table-cell>{{item.Hours}}</td>
+                                        </tr>
+                                        <tr ng-if="!hasSelectedProject()" fd-table-row>
+                                            <td fd-table-cell no-data="true">Please, select a project from the drop-down
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="hasSelectedProject() && timesheets.length === 0" fd-table-row>
+                                            <td fd-table-cell no-data="true">No timesheets pending for approval
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </fd-scrollbar>
                         </div>
-
                     </div>
+                    <br>
+                    <p class="fd-text">The technology platform used for project <b>Chronos</b> is <a
+                            href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
+                        <br>
+                        All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
+                            target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
+                        maintained at <a href="https://github.com/eclipse/dirigible" target="_blank"
+                            class="fd-link">GitHub</a>.
+                    </p>
                 </div>
             </div>
-            <br>
-            <p class="fd-text">The technology platform used for project <b>Chronos</b> is <a
-                    href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
-                <br>
-                All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
-                    target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
-                maintained at <a href="https://github.com/eclipse/dirigible" target="_blank" class="fd-link">GitHub</a>.
-            </p>
-        </section>
+        </main>
 
     </body>
 

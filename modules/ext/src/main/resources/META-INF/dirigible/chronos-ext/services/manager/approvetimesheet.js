@@ -1,6 +1,7 @@
-var rs = require("http/v4/rs");
-var dao = require("chronos-app/gen/dao/Timesheets/Timesheet");
-var http = require("chronos-app/gen/api/utils/http");
+let rs = require("http/v4/rs");
+let dao = require("chronos-app/gen/dao/Timesheets/Timesheet");
+let http = require("chronos-app/gen/api/utils/http");
+let { TimesheetStatus } = require("chronos-ext/services/common/utilities");
 
 rs.service()
     .resource("")
@@ -19,11 +20,16 @@ rs.service()
     })
     .resource("{id}")
     .post(function (ctx, request, response) {
-        var id = ctx.pathParameters.id;
-        var entity = dao.get(id);
+        let id = ctx.pathParameters.id;
+        let entity = dao.get(id);
         if (entity) {
+            if (entity.Status !== TimesheetStatus.Opened && entity.Status !== TimesheetStatus.Reopened) {
+                http.sendResponseBadRequest('Invalid timesheet status');
+                return;
+            }
+
             entity.Id = ctx.pathParameters.id;
-            entity.Approved = 1;
+            entity.Status = TimesheetStatus.Approved;
             dao.update(entity);
             http.sendResponseOk(entity);
         } else {
