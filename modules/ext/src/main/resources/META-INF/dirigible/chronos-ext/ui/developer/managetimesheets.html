@@ -20,14 +20,25 @@
 
         <script type="text/javascript" src="/services/v4/js/ide-core/services/loader.js?id=ide-view-js"></script>
 
-        <script type="text/javascript" src="approvetimesheets.js"></script>
+        <script type="text/javascript" src="managetimesheets.js"></script>
         <script type="text/javascript" src="/services/v4/web/chronos-ext/services/common/utilities.js"></script>
 
         <link type="text/css" rel="stylesheet" href="/services/v4/js/ide-core/services/loader.js?id=ide-view-css" />
         <theme></theme>
 
-        <link type="text/css" rel="stylesheet" href="style.css" />
+        <link type="text/css" rel="stylesheet" href="../manager/style.css" />
 
+        <style>
+            .timesheet-row>* {
+                vertical-align: middle;
+            }
+
+            .timesheet-row>.sap-icon {
+                font-size: large;
+                margin-right: 5px;
+            }
+
+        </style>
     </head>
 
     <body>
@@ -41,7 +52,7 @@
                             </a>
                         </fd-bar-element>
                         <fd-bar-element>
-                            <h3 fd-title header-size="3">Chronos / Approve Timesheets</h3>
+                            <h3 fd-title header-size="3">Chronos / My Timesheets</h3>
                         </fd-bar-element>
                     </fd-bar-left>
                     <fd-bar-right>
@@ -76,21 +87,35 @@
                                         <tr fd-table-row>
                                             <th fd-table-header-cell>Name</th>
                                             <th fd-table-header-cell>Description</th>
-                                            <th fd-table-header-cell width="100">Hours</th>
+                                            <th fd-table-header-cell width="100px">Hours</th>
+                                            <th fd-table-header-cell width="100px"></th>
                                         </tr>
                                     </thead>
                                     <tbody fd-table-body>
                                         <tr fd-table-row ng-repeat-start="next in timesheets">
                                             <td fd-table-group-cell nesting-level="1" expanded="true">
-                                                <b>{{next.EmployeeName}}</b>:
-                                                {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
+                                                <span class="timesheet-row">
+                                                    <span ng-class="getStatusClassNames(next.StatusId)"
+                                                        title="{{ (next.StatusName) }}"></span>
+                                                    <span>{{next.Start}} - {{next.End}} [<b>{{next.Hours}} of
+                                                            40</b>]</span>
+                                                    <em ng-if="next.Reason">
+                                                        <span fd-object-status status="negative"
+                                                            text="({{ next.Reason }})"></span>
+                                                    </em>
+                                                </span>
                                                 <fd-toolbar has-title="false" dg-size="cozy" dg-type="transparent"
                                                     no-bottom-border="true" class="group-cell-toolbar">
-                                                    <fd-button compact="true" dg-type="positive"
-                                                        ng-click="approveTimesheet(next, $event)" dg-label="Approve">
+                                                    <fd-button compact="true" dg-type="transparent" dg-label="Add Task"
+                                                        ng-click="showItemDialog($event, next.Id)">
+                                                    </fd-button>
+                                                    <fd-toolbar-separator></fd-toolbar-separator>
+                                                    <fd-button ng-if="isTimesheetRejected(next)" compact="true"
+                                                        dg-type="positive" ng-click="reopenTimesheet(next, $event)"
+                                                        dg-label="Reopen">
                                                     </fd-button>
                                                     <fd-button compact="true" dg-type="negative"
-                                                        ng-click="showRejectDialog(next, $event)" dg-label="Reject">
+                                                        ng-click="deleteTimesheet(next, $event)" dg-label="Delete">
                                                     </fd-button>
                                                 </fd-toolbar>
                                             </td>
@@ -99,13 +124,22 @@
                                             <td fd-table-cell nesting-level="2">{{$index + 1}}. {{item.Name}}</td>
                                             <td fd-table-cell>{{item.Description}}</td>
                                             <td fd-table-cell>{{item.Hours}}</td>
+                                            <td fd-table-cell width="100px">
+                                                <fd-button dg-type="transparent" glyph="sap-icon--edit" title="Edit"
+                                                    aria-label="Edit" ng-click="showItemDialog($event, next.Id, item)">
+                                                </fd-button>
+                                                <fd-button dg-type="transparent" glyph="sap-icon--delete" title="Remove"
+                                                    aria-label="Remove" ng-click="deleteTimesheetItem(item.Id)"
+                                                    state="{{next.items.length > 1 ? undefined: 'disabled'}}">
+                                                </fd-button>
+                                            </td>
                                         </tr>
                                         <tr ng-if="!hasSelectedProject()" fd-table-row>
                                             <td fd-table-cell no-data="true">Please, select a project from the drop-down
                                             </td>
                                         </tr>
                                         <tr ng-if="hasSelectedProject() && timesheets.length === 0" fd-table-row>
-                                            <td fd-table-cell no-data="true">No timesheets pending for approval
+                                            <td fd-table-cell no-data="true">No timesheets
                                             </td>
                                         </tr>
                                     </tbody>
@@ -126,39 +160,62 @@
             </div>
         </main>
 
-        <section ng-show="reject.showDialog" class="fd-dialog-docs-static fd-dialog fd-dialog--active ts-dialog">
-            <div class="fd-dialog__content fd-dialog__content--draggable-grab fd-dialog__content--s" role="dialog"
-                aria-modal="true" aria-labelledby="dialog-title-7">
+        <section ng-show="manage.showDialog" class="fd-dialog-docs-static fd-dialog fd-dialog--active ts-dialog">
+            <div class="fd-dialog__content fd-dialog__content--s" role="dialog" aria-modal="true"
+                aria-labelledby="dialog-title-add-task">
                 <header class="fd-dialog__header fd-bar fd-bar--header">
                     <div class="fd-bar__left">
                         <div class="fd-bar__element">
-                            <h2 class="fd-title fd-title--h5" id="dialog-title-7">
-                                Reject Timesheet
+                            <h2 class="fd-title fd-title--h5" id="dialog-title-add-task">
+                                {{ manage.timesheetItem.Id ? 'Edit Task': 'Add New Task' }}
                             </h2>
                         </div>
                     </div>
                 </header>
                 <div class="fd-dialog__body">
-                    Please, provide a reason for the rejection
-                    <div class="fd-container fd-form-layout-grid-container fd-form-layout-grid-container--vertical">
-                        <div class="fd-row">
-                            <div class="fd-col">
-                                <input class="fd-input" type="text" id="reason" ng-model="reject.reason"
-                                    placeholder="Reason ...">
-                            </div>
-                        </div>
+                    <div style="width: 500px; padding-bottom:100px">
+                        <fd-form-item>
+                            <fd-form-label id="taskLabel" dg-required="true" dg-colon="true">Task
+                            </fd-form-label>
+                            <fd-select dropdown-fill="true" ng-model="manage.timesheetItem.TaskId"
+                                dg-placeholder="Select task..." label-id="taskLabel">
+                                <fd-option ng-repeat="task in manage.tasks track by task.Id" text="{{ task.Name }}"
+                                    value="task.Id"></fd-option>
+                            </fd-select>
+                        </fd-form-item>
+                        <fd-form-item>
+                            <fd-form-label for="hours" dg-required="true" dg-colon="true">Hours
+                            </fd-form-label>
+                            <fd-input id="hours" type="number" placeholder="Enter hours spent"
+                                ng-model="manage.timesheetItem.Hours" type="number" min="1" max="{{maxHoursPerWeek}}"
+                                ng-required>
+                            </fd-input>
+                        </fd-form-item>
+
+                        <fd-form-item>
+                            <fd-form-label for="description" dg-required="false" dg-colon="true">Description
+                            </fd-form-label>
+                            <fd-input id="description" type="text" placeholder="Enter description"
+                                ng-model="manage.timesheetItem.Description" required="required">
+                            </fd-input>
+                        </fd-form-item>
                     </div>
                 </div>
                 <footer class="fd-dialog__footer fd-bar fd-bar--footer">
                     <div class="fd-bar__right">
                         <div class="fd-bar__element">
-                            <fd-button dg-type="emphasized" class="fd-dialog__decisive-button" compact="true"
-                                dg-label="Reject" ng-click="rejectTimesheet()">
+                            <fd-button ng-if="!manage.timesheetItem.Id" dg-type="emphasized"
+                                class="fd-dialog__decisive-button" compact="true" dg-label="Add New Task"
+                                ng-click="addTimesheetItem()" state="{{ getAddTaskButtonState() }}">
+                            </fd-button>
+                            <fd-button ng-if="manage.timesheetItem.Id" dg-type="emphasized"
+                                class="fd-dialog__decisive-button" compact="true" dg-label="Save"
+                                ng-click="saveTimesheetItem()" state="{{ getAddTaskButtonState() }}">
                             </fd-button>
                         </div>
                         <div class="fd-bar__element">
                             <fd-button dg-type="transparent" class="fd-dialog__decisive-button" compact="true"
-                                dg-label="Cancel" ng-click="hideRejectDialog()"></fd-button>
+                                dg-label="Cancel" ng-click="hideItemDialog()"></fd-button>
                         </div>
                     </div>
                 </footer>

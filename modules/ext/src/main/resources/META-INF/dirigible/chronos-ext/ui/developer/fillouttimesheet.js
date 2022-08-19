@@ -19,16 +19,23 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
 
     $http.get('/services/v4/js/chronos-ext/services/common/myprojects.js').then(function (response) {
         $scope.projects = response.data;
-    });
 
-    $scope.$watch('timesheet.projectId', function (newProjectId) {
-        if (newProjectId) {
-            $http.get('/services/v4/js/chronos-ext/services/developer/mytasks.js?ProjectId=' + newProjectId).then(function (response) {
-                $scope.tasks = response.data;
-                $scope.items = [];
-            });
+        if ($scope.projects.length == 1) {
+            $scope.timesheet.projectId = $scope.projects[0].Id;
+            $scope.loadTasks();
         }
     });
+
+    $scope.loadTasks = function () {
+        const { projectId } = $scope.timesheet;
+        if (projectId) {
+            $http.get(`/services/v4/js/chronos-ext/services/developer/mytasks.js?ProjectId=${projectId}`)
+                .then(function (response) {
+                    $scope.tasks = response.data;
+                    $scope.items = [];
+                });
+        }
+    };
 
     $http.get('/services/v4/js/chronos-ext/services/common/myuser.js').then(function (response) {
         $scope.userid = response.data;

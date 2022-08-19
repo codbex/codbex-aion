@@ -10,3 +10,7 @@
   float: right;
   display: inline-flex;
 }
+
+.ts-dialog {
+  z-index: 1000;
+}

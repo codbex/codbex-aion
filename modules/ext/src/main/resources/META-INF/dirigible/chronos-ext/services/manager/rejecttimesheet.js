@@ -21,6 +21,7 @@ rs.service()
     .resource("{id}")
     .post(function (ctx, request, response) {
         var id = ctx.pathParameters.id;
+        var data = request.getJSON();
         var entity = dao.get(id);
         if (entity) {
             if (entity.Status !== TimesheetStatus.Opened && entity.Status !== TimesheetStatus.Reopened) {
@@ -29,6 +30,7 @@ rs.service()
             }
 
             entity.Id = ctx.pathParameters.id;
+            entity.Reason = data.reason;
             entity.Status = TimesheetStatus.Rejected;
             dao.update(entity);
             http.sendResponseOk(entity);

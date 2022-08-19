@@ -66,8 +66,8 @@
                                 <fd-form-item>
                                     <fd-form-label id="projectLabel" dg-required="true" dg-colon="true">Project
                                     </fd-form-label>
-                                    <fd-select dropdown-fill="true" selected-value="timesheet.projectId"
-                                        label-id="projectLabel">
+                                    <fd-select dropdown-fill="true" ng-model="timesheet.projectId"
+                                        ng-change="loadTasks()" label-id="projectLabel">
                                         <fd-option ng-repeat="project in projects track by project.Id"
                                             text="{{ project.Name }}" value="project.Id"></fd-option>
                                     </fd-select>

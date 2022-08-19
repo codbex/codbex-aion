@@ -7,6 +7,11 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
     $scope.projects = [];
     $scope.timesheets = [];
     $scope.manage = {};
+    $scope.reject = {
+        showDialog: false,
+        timesheet: {},
+        reason: ''
+    };
 
     const removeTimesheet = function (timesheet) {
         const index = $scope.timesheets.findIndex(x => x.Id === timesheet.Id);
@@ -51,15 +56,31 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
             });
     }
 
-    $scope.rejectTimesheet = function (timesheet, e) {
-        e.stopPropagation();
+    $scope.rejectTimesheet = function () {
+        const { timesheet, reason } = $scope.reject;
+        if (!timesheet.Id)
+            return;
 
-        $http.post('/services/v4/js/chronos-ext/services/manager/rejecttimesheet.js/' + timesheet.Id)
+        $http.post('/services/v4/js/chronos-ext/services/manager/rejecttimesheet.js/' + timesheet.Id, { reason })
             .then(function (data) {
                 removeTimesheet(timesheet);
+                $scope.hideRejectDialog();
             }, function (data) {
                 alert('Error: ' + JSON.stringify(data.data));
             });
     }
+
+    $scope.showRejectDialog = function (timesheet, e) {
+        e.stopPropagation();
+        $scope.reject.timesheet = timesheet;
+        $scope.reject.showDialog = true;
+    }
+
+    $scope.hideRejectDialog = function () {
+        $scope.reject.reason = '';
+        $scope.reject.timesheet = {};
+        $scope.reject.showDialog = false;
+    }
+
 }]);
 
