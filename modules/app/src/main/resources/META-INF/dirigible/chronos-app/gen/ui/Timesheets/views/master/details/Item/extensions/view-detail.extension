@@ -1,5 +1,0 @@
-{
-	"description": "Item view",
-	"extensionPoint": "launchpad-chronos-Timesheets-Timesheet-view",
-	"module": "chronos-app/gen/ui/Timesheets/views/master/details/Item/extensions/view.js"
-}

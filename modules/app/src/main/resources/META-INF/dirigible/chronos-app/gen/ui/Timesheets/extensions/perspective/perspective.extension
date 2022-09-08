@@ -1,5 +1,0 @@
-{
-	"description": "Timesheets perspective",
-	"extensionPoint": "launchpad-chronos-perspective",
-	"module": "chronos-app/gen/ui/Timesheets/extensions/perspective/perspective.js"
-}

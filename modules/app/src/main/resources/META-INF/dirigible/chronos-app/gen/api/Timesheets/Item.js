@@ -1,16 +1,16 @@
-var rs = require("http/v4/rs");
-var dao = require("chronos-app/gen/dao/Timesheets/Item");
-var http = require("chronos-app/gen/api/utils/http");
+const rs = require("http/v4/rs");
+const dao = require("chronos-app/gen/dao/Timesheets/Item");
+const http = require("chronos-app/gen/api/utils/http");
 
 rs.service()
 	.resource("")
 		.get(function(ctx, request) {
-			var queryOptions = {};
-			var parameters = request.getParameterNames();
-			for (var i = 0; i < parameters.length; i ++) {
+			let queryOptions = {};
+			let parameters = request.getParameterNames();
+			for (let i = 0; i < parameters.length; i ++) {
 				queryOptions[parameters[i]] = request.getParameter(parameters[i]);
 			}
-			var entities = dao.list(queryOptions);
+			let entities = dao.list(queryOptions);
 			http.sendResponseOk(entities);
 		})
 		.produces(["application/json"])
@@ -23,9 +23,10 @@ rs.service()
 				http.sendInternalServerError(error.message);
 			}
         })
-	.resource("count")
+	.resource("count/{TimesheetId}")
 		.get(function(ctx, request) {
-			http.sendResponseOk(dao.count());
+			let TimesheetId = ctx.pathParameters.TimesheetId;
+			http.sendResponseOk("" + dao.count(TimesheetId));
 		})
 		.catch(function(ctx, error) {
             if (error.name === "ForbiddenError") {
@@ -38,8 +39,8 @@ rs.service()
         })
 	.resource("{id}")
 		.get(function(ctx) {
-			var id = ctx.pathParameters.id;
-			var entity = dao.get(id);
+			let id = ctx.pathParameters.id;
+			let entity = dao.get(id);
 			if (entity) {
 			    http.sendResponseOk(entity);
 			} else {
@@ -58,7 +59,7 @@ rs.service()
         })
 	.resource("")
 		.post(function(ctx, request, response) {
-			var entity = request.getJSON();
+			let entity = request.getJSON();
 			entity.Id = dao.create(entity);
 			response.setHeader("Content-Location", "/services/v4/js/chronos-app/gen/api/Item.js/" + entity.Id);
 			http.sendResponseCreated(entity);
@@ -75,7 +76,7 @@ rs.service()
         })
 	.resource("{id}")
 		.put(function(ctx, request) {
-			var entity = request.getJSON();
+			let entity = request.getJSON();
 			entity.Id = ctx.pathParameters.id;
 			dao.update(entity);
 			http.sendResponseOk(entity);
@@ -92,8 +93,8 @@ rs.service()
         })
 	.resource("{id}")
 		.delete(function(ctx) {
-			var id = ctx.pathParameters.id;
-			var entity = dao.get(id);
+			let id = ctx.pathParameters.id;
+			let entity = dao.get(id);
 			if (entity) {
 				dao.delete(id);
 				http.sendResponseNoContent();

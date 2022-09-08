@@ -1,5 +1,0 @@
-{
-	"expression": "0 0 0 1 * ? *",
-	"handler": "chronos-app/gen/feed/Projects/TaskFeedSynchronizer.js",
-	"description": "TaskFeedSynchronizer Job"
-}

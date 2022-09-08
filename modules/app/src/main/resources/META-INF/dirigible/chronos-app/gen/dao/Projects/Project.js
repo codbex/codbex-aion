@@ -1,9 +1,9 @@
-var query = require("db/v4/query");
-var producer = require("messaging/v4/producer");
-var daoApi = require("db/v4/dao");
-var EntityUtils = require("chronos-app/gen/dao/utils/EntityUtils");
+const query = require("db/v4/query");
+const producer = require("messaging/v4/producer");
+const daoApi = require("db/v4/dao");
+const EntityUtils = require("chronos-app/gen/dao/utils/EntityUtils");
 
-var dao = daoApi.create({
+let dao = daoApi.create({
 	table: "CHRONOS_PROJECT",
 	properties: [
 		{
@@ -12,48 +12,54 @@ var dao = daoApi.create({
 			type: "INTEGER",
 			id: true,
 			autoIncrement: true,
-		}, {
+		},
+ {
 			name: "Name",
 			column: "PROJECT_NAME",
 			type: "VARCHAR",
-		}, {
+		},
+ {
 			name: "Start",
 			column: "PROJECT_START",
 			type: "DATE",
-		}, {
+		},
+ {
 			name: "End",
 			column: "PROJECT_END",
 			type: "DATE",
-		}, {
+		},
+ {
 			name: "EmployeeId",
 			column: "PROJECT_EMPLOYEEID",
 			type: "INTEGER",
-		}, {
+		},
+ {
 			name: "ProjectStatusId",
 			column: "PROJECT_PROJECTSTATUSID",
 			type: "INTEGER",
-		}]
+		}
+]
 });
 
 exports.list = function(settings) {
 	return dao.list(settings).map(function(e) {
-		EntityUtils.setLocalDate(e, "Start");
-		EntityUtils.setLocalDate(e, "End");
+		EntityUtils.setDate(e, "Start");
+		EntityUtils.setDate(e, "End");
 		return e;
 	});
 };
 
 exports.get = function(id) {
-	var entity = dao.find(id);
-	EntityUtils.setLocalDate(entity, "Start");
-	EntityUtils.setLocalDate(entity, "End");
+	let entity = dao.find(id);
+	EntityUtils.setDate(entity, "Start");
+	EntityUtils.setDate(entity, "End");
 	return entity;
 };
 
 exports.create = function(entity) {
 	EntityUtils.setLocalDate(entity, "Start");
 	EntityUtils.setLocalDate(entity, "End");
-	var id = dao.insert(entity);
+	let id = dao.insert(entity);
 	triggerEvent("Create", {
 		table: "CHRONOS_PROJECT",
 		key: {
@@ -66,8 +72,8 @@ exports.create = function(entity) {
 };
 
 exports.update = function(entity) {
-	EntityUtils.setLocalDate(entity, "Start");
-	EntityUtils.setLocalDate(entity, "End");
+	// EntityUtils.setLocalDate(entity, "Start");
+	// EntityUtils.setLocalDate(entity, "End");
 	dao.update(entity);
 	triggerEvent("Update", {
 		table: "CHRONOS_PROJECT",
@@ -96,7 +102,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_PROJECT");
+	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_PROJECT");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

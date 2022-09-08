@@ -1,5 +1,0 @@
-{
-	"description": "Projects view",
-	"extensionPoint": "launchpad-chronos-Projects-view",
-	"module": "chronos-app/gen/ui/Projects/views/master/Project/extensions/view.js"
-}

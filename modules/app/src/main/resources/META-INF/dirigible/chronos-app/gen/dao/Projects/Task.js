@@ -1,8 +1,8 @@
-var query = require("db/v4/query");
-var producer = require("messaging/v4/producer");
-var daoApi = require("db/v4/dao");
+const query = require("db/v4/query");
+const producer = require("messaging/v4/producer");
+const daoApi = require("db/v4/dao");
 
-var dao = daoApi.create({
+let dao = daoApi.create({
 	table: "CHRONOS_TASK",
 	properties: [
 		{
@@ -11,23 +11,28 @@ var dao = daoApi.create({
 			type: "INTEGER",
 			id: true,
 			autoIncrement: true,
-		}, {
+		},
+ {
 			name: "Name",
 			column: "TASK_NAME",
 			type: "VARCHAR",
-		}, {
+		},
+ {
 			name: "Link",
 			column: "TASK_LINK",
 			type: "VARCHAR",
-		}, {
+		},
+ {
 			name: "ProjectId",
 			column: "TASK_PROJECTID",
 			type: "INTEGER",
-		}, {
+		},
+ {
 			name: "TaskStatusId",
 			column: "TASK_TASKSTATUSID",
 			type: "INTEGER",
-		}]
+		}
+]
 });
 
 exports.list = function(settings) {
@@ -39,7 +44,7 @@ exports.get = function(id) {
 };
 
 exports.create = function(entity) {
-	var id = dao.insert(entity);
+	let id = dao.insert(entity);
 	triggerEvent("Create", {
 		table: "CHRONOS_TASK",
 		key: {
@@ -75,12 +80,20 @@ exports.delete = function(id) {
 	});
 };
 
-exports.count = function() {
-	return dao.count();
+exports.count = function (ProjectId) {
+	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK WHERE TASK_PROJECTID = ?", [ProjectId]);
+	if (resultSet !== null && resultSet[0] !== null) {
+		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
+			return resultSet[0].COUNT;
+		} else if (resultSet[0].count !== undefined && resultSet[0].count !== null) {
+			return resultSet[0].count;
+		}
+	}
+	return 0;
 };
 
 exports.customDataCount = function() {
-	var resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK");
+	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK");
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

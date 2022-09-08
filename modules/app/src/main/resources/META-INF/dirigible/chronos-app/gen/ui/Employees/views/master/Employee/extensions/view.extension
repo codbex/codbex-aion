@@ -1,5 +1,0 @@
-{
-	"description": "Employees view",
-	"extensionPoint": "launchpad-chronos-Employees-view",
-	"module": "chronos-app/gen/ui/Employees/views/master/Employee/extensions/view.js"
-}

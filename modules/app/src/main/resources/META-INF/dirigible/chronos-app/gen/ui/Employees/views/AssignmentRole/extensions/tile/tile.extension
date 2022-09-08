@@ -1,5 +1,0 @@
-{
-	"description": "Employees tiles",
-	"extensionPoint": "launchpad-chronos-tiles",
-	"module": "chronos-app/gen/ui/Employees/views/AssignmentRole/extensions/tile/tile.js"
-}

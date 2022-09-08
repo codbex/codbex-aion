@@ -1,0 +1,4 @@
+{
+    "name": "chronos-app-tile",
+    "description": "chronos-app - Extension Point for the Application Tile Providers"
+}

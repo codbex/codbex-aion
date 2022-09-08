@@ -1,5 +1,0 @@
-{
-	"description": "TimesheetStatus menu",
-	"extensionPoint": "shell-chronos-app-menu",
-	"module": "chronos-app/gen/ui/Timesheets/views/TimesheetStatus/extensions/menu/item.js"
-}

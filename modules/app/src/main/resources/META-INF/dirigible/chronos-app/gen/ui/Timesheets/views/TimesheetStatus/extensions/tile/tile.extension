@@ -1,5 +1,0 @@
-{
-	"description": "Timesheets tiles",
-	"extensionPoint": "launchpad-chronos-tiles",
-	"module": "chronos-app/gen/ui/Timesheets/views/TimesheetStatus/extensions/tile/tile.js"
-}

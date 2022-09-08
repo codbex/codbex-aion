@@ -162,6 +162,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Project Status",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Project_ProjectStatus",
@@ -238,6 +239,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Project",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Assignment_Project",
@@ -392,6 +394,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Task Status",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Task_TaskStatus",
@@ -476,6 +479,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Project",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Timesheet_Project",
@@ -496,6 +500,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Employee",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Timesheet_Employee",
@@ -531,6 +536,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Timesheet Status",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Timesheet_TimesheetStatus",
@@ -583,6 +589,7 @@
                         "isCalculatedProperty": "false",
                         "name": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Task Status Name",
                         "widgetLength": "50",
                         "widgetType": "TEXTBOX"
                     }
@@ -632,6 +639,7 @@
                         "isCalculatedProperty": "false",
                         "name": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Project Status Name",
                         "widgetLength": "50",
                         "widgetType": "TEXTBOX"
                     }
@@ -703,6 +711,7 @@
                         "widgetDropDownKey": "Id",
                         "widgetDropDownValue": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Task",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Item_Task",
@@ -834,6 +843,7 @@
                         "isCalculatedProperty": "false",
                         "name": "Name",
                         "widgetIsMajor": "true",
+                        "widgetLabel": "Role Name",
                         "widgetLength": "200",
                         "widgetType": "TEXTBOX"
                     }
