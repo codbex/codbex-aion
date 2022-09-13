@@ -1,5 +1,0 @@
-{
-    "module": "chronos-app/gen/ui/core/launchpad/Home/view.js",
-    "extensionPoint": "chronos-app-view",
-    "description": "chronos-app - Application View"
-}
