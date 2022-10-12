@@ -151,7 +151,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/v4/js/chronos-app/gen/api/Projects/ProjectStatus.js").then(function (response) {
+		$http.get("/services/v4/js/chronos-app/gen/api/Configurations/ProjectStatus.js").then(function (response) {
 			$scope.optionsProjectStatusId = response.data.map(e => {
 				return {
 					value: e.Id,

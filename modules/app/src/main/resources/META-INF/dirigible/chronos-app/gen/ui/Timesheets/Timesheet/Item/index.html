@@ -9,9 +9,9 @@
 		<title dg-brand-title></title>
 		<theme></theme>
 		<script type="text/javascript"
-			src="/services/v4/js/ide-core/services/loader.js?id=application-view-js"></script>
+			src="/services/v4/js/resources-core/services/loader.js?id=application-view-js"></script>
 		<link type="text/css" rel="stylesheet"
-			href="/services/v4/js/ide-core/services/loader.js?id=application-view-css" />
+			href="/services/v4/js/resources-core/services/loader.js?id=application-view-css" />
 
 		<script type="text/javascript" src="controller.js"></script>
 	</head>
@@ -33,7 +33,6 @@
 				<thead fd-table-header sticky="true">
 					<tr fd-table-row>
 						<th fd-table-header-cell>Task</th>
-						<th fd-table-header-cell>Description</th>
 						<th fd-table-header-cell>Hours</th>
 						<th fd-table-header-cell></th>
 					</tr>
@@ -47,7 +46,6 @@
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
 							{{optionsTaskIdValue(next.TaskId)}}
 						</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.Description}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.Hours}}</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>

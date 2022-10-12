@@ -9,9 +9,9 @@
 		<title dg-brand-title></title>
 		<theme></theme>
 		<script type="text/javascript"
-			src="/services/v4/js/ide-core/services/loader.js?id=application-view-js"></script>
+			src="/services/v4/js/resources-core/services/loader.js?id=application-view-js"></script>
 		<link type="text/css" rel="stylesheet"
-			href="/services/v4/js/ide-core/services/loader.js?id=application-view-css" />
+			href="/services/v4/js/resources-core/services/loader.js?id=application-view-css" />
 
 		<script type="text/javascript" src="controller.js"></script>
 	</head>
@@ -38,9 +38,9 @@
 						<fd-list-content
 							item-title="{{next.Name}}">
 							<fd-list-byline dg-align="left">
+								{{optionsEmployeeIdValue(next.EmployeeId)}} |
 								{{next.Start | date: "dd/MMM/yyyy"}} |
 								{{next.End | date: "dd/MMM/yyyy"}} |
-								{{optionsEmployeeIdValue(next.EmployeeId)}} |
 								{{optionsProjectStatusIdValue(next.ProjectStatusId)}}
 							</fd-list-byline>
 						</fd-list-content>

@@ -17,26 +17,31 @@ let dao = daoApi.create({
 			name: "Name",
 			column: "PROJECT_NAME",
 			type: "VARCHAR",
-		},
- {
-			name: "Start",
-			column: "PROJECT_START",
-			type: "DATE",
-		},
- {
-			name: "End",
-			column: "PROJECT_END",
-			type: "DATE",
+			required: true
 		},
  {
 			name: "EmployeeId",
 			column: "PROJECT_EMPLOYEEID",
 			type: "INTEGER",
+			required: true
+		},
+ {
+			name: "Start",
+			column: "PROJECT_START",
+			type: "DATE",
+			required: true
+		},
+ {
+			name: "End",
+			column: "PROJECT_END",
+			type: "DATE",
+			required: true
 		},
  {
 			name: "ProjectStatusId",
 			column: "PROJECT_PROJECTSTATUSID",
 			type: "INTEGER",
+			required: true
 		}
 ]
 });
@@ -102,7 +107,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_PROJECT");
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_PROJECT"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

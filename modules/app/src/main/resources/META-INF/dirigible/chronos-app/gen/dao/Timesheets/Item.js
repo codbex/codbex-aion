@@ -21,6 +21,7 @@ let dao = daoApi.create({
 			name: "TaskId",
 			column: "ITEM_TASKID",
 			type: "INTEGER",
+			required: true
 		},
  {
 			name: "Description",
@@ -31,6 +32,7 @@ let dao = daoApi.create({
 			name: "Hours",
 			column: "ITEM_HOURS",
 			type: "INTEGER",
+			required: true
 		}
 ]
 });
@@ -81,7 +83,7 @@ exports.delete = function(id) {
 };
 
 exports.count = function (TimesheetId) {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_ITEM WHERE ITEM_TIMESHEETID = ?", [TimesheetId]);
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_ITEM" WHERE "ITEM_TIMESHEETID" = ?', [TimesheetId]);
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -93,7 +95,7 @@ exports.count = function (TimesheetId) {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_ITEM");
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_ITEM"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

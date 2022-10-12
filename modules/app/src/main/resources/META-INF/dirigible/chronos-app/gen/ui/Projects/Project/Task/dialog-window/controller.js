@@ -24,6 +24,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				if ($scope.action === "create") {
 					// Set Errors for required fields only
 					$scope.formErrors = {
+						Name: true,
+						TaskStatusId: true,
 
 					};
 				}

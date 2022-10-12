@@ -9,9 +9,9 @@
         <title dg-brand-title></title>
         <theme></theme>
         <script type="text/javascript"
-            src="/services/v4/js/ide-core/services/loader.js?id=application-view-js"></script>
+            src="/services/v4/js/resources-core/services/loader.js?id=application-view-js"></script>
         <link type="text/css" rel="stylesheet"
-            href="/services/v4/js/ide-core/services/loader.js?id=application-view-css" />
+            href="/services/v4/js/resources-core/services/loader.js?id=application-view-css" />
 
         <script type="text/javascript" src="controller.js"></script>
     </head>
@@ -22,12 +22,12 @@
             <fd-fieldset class="fd-margin--md" ng-form="formFieldset">
                 <fd-form-group dg-header="{{formHeaders[action]}}" name="entityForm">
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idName" dg-required="false" dg-colon="true">Name</fd-form-label>
+                        <fd-form-label for="idName" dg-required="true" dg-colon="true">Name</fd-form-label>
                         <fd-form-input-message-group dg-inactive="{{ formErrors.Name ? false : true }}">
                             <fd-input id="idName"
                                 name="Name"
                                 state="{{ formErrors.Name ? 'error' : '' }}"
-								ng-required="false"
+								ng-required="true"
                                 ng-change="isValid(formFieldset['Name'].$valid, 'Name')"
                                 ng-model="entity.Name"
                                 ng-readonly="action === 'select'"
@@ -41,19 +41,19 @@
                         </fd-form-input-message-group>
                     </fd-form-item>
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idEmail" dg-required="false" dg-colon="true">Email</fd-form-label>
+                        <fd-form-label for="idEmail" dg-required="true" dg-colon="true">Email</fd-form-label>
                         <fd-form-input-message-group dg-inactive="{{ formErrors.Email ? false : true }}">
                             <fd-input id="idEmail"
                                 name="Email"
                                 state="{{ formErrors.Email ? 'error' : '' }}"
-								ng-required="false"
+								ng-required="true"
                                 ng-change="isValid(formFieldset['Email'].$valid, 'Email')"
                                 ng-model="entity.Email"
                                 ng-readonly="action === 'select'"
                                 ng-minlength="0.0 || 0"
                                 ng-maxlength="100.0 || -1"
                                 dg-input-rules="{ patterns: [''] }"
-                                type="text"
+                                type="email"
                                 placeholder="Enter Email">
                             </fd-input>
                             <fd-form-message dg-type="error">Incorrect Input</fd-form-message>

@@ -9,9 +9,9 @@
         <title dg-brand-title></title>
         <theme></theme>
         <script type="text/javascript"
-            src="/services/v4/js/ide-core/services/loader.js?id=application-view-js"></script>
+            src="/services/v4/js/resources-core/services/loader.js?id=application-view-js"></script>
         <link type="text/css" rel="stylesheet"
-            href="/services/v4/js/ide-core/services/loader.js?id=application-view-css" />
+            href="/services/v4/js/resources-core/services/loader.js?id=application-view-css" />
 
         <script type="text/javascript" src="controller.js"></script>
     </head>
@@ -22,37 +22,7 @@
             <fd-fieldset class="fd-margin--md" ng-form="formFieldset">
                 <fd-form-group dg-header="{{formHeaders[action]}}" name="entityForm">
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idStart" dg-required="false" dg-colon="true">Start</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.Start ? false : true }}">
-                            <fd-input id="idStart"
-                                name="Start"
-                                state="{{ formErrors.Start ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['Start'].$valid, 'Start')"
-                                ng-model="entity.Start"
-                                ng-readonly="action === 'select'"
-                                type="date">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
-                    </fd-form-item>
-                    <fd-form-item horizontal="false">
-                        <fd-form-label for="idEnd" dg-required="false" dg-colon="true">End</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.End ? false : true }}">
-                            <fd-input id="idEnd"
-                                name="End"
-                                state="{{ formErrors.End ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['End'].$valid, 'End')"
-                                ng-model="entity.End"
-                                ng-readonly="action === 'select'"
-                                type="date">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
-                    </fd-form-item>
-                    <fd-form-item horizontal="false">
-                        <fd-form-label for="idProjectId" dg-required="false" dg-colon="true">Project</fd-form-label>
+                        <fd-form-label for="idProjectId" dg-required="true" dg-colon="true">Project</fd-form-label>
                         <fd-combobox-input id="idProjectId"
                             name="ProjectId"
                             state="{{ formErrors.ProjectId ? 'error' : '' }}"
@@ -65,7 +35,7 @@
                         </fd-combobox-input>
                     </fd-form-item>
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idEmployeeId" dg-required="false" dg-colon="true">Employee</fd-form-label>
+                        <fd-form-label for="idEmployeeId" dg-required="true" dg-colon="true">Employee</fd-form-label>
                         <fd-combobox-input id="idEmployeeId"
                             name="EmployeeId"
                             state="{{ formErrors.EmployeeId ? 'error' : '' }}"
@@ -76,6 +46,36 @@
                             dropdown-items="optionsEmployeeId"
                             dg-placeholder="Search Employee ...">
                         </fd-combobox-input>
+                    </fd-form-item>
+                    <fd-form-item horizontal="false">
+                        <fd-form-label for="idStart" dg-required="true" dg-colon="true">Start</fd-form-label>
+                        <fd-form-input-message-group dg-inactive="{{ formErrors.Start ? false : true }}">
+                            <fd-input id="idStart"
+                                name="Start"
+                                state="{{ formErrors.Start ? 'error' : '' }}"
+								ng-required="true"
+                                ng-change="isValid(formFieldset['Start'].$valid, 'Start')"
+                                ng-model="entity.Start"
+                                ng-readonly="action === 'select'"
+                                type="date">
+                            </fd-input>
+                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
+                        </fd-form-input-message-group>
+                    </fd-form-item>
+                    <fd-form-item horizontal="false">
+                        <fd-form-label for="idEnd" dg-required="true" dg-colon="true">End</fd-form-label>
+                        <fd-form-input-message-group dg-inactive="{{ formErrors.End ? false : true }}">
+                            <fd-input id="idEnd"
+                                name="End"
+                                state="{{ formErrors.End ? 'error' : '' }}"
+								ng-required="true"
+                                ng-change="isValid(formFieldset['End'].$valid, 'End')"
+                                ng-model="entity.End"
+                                ng-readonly="action === 'select'"
+                                type="date">
+                            </fd-input>
+                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
+                        </fd-form-input-message-group>
                     </fd-form-item>
                     <fd-form-item horizontal="false">
                         <fd-form-label for="idReason" dg-required="false" dg-colon="true">Reason</fd-form-label>
@@ -97,7 +97,7 @@
                         </fd-form-input-message-group>
                     </fd-form-item>
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idStatus" dg-required="false" dg-colon="true">Timesheet Status</fd-form-label>
+                        <fd-form-label for="idStatus" dg-required="true" dg-colon="true">Timesheet Status</fd-form-label>
                         <fd-combobox-input id="idStatus"
                             name="Status"
                             state="{{ formErrors.Status ? 'error' : '' }}"

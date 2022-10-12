@@ -16,6 +16,7 @@ let dao = daoApi.create({
 			name: "Name",
 			column: "TASK_NAME",
 			type: "VARCHAR",
+			required: true
 		},
  {
 			name: "Link",
@@ -31,6 +32,7 @@ let dao = daoApi.create({
 			name: "TaskStatusId",
 			column: "TASK_TASKSTATUSID",
 			type: "INTEGER",
+			required: true
 		}
 ]
 });
@@ -81,7 +83,7 @@ exports.delete = function(id) {
 };
 
 exports.count = function (ProjectId) {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK WHERE TASK_PROJECTID = ?", [ProjectId]);
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_TASK" WHERE "TASK_PROJECTID" = ?', [ProjectId]);
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -93,7 +95,7 @@ exports.count = function (ProjectId) {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TASK");
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_TASK"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

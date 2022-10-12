@@ -14,24 +14,28 @@ let dao = daoApi.create({
 			autoIncrement: true,
 		},
  {
-			name: "Start",
-			column: "TIMESHEET_START",
-			type: "DATE",
-		},
- {
-			name: "End",
-			column: "TIMESHEET_END",
-			type: "DATE",
-		},
- {
 			name: "ProjectId",
 			column: "TIMESHEET_PROJECTID",
 			type: "INTEGER",
+			required: true
 		},
  {
 			name: "EmployeeId",
 			column: "TIMESHEET_EMPLOYEEID",
 			type: "INTEGER",
+			required: true
+		},
+ {
+			name: "Start",
+			column: "TIMESHEET_START",
+			type: "DATE",
+			required: true
+		},
+ {
+			name: "End",
+			column: "TIMESHEET_END",
+			type: "DATE",
+			required: true
 		},
  {
 			name: "Reason",
@@ -42,6 +46,7 @@ let dao = daoApi.create({
 			name: "Status",
 			column: "TIMESHEET_STATUS",
 			type: "INTEGER",
+			required: true
 		}
 ]
 });
@@ -107,7 +112,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_TIMESHEET");
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_TIMESHEET"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

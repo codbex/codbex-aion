@@ -9,9 +9,9 @@
 		<title dg-brand-title></title>
 		<theme></theme>
 		<script type="text/javascript"
-			src="/services/v4/js/ide-core/services/loader.js?id=application-view-js"></script>
+			src="/services/v4/js/resources-core/services/loader.js?id=application-view-js"></script>
 		<link type="text/css" rel="stylesheet"
-			href="/services/v4/js/ide-core/services/loader.js?id=application-view-css" />
+			href="/services/v4/js/resources-core/services/loader.js?id=application-view-css" />
 
 		<script type="text/javascript" src="controller.js"></script>
 	</head>
@@ -36,12 +36,11 @@
 						navigated="next.Id === selectedEntity.Id"
 						ng-click="action == 'select' ? selectEntity(next) : ''">
 						<fd-list-content
-							item-title="{{next.Start | date: 'dd/MMM/yyyy'}}">
+							item-title="{{optionsProjectIdValue(next.ProjectId)}}">
 							<fd-list-byline dg-align="left">
-								{{next.End | date: "dd/MMM/yyyy"}} |
-								{{optionsProjectIdValue(next.ProjectId)}} |
 								{{optionsEmployeeIdValue(next.EmployeeId)}} |
-								{{next.Reason}} |
+								{{next.Start | date: "dd/MMM/yyyy"}} |
+								{{next.End | date: "dd/MMM/yyyy"}} |
 								{{optionsStatusValue(next.Status)}}
 							</fd-list-byline>
 						</fd-list-content>

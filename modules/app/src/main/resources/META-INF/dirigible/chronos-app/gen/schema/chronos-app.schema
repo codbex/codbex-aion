@@ -16,13 +16,11 @@
                     {
                         "type": "VARCHAR",
                         "length": 100,
-                        "nullable": true,
                         "name": "EMPLOYEE_NAME"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 100,
-                        "nullable": true,
                         "name": "EMPLOYEE_EMAIL"
                     }
                 ]
@@ -42,31 +40,26 @@
                     {
                         "type": "VARCHAR",
                         "length": 100,
-                        "nullable": true,
                         "name": "PROJECT_NAME"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "PROJECT_EMPLOYEEID"
                     },
                     {
                         "type": "DATE",
                         "length": 20,
-                        "nullable": true,
                         "name": "PROJECT_START"
                     },
                     {
                         "type": "DATE",
                         "length": 20,
-                        "nullable": true,
                         "name": "PROJECT_END"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
-                        "name": "PROJECT_EMPLOYEEID"
-                    },
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "nullable": true,
                         "name": "PROJECT_PROJECTSTATUSID"
                     }
                 ]
@@ -86,32 +79,27 @@
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "ASSIGNMENT_EMPLOYEEID"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "ASSIGNMENT_PROJECTID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "ASSIGNMENT_ROLE"
                     },
                     {
                         "type": "DATE",
                         "length": 20,
-                        "nullable": true,
                         "name": "ASSIGNMENT_START"
                     },
                     {
                         "type": "DATE",
                         "length": 20,
-                        "nullable": true,
                         "name": "ASSIGNMENT_END"
-                    },
-                    {
-                        "type": "INTEGER",
-                        "length": 0,
-                        "nullable": true,
-                        "name": "ASSIGNMENT_ROLE"
                     }
                 ]
             },
@@ -130,7 +118,6 @@
                     {
                         "type": "VARCHAR",
                         "length": 255,
-                        "nullable": true,
                         "name": "TASK_NAME"
                     },
                     {
@@ -148,7 +135,6 @@
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "TASK_TASKSTATUSID"
                     }
                 ]
@@ -166,28 +152,24 @@
                         "name": "TIMESHEET_ID"
                     },
                     {
-                        "type": "DATE",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "TIMESHEET_START"
-                    },
-                    {
-                        "type": "DATE",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "TIMESHEET_END"
-                    },
-                    {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "TIMESHEET_PROJECTID"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "TIMESHEET_EMPLOYEEID"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "TIMESHEET_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "TIMESHEET_END"
                     },
                     {
                         "type": "VARCHAR",
@@ -198,7 +180,6 @@
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "TIMESHEET_STATUS"
                     }
                 ]
@@ -218,7 +199,6 @@
                     {
                         "type": "VARCHAR",
                         "length": 50,
-                        "nullable": true,
                         "name": "TASKSTATUS_NAME"
                     }
                 ]
@@ -238,7 +218,6 @@
                     {
                         "type": "VARCHAR",
                         "length": 50,
-                        "nullable": true,
                         "name": "PROJECTSTATUS_NAME"
                     }
                 ]
@@ -264,7 +243,6 @@
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "nullable": true,
                         "name": "ITEM_TASKID"
                     },
                     {
@@ -276,7 +254,6 @@
                     {
                         "type": "INTEGER",
                         "length": 20,
-                        "nullable": true,
                         "name": "ITEM_HOURS"
                     }
                 ]
@@ -296,13 +273,12 @@
                     {
                         "type": "VARCHAR",
                         "length": 200,
-                        "nullable": true,
                         "name": "TIMESHEETSTATUS_NAME"
                     }
                 ]
             },
             {
-                "name": "CHRONOS_ASSIGNMENTROLE",
+                "name": "CHRONOS_ROLE",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -316,7 +292,6 @@
                     {
                         "type": "VARCHAR",
                         "length": 200,
-                        "nullable": true,
                         "name": "ASSIGNMENTROLE_NAME"
                     }
                 ]
@@ -358,12 +333,12 @@
                 "referencedColumns": "PROJECT_ID"
             },
             {
-                "name": "Assignment_AssignmentRole",
+                "name": "Assignment_Role",
                 "type": "foreignKey",
                 "table": "CHRONOS_ASSIGNMENT",
-                "constraintName": "Assignment_AssignmentRole",
+                "constraintName": "Assignment_Role",
                 "columns": "ASSIGNMENT_ROLE",
-                "referencedTable": "CHRONOS_ASSIGNMENTROLE",
+                "referencedTable": "CHRONOS_ROLE",
                 "referencedColumns": "ASSIGNMENTROLE_ID"
             },
             {

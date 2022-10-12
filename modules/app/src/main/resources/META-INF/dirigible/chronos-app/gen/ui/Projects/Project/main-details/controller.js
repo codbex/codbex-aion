@@ -50,6 +50,11 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				$scope.action = 'create';
 				// Set Errors for required fields only
 				$scope.formErrors = {
+					Name: true,
+					EmployeeId: true,
+					Start: true,
+					End: true,
+					ProjectStatusId: true,
 				};
 			});
 		});

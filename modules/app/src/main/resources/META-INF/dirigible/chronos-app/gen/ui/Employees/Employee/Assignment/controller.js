@@ -169,7 +169,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/v4/js/chronos-app/gen/api/Employees/AssignmentRole.js").then(function (response) {
+		$http.get("/services/v4/js/chronos-app/gen/api/Configurations/Role.js").then(function (response) {
 			$scope.optionsRole = response.data.map(e => {
 				return {
 					value: e.Id,

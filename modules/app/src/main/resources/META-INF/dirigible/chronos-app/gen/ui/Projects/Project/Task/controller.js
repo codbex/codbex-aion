@@ -133,7 +133,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//----------------Dropdowns-----------------//
 		$scope.optionsTaskStatusId = [];
 
-		$http.get("/services/v4/js/chronos-app/gen/api/Projects/TaskStatus.js").then(function (response) {
+		$http.get("/services/v4/js/chronos-app/gen/api/Configurations/TaskStatus.js").then(function (response) {
 			$scope.optionsTaskStatusId = response.data.map(e => {
 				return {
 					value: e.Id,

@@ -16,11 +16,13 @@ let dao = daoApi.create({
 			name: "Name",
 			column: "EMPLOYEE_NAME",
 			type: "VARCHAR",
+			required: true
 		},
  {
 			name: "Email",
 			column: "EMPLOYEE_EMAIL",
 			type: "VARCHAR",
+			required: true
 		}
 ]
 });
@@ -75,7 +77,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_EMPLOYEE");
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_EMPLOYEE"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

@@ -9,9 +9,9 @@
         <title dg-brand-title></title>
         <theme></theme>
         <script type="text/javascript"
-            src="/services/v4/js/ide-core/services/loader.js?id=application-view-js"></script>
+            src="/services/v4/js/resources-core/services/loader.js?id=application-view-js"></script>
         <link type="text/css" rel="stylesheet"
-            href="/services/v4/js/ide-core/services/loader.js?id=application-view-css" />
+            href="/services/v4/js/resources-core/services/loader.js?id=application-view-css" />
 
         <script type="text/javascript" src="controller.js"></script>
     </head>
@@ -22,7 +22,7 @@
             <fd-fieldset class="fd-margin--md" ng-form="formFieldset">
                 <fd-form-group dg-header="{{formHeaders[action]}}" name="entityForm">
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idTaskId" dg-required="false" dg-colon="true">Task</fd-form-label>
+                        <fd-form-label for="idTaskId" dg-required="true" dg-colon="true">Task</fd-form-label>
                         <fd-combobox-input id="idTaskId"
                             name="TaskId"
                             state="{{ formErrors.TaskId ? 'error' : '' }}"
@@ -51,12 +51,12 @@
 						<fd-form-message dg-type="error" ng-show="formErrors.Description">Incorrect Input</fd-form-message>
 					</fd-form-item horizontal="false">
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idHours" dg-required="false" dg-colon="true">Hours</fd-form-label>
+                        <fd-form-label for="idHours" dg-required="true" dg-colon="true">Hours</fd-form-label>
                         <fd-form-input-message-group dg-inactive="{{ formErrors.Hours ? false : true }}">
                             <fd-input id="idHours"
                                 name="Hours"
                                 state="{{ formErrors.Hours ? 'error' : '' }}"
-								ng-required="false"
+								ng-required="true"
                                 ng-change="isValid(formFieldset['Hours'].$valid, 'Hours')"
                                 ng-model="entity.Hours"
                                 ng-readonly="action === 'select'"

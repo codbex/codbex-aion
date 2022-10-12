@@ -17,26 +17,31 @@ let dao = daoApi.create({
 			name: "EmployeeId",
 			column: "ASSIGNMENT_EMPLOYEEID",
 			type: "INTEGER",
+			required: true
 		},
  {
 			name: "ProjectId",
 			column: "ASSIGNMENT_PROJECTID",
 			type: "INTEGER",
-		},
- {
-			name: "Start",
-			column: "ASSIGNMENT_START",
-			type: "DATE",
-		},
- {
-			name: "End",
-			column: "ASSIGNMENT_END",
-			type: "DATE",
+			required: true
 		},
  {
 			name: "Role",
 			column: "ASSIGNMENT_ROLE",
 			type: "INTEGER",
+			required: true
+		},
+ {
+			name: "Start",
+			column: "ASSIGNMENT_START",
+			type: "DATE",
+			required: true
+		},
+ {
+			name: "End",
+			column: "ASSIGNMENT_END",
+			type: "DATE",
+			required: true
 		}
 ]
 });
@@ -98,7 +103,7 @@ exports.delete = function(id) {
 };
 
 exports.count = function (EmployeeId) {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_ASSIGNMENT WHERE ASSIGNMENT_EMPLOYEEID = ?", [EmployeeId]);
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_ASSIGNMENT" WHERE "ASSIGNMENT_EMPLOYEEID" = ?', [EmployeeId]);
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -110,7 +115,7 @@ exports.count = function (EmployeeId) {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute("SELECT COUNT(*) AS COUNT FROM CHRONOS_ASSIGNMENT");
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CHRONOS_ASSIGNMENT"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
