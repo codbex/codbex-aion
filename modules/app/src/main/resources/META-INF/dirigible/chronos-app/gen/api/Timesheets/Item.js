@@ -25,7 +25,8 @@ rs.service()
         })
 	.resource("count/{TimesheetId}")
 		.get(function(ctx, request) {
-			let TimesheetId = ctx.pathParameters.TimesheetId;
+			let TimesheetId = parseInt(ctx.pathParameters.TimesheetId);
+			TimesheetId = isNaN(TimesheetId) ? ctx.pathParameters.TimesheetId : TimesheetId;
 			http.sendResponseOk("" + dao.count(TimesheetId));
 		})
 		.catch(function(ctx, error) {

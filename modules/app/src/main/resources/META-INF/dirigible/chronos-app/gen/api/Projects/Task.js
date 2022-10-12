@@ -25,7 +25,8 @@ rs.service()
         })
 	.resource("count/{ProjectId}")
 		.get(function(ctx, request) {
-			let ProjectId = ctx.pathParameters.ProjectId;
+			let ProjectId = parseInt(ctx.pathParameters.ProjectId);
+			ProjectId = isNaN(ProjectId) ? ctx.pathParameters.ProjectId : ProjectId;
 			http.sendResponseOk("" + dao.count(ProjectId));
 		})
 		.catch(function(ctx, error) {
