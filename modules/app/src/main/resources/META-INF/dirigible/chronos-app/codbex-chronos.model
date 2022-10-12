@@ -59,7 +59,7 @@
                 "menuKey": "employee",
                 "menuLabel": "Employee",
                 "name": "Employee",
-                "perspectiveIcon": "users",
+                "perspectiveIcon": "/services/v4/web/resources/unicons/user.svg",
                 "perspectiveName": "Employees",
                 "perspectiveOrder": "100",
                 "title": "Employee",
@@ -181,7 +181,7 @@
                 "menuKey": "project",
                 "menuLabel": "Project",
                 "name": "Project",
-                "perspectiveIcon": "edit",
+                "perspectiveIcon": "/services/v4/web/resources/unicons/edit.svg",
                 "perspectiveName": "Projects",
                 "perspectiveOrder": "200",
                 "title": "Project",
@@ -309,7 +309,7 @@
                 "menuKey": "assignment",
                 "menuLabel": "Assignment",
                 "name": "Assignment",
-                "perspectiveIcon": "users",
+                "perspectiveIcon": "/services/v4/web/resources/unicons/user.svg",
                 "perspectiveName": "Employees",
                 "perspectiveOrder": "100",
                 "title": "Assignment",
@@ -417,7 +417,7 @@
                 "menuKey": "task",
                 "menuLabel": "Task",
                 "name": "Task",
-                "perspectiveIcon": "edit",
+                "perspectiveIcon": "/services/v4/web/resources/unicons/edit.svg",
                 "perspectiveName": "Projects",
                 "perspectiveOrder": "200",
                 "title": "Task",
@@ -560,7 +560,7 @@
                 "menuKey": "timesheet",
                 "menuLabel": "Timesheet",
                 "name": "Timesheet",
-                "perspectiveIcon": "calendar",
+                "perspectiveIcon": "/services/v4/web/resources/unicons/calender.svg",
                 "perspectiveName": "Timesheets",
                 "perspectiveOrder": "300",
                 "title": "Timesheet",
@@ -770,7 +770,7 @@
                 "menuKey": "item",
                 "menuLabel": "Item",
                 "name": "Item",
-                "perspectiveIcon": "calendar",
+                "perspectiveIcon": "/services/v4/web/resources/unicons/calender.svg",
                 "perspectiveName": "Timesheets",
                 "perspectiveOrder": "300",
                 "title": "Item",
@@ -883,25 +883,25 @@
             {
                 "name": "Employees",
                 "label": "Employees",
-                "icon": "users",
+                "icon": "/services/v4/web/resources/unicons/user.svg",
                 "order": "100"
             },
             {
                 "name": "Projects",
                 "label": "Projects",
-                "icon": "edit",
+                "icon": "/services/v4/web/resources/unicons/edit.svg",
                 "order": "200"
             },
             {
                 "name": "Timesheets",
                 "label": "Timesheets",
-                "icon": "calendar",
+                "icon": "/services/v4/web/resources/unicons/calender.svg",
                 "order": "300"
             },
             {
                 "name": "Reports",
                 "label": "Reports",
-                "icon": "area-chart",
+                "icon": "/services/v4/web/resources/unicons/chart.svg",
                 "order": "400"
             }
         ],
