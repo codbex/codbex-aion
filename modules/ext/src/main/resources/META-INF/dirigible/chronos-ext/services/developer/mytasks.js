@@ -14,10 +14,9 @@ var request = require("http/v4/request");
 var response = require("http/v4/response");
 var user = require("security/v4/user");
 
-var sql = "SELECT TASK_ID, TASK_NAME FROM CHRONOS_TASK "
-    + " WHERE TASK_PROJECTID = ? AND TASK_TASKSTATUSID=1";
+var sql = 'SELECT "TASK_ID", "TASK_NAME" FROM "CHRONOS_TASK" WHERE "TASK_PROJECTID" = ? AND "TASK_TASKSTATUSID" = 1';
 
-let projectId = request.getParameter('ProjectId');
+let projectId = parseInt(request.getParameter('ProjectId'));
 if (projectId) {
     var resultset = query.execute(sql, [projectId]);
 

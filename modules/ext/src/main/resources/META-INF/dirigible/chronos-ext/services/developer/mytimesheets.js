@@ -18,18 +18,19 @@ var { options } = require("chronos-ext/services/common/utilities");
 let statusFilter = "";
 let statusIds = request.getParameterValues('StatusId');
 if (statusIds && statusIds.length) {
+    statusIds = statusIds.map(id => parseInt(id));
     statusFilter = ` AND TIMESHEET_STATUS IN ( ${statusIds.map(() => '?').join(',')} )`;
 }
 
-var sql = "SELECT * FROM CHRONOS_TIMESHEET, CHRONOS_ITEM, CHRONOS_TASK, CHRONOS_EMPLOYEE, CHRONOS_TIMESHEETSTATUS "
-    + " WHERE EMPLOYEE_EMAIL = ? "
-    + " AND TIMESHEET_PROJECTID = ? "
-    + " AND TIMESHEET_ID = ITEM_TIMESHEETID "
-    + " AND TASK_ID = ITEM_TASKID "
-    + " AND EMPLOYEE_ID = TIMESHEET_EMPLOYEEID"
-    + " AND TIMESHEET_STATUS = TIMESHEETSTATUS_ID"
+var sql = 'SELECT * FROM "CHRONOS_TIMESHEET", "CHRONOS_ITEM", "CHRONOS_TASK", "CHRONOS_EMPLOYEE", "CHRONOS_TIMESHEETSTATUS" '
+    + ' WHERE "EMPLOYEE_EMAIL" = ? '
+    + ' AND TIMESHEET_PROJECTID = ? '
+    + ' AND TIMESHEET_ID = ITEM_TIMESHEETID '
+    + ' AND TASK_ID = ITEM_TASKID '
+    + ' AND EMPLOYEE_ID = TIMESHEET_EMPLOYEEID '
+    + ' AND TIMESHEET_STATUS = TIMESHEETSTATUS_ID'
     + statusFilter
-    + " ORDER BY TIMESHEET_ID";
+    + ' ORDER BY TIMESHEET_ID';
 
 let projectId = request.getParameter('ProjectId');
 
