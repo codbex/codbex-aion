@@ -133,6 +133,33 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
                     alert('Error: ' + JSON.stringify(data.data));
                 });
         }
+
+        // messageHub.showDialogAsync(
+        //     'Delete Timesheet?',
+        //     `Are you sure you want to delete this timesheet.`,
+        //     [{
+        //         id: "delete-btn-yes",
+        //         type: "emphasized",
+        //         label: "Yes",
+        //     },
+        //     {
+        //         id: "delete-btn-no",
+        //         type: "normal",
+        //         label: "No",
+        //     }],
+        // ).then(function (msg) {
+        //     if (msg.data === "delete-btn-yes") {
+        //         $http.delete(`/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js/${timesheet.Id}`)
+        //             .then(function (response) {
+        //                 console.log("Timesheet has been deleted: " + JSON.stringify(response.data));
+
+        //                 $scope.loadTimesheets();
+        //             }, function (data) {
+        //                 alert('Error: ' + JSON.stringify(data.data));
+        //             });
+        //     }
+        // });
+
     }
 
     $scope.reopenTimesheet = function (timesheet, e) {
