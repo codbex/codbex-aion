@@ -261,6 +261,12 @@
                         "type": "INTEGER",
                         "length": 20,
                         "name": "ITEM_HOURS"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ITEM_DAY"
                     }
                 ]
             },

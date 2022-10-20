@@ -62,6 +62,7 @@ if (projectId) {
         item.Id = row.ITEM_ID;
         item.Name = row.TASK_NAME;
         item.Description = row.ITEM_DESCRIPTION;
+        item.Day = row.ITEM_DAY;
         item.Hours = row.ITEM_HOURS;
         item.TaskStatus = row.TASK_TASKSTATUSID;
 

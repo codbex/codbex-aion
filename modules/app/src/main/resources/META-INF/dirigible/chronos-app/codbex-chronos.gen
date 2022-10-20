@@ -1290,6 +1290,25 @@
           "dataNotNull": true,
           "widgetLabel": "Hours",
           "inputRule": ""
+        },
+        {
+          "calculatedPropertyExpression": "",
+          "dataAutoIncrement": false,
+          "dataLength": "20",
+          "dataName": "ITEM_DAY",
+          "dataNullable": true,
+          "dataPrimaryKey": false,
+          "dataType": "DATE",
+          "dataUnique": false,
+          "isCalculatedProperty": false,
+          "name": "Day",
+          "widgetIsMajor": true,
+          "widgetLength": "20",
+          "widgetType": "DATE",
+          "dataNotNull": false,
+          "widgetLabel": "Day",
+          "isDateType": true,
+          "inputRule": ""
         }
       ],
       "caption": "Manage entity Item",
@@ -1314,7 +1333,8 @@
       "primaryKeysString": "Id",
       "masterEntity": "Timesheet",
       "masterEntityId": "TimesheetId",
-      "hasDropdowns": true
+      "hasDropdowns": true,
+      "hasDates": true
     },
     {
       "properties": [

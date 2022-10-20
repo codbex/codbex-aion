@@ -14,6 +14,7 @@ let app = angular.module("app", ['ideUI', 'ideView']);
 app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames', function ($scope, $http, $q, utilities, classNames) {
 
     const { TimesheetStatus } = utilities;
+    $scope.options = utilities.options;
 
     $scope.projects = [];
     $scope.timesheets = [];
@@ -69,6 +70,7 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
         const item = {
             TimesheetId: timesheetItem.TimesheetId,
             TaskId: timesheetItem.TaskId,
+            Day: timesheetItem.Day,
             Hours: timesheetItem.Hours,
             Description: timesheetItem.Description
         };
@@ -92,6 +94,7 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
         const item = {
             TimesheetId: timesheetItem.TimesheetId,
             TaskId: timesheetItem.TaskId,
+            Day: timesheetItem.Day,
             Hours: timesheetItem.Hours,
             Description: timesheetItem.Description
         };

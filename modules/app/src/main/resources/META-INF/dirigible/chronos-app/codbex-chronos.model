@@ -773,6 +773,21 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "NUMBER"
+                    },
+                    {
+                        "calculatedPropertyExpression": "",
+                        "dataAutoIncrement": "false",
+                        "dataLength": "20",
+                        "dataName": "ITEM_DAY",
+                        "dataNullable": "true",
+                        "dataPrimaryKey": "false",
+                        "dataType": "DATE",
+                        "dataUnique": "false",
+                        "isCalculatedProperty": "false",
+                        "name": "Day",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetType": "DATE"
                     }
                 ],
                 "caption": "Manage entity Item",

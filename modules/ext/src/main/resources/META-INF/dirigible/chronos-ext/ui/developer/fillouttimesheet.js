@@ -85,6 +85,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
                     let timesheetItem = {};
                     timesheetItem.TimesheetId = data.data.Id;
                     timesheetItem.TaskId = item.taskId;
+                    timesheetItem.Day = item.Day;
                     timesheetItem.Hours = item.Hours;
                     timesheetItem.Description = item.Description;
                     $http.post('/services/v4/js/chronos-app/gen/api/Timesheets/Item.js', JSON.stringify(timesheetItem))

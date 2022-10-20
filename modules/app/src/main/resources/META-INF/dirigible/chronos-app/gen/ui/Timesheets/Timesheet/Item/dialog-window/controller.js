@@ -30,6 +30,10 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 					};
 				}
 
+				if (params.entity.Day) {
+					params.entity.Day = new Date(params.entity.Day);
+				}
+
 				$scope.entity = params.entity;
 				$scope.selectedMainEntityKey = params.selectedMainEntityKey;
 				$scope.selectedMainEntityId = params.selectedMainEntityId;

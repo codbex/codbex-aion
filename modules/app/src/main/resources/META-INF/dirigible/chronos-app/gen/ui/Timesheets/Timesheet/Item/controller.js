@@ -62,6 +62,13 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 						messageHub.showAlertError("Item", `Unable to list Item: '${response.message}'`);
 						return;
 					}
+
+					response.data.forEach(e => {
+						if (e.Day) {
+							e.Day = new Date(e.Day);
+						}
+					});
+
 					$scope.data = response.data;
 				});
 			});

@@ -1,6 +1,7 @@
 const query = require("db/v4/query");
 const producer = require("messaging/v4/producer");
 const daoApi = require("db/v4/dao");
+const EntityUtils = require("chronos-app/gen/dao/utils/EntityUtils");
 
 let dao = daoApi.create({
 	table: "CHRONOS_ITEM",
@@ -33,19 +34,30 @@ let dao = daoApi.create({
 			column: "ITEM_HOURS",
 			type: "INTEGER",
 			required: true
+		},
+ {
+			name: "Day",
+			column: "ITEM_DAY",
+			type: "DATE",
 		}
 ]
 });
 
 exports.list = function(settings) {
-	return dao.list(settings);
+	return dao.list(settings).map(function(e) {
+		EntityUtils.setDate(e, "Day");
+		return e;
+	});
 };
 
 exports.get = function(id) {
-	return dao.find(id);
+	let entity = dao.find(id);
+	EntityUtils.setDate(entity, "Day");
+	return entity;
 };
 
 exports.create = function(entity) {
+	EntityUtils.setLocalDate(entity, "Day");
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
 		table: "CHRONOS_ITEM",
@@ -59,6 +71,7 @@ exports.create = function(entity) {
 };
 
 exports.update = function(entity) {
+	// EntityUtils.setLocalDate(entity, "Day");
 	dao.update(entity);
 	triggerEvent("Update", {
 		table: "CHRONOS_ITEM",

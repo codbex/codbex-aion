@@ -34,6 +34,7 @@
 					<tr fd-table-row>
 						<th fd-table-header-cell>Task</th>
 						<th fd-table-header-cell>Hours</th>
+						<th fd-table-header-cell>Day</th>
 						<th fd-table-header-cell></th>
 					</tr>
 				</thead>
@@ -47,6 +48,9 @@
 							{{optionsTaskIdValue(next.TaskId)}}
 						</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.Hours}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							<fd-input type="date" ng-model="next.Day" ng-readonly="true"></fd-input>
+						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>
 								<fd-popover-control>

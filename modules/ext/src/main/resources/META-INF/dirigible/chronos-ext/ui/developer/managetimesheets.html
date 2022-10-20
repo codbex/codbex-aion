@@ -88,6 +88,7 @@
                                         <tr fd-table-row>
                                             <th fd-table-header-cell>Name</th>
                                             <th fd-table-header-cell>Description</th>
+                                            <th fd-table-header-cell width="100px">Day</th>
                                             <th fd-table-header-cell width="100px">Hours</th>
                                             <th fd-table-header-cell width="100px"></th>
                                         </tr>
@@ -124,6 +125,7 @@
                                         <tr fd-table-row ng-repeat-end ng-repeat="item in next.items">
                                             <td fd-table-cell nesting-level="2">{{$index + 1}}. {{item.Name}}</td>
                                             <td fd-table-cell>{{item.Description}}</td>
+                                            <td fd-table-cell>{{item.Day}}</td>
                                             <td fd-table-cell>{{item.Hours}}</td>
                                             <td fd-table-cell width="100px">
                                                 <fd-button dg-type="transparent" glyph="sap-icon--edit" title="Edit"
