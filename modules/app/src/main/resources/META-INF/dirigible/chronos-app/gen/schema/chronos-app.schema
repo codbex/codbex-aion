@@ -100,6 +100,12 @@
                         "type": "DATE",
                         "length": 20,
                         "name": "ASSIGNMENT_END"
+                    },
+                    {
+                        "type": "DOUBLE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_RATE"
                     }
                 ]
             },
@@ -287,12 +293,12 @@
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
-                        "name": "ASSIGNMENTROLE_ID"
+                        "name": "ROLE_ID"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 200,
-                        "name": "ASSIGNMENTROLE_NAME"
+                        "name": "ROLE_NAME"
                     }
                 ]
             },
@@ -339,7 +345,7 @@
                 "constraintName": "Assignment_Role",
                 "columns": "ASSIGNMENT_ROLE",
                 "referencedTable": "CHRONOS_ROLE",
-                "referencedColumns": "ASSIGNMENTROLE_ID"
+                "referencedColumns": "ROLE_ID"
             },
             {
                 "name": "Task_Project",

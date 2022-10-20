@@ -8,8 +8,7 @@
     "delimField": ",",
     "delimEnclosing": "\"",
     "distinguishEmptyFromNull": true,
-    "keys": [],
-    "schema": "public"
+    "keys": []
   },
   {
     "table": "CHRONOS_TASKSTATUS",
@@ -20,8 +19,7 @@
     "delimField": ",",
     "delimEnclosing": "\"",
     "distinguishEmptyFromNull": true,
-    "keys": [],
-    "schema": "public"
+    "keys": []
   },
   {
     "table": "CHRONOS_TIMESHEETSTATUS",
@@ -32,8 +30,7 @@
     "delimField": ",",
     "delimEnclosing": "\"",
     "distinguishEmptyFromNull": true,
-    "keys": [],
-    "schema": "public"
+    "keys": []
   },
   {
     "table": "CHRONOS_ROLE",
@@ -44,7 +41,6 @@
     "delimField": ",",
     "delimEnclosing": "\"",
     "distinguishEmptyFromNull": true,
-    "keys": [],
-    "schema": "public"
+    "keys": []
   }
 ]

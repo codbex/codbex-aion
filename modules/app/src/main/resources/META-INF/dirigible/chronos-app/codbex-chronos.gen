@@ -5,7 +5,7 @@
   "title": "Chronos",
   "description": "Timesheet Management Application",
   "projectName": "chronos-app",
-  "workspaceName": "workspace",
+  "workspaceName": "chronos",
   "filePath": "codbex-chronos.model",
   "perspectives": {
     "Employees": {
@@ -600,6 +600,24 @@
           "dataNotNull": true,
           "widgetLabel": "End",
           "isDateType": true,
+          "inputRule": ""
+        },
+        {
+          "calculatedPropertyExpression": "",
+          "dataAutoIncrement": false,
+          "dataLength": "20",
+          "dataName": "ASSIGNMENT_RATE",
+          "dataNullable": true,
+          "dataPrimaryKey": false,
+          "dataType": "DOUBLE",
+          "dataUnique": false,
+          "isCalculatedProperty": false,
+          "name": "Rate",
+          "widgetIsMajor": true,
+          "widgetLength": "20",
+          "widgetType": "NUMBER",
+          "dataNotNull": false,
+          "widgetLabel": "Rate",
           "inputRule": ""
         }
       ],
@@ -1366,7 +1384,7 @@
           "calculatedPropertyExpression": "",
           "dataAutoIncrement": true,
           "dataLength": "0",
-          "dataName": "ASSIGNMENTROLE_ID",
+          "dataName": "ROLE_ID",
           "dataNullable": true,
           "dataPrimaryKey": true,
           "dataType": "INTEGER",
@@ -1384,7 +1402,7 @@
           "calculatedPropertyExpression": "",
           "dataAutoIncrement": false,
           "dataLength": "200",
-          "dataName": "ASSIGNMENTROLE_NAME",
+          "dataName": "ROLE_NAME",
           "dataNullable": false,
           "dataPrimaryKey": false,
           "dataType": "VARCHAR",

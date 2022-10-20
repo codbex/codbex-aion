@@ -1,4 +1,4 @@
-ASSIGNMENTROLE_ID,ASSIGNMENTROLE_NAME
+ROLE_ID,ROLE_NAME
 1,Developer
 2,Project Manager (PM)
 3,Product Owner (PO)
