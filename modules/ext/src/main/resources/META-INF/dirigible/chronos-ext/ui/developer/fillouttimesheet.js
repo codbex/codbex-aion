@@ -17,11 +17,32 @@ app.config(["messageHubProvider", function (messageHubProvider) {
 
 app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, $http, utilities) {
 
-    const { TimesheetStatus, settings } = utilities;
+    const { TimesheetStatus, settings, dateToString, groupTimesheetItemsByDate } = utilities;
     $scope.options = utilities.options;
     $scope.maxHoursPerWeek = settings.maxHoursPerWeek;
+    $scope.dateToString = dateToString;
 
-    $scope.timesheet = {};
+    $scope.timesheet = {
+        items: [],
+        groupedItems: [],
+        groupItems: () => $scope.timesheet.groupedItems = groupTimesheetItemsByDate([$scope.timesheet])[0].groupedItems,
+        addItem: (item) => {
+            $scope.timesheet.items.push(item);
+            $scope.timesheet.groupItems();
+        },
+        removeItem: (id) => {
+            const { items } = $scope.timesheet;
+            let index = items.findIndex(item => item.Id === id);
+            if (index >= 0) {
+                items.splice(index, 1);
+                $scope.timesheet.groupItems();
+            }
+        },
+        clearItems: () => {
+            $scope.timesheet.items = [];
+            $scope.timesheet.groupedItems = [];
+        }
+    };
     $scope.timesheet.Start = utilities.getMonday(new Date());
     $scope.timesheet.End = utilities.getFriday(new Date());
 
@@ -43,7 +64,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
             $http.get(`/services/v4/js/chronos-ext/services/developer/mytasks.js?ProjectId=${projectId}`)
                 .then(function (response) {
                     $scope.tasks = response.data;
-                    $scope.items = [];
+                    $scope.timesheet.clearItems();
                 });
         }
     };
@@ -52,22 +73,19 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
         $scope.userid = response.data;
     });
 
-    $scope.items = [];
     $scope.item = {};
     $scope.item.Id = (new Date()).getTime();
 
     $scope.addItem = function () {
         $scope.item.ProjectId = $scope.timesheet.projectId;
-        $scope.items.push($scope.item);
+        $scope.timesheet.addItem($scope.item);
+
         $scope.item = {};
         $scope.item.Id = (new Date()).getTime();
-
     }
 
     $scope.removeItem = function (id) {
-        $scope.items.splice($scope.items.findIndex(function (i) {
-            return i.Id === id;
-        }), 1);
+        $scope.timesheet.removeItem(id);
     }
 
     $scope.saveTimesheet = function () {
@@ -81,7 +99,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
 
         $http.post('/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js', JSON.stringify(timesheet))
             .then(function (data) {
-                $scope.items.forEach(function (item) {
+                $scope.timesheet.items.forEach(function (item) {
                     let timesheetItem = {};
                     timesheetItem.TimesheetId = data.data.Id;
                     timesheetItem.TaskId = item.taskId;
@@ -118,7 +136,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
     $scope.restart = function () {
         $scope.page.number = 1;
         $scope.page.completed = 0;
-        $scope.items = [];
+        $scope.timesheet.clearItems();
     }
 
     $scope.gotoNextStep = function () {
@@ -165,7 +183,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
                 isDisabled = !$scope.timesheet.projectId || !$scope.timesheet.Start || !$scope.timesheet.End;
                 break;
             case 2:
-                isDisabled = !$scope.items.length;
+                isDisabled = !$scope.timesheet.items.length;
                 break;
         }
 
@@ -173,7 +191,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
     }
 
     $scope.getAddTaskButtonState = function () {
-        return !$scope.item.Hours || !$scope.item.taskId ? 'disabled' : undefined;
+        return !$scope.item.Hours || !$scope.item.taskId || !$scope.item.Day ? 'disabled' : undefined;
     }
 
     $scope.getProjectName = function (id) {
@@ -187,7 +205,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
     }
 
     $scope.getTotalHours = function () {
-        return $scope.items.reduce((sum, x) => sum + x.Hours, 0);
+        return $scope.timesheet.items.reduce((sum, x) => sum + x.Hours, 0);
     }
 
     $scope.isNextDisabled = function () {

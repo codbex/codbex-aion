@@ -30,6 +30,31 @@ const utilities = {
         return result;
     },
 
+    toDate: function (time) {
+        let date = new Date();
+        date.setTime(time);
+        return date;
+    },
+
+    dateToString: (date) => date ? date.toLocaleDateString(utilities.locale, utilities.options) : '-',
+
+    groupTimesheetItemsByDate: function (timesheets) {
+        return timesheets.map(timesheet => {
+            if (timesheet.items) {
+                timesheet.groupedItems = timesheet.items.reduce((itemsByDate, item) => {
+                    const val = Date.parse(item.Day);
+                    itemsByDate[val] = itemsByDate[val] || []
+                    itemsByDate[val].push(item);
+                    return itemsByDate;
+                }, {});
+                timesheet.groupedItems = Object.entries(timesheet.groupedItems).map(([day, items]) => ({ day: utilities.toDate(day), items }));
+            }
+            return timesheet;
+        });
+    },
+
+    locale: 'en-US',
+
     options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
 
     TimesheetStatus: { Opened: 1, Reopened: 2, Approved: 3, Rejected: 4 },
@@ -43,6 +68,10 @@ if (typeof exports !== 'undefined') {
     exports.getMonday = utilities.getMonday;
     exports.getFriday = utilities.getFriday;
     exports.addDays = utilities.addDays;
+    exports.toDate = utilities.toDate;
+    exports.dateToString = utilities.dateToString;
+    exports.groupTimesheetItemsByDate = utilities.groupTimesheetItemsByDate;
+    exports.locale = utilities.locale;
     exports.options = utilities.options;
     exports.TimesheetStatus = utilities.TimesheetStatus;
 }

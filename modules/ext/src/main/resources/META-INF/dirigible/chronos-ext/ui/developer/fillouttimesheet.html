@@ -142,28 +142,30 @@
                             <fd-toolbar has-title="true">
                                 <h4>Tasks for: {{getProjectName(timesheet.projectId)}}</h4>
                                 <fd-toolbar-spacer></fd-toolbar-spacer>
-                                <b><i>{{timesheet.Start.toLocaleDateString("en-US", options)}}</i></b> -
-                                <b><i>{{timesheet.End.toLocaleDateString("en-US", options)}}</i></b>
+                                <b><i>{{dateToString(timesheet.Start)}}</i></b> -
+                                <b><i>{{dateToString(timesheet.End)}}</i></b>
                             </fd-toolbar>
                             <fd-scrollbar class="dg-stretch">
-                                <table fd-table display-mode="compact" sticky="true">
+                                <table fd-table fd-table-group display-mode="compact" sticky="true">
                                     <thead fd-table-header sticky="true">
                                         <tr fd-table-row>
                                             <th fd-table-header-cell>Task</th>
-                                            <th fd-table-header-cell>Day</th>
                                             <th fd-table-header-cell>Hours</th>
                                             <th fd-table-header-cell>Description</th>
                                             <th fd-table-header-cell width="30px"></th>
                                         </tr>
                                     </thead>
                                     <tbody fd-table-body>
-                                        <tr fd-table-row ng-repeat="next in items" hoverable="true" activable="false">
-                                            <td fd-table-cell>
-                                                <div class="tdSingleLine">{{getTaskName(next.taskId)}}</div>
+                                        <tr fd-table-row
+                                            ng-repeat-start="itemsByDate in timesheet.groupedItems | orderBy:'day'">
+                                            <td fd-table-group-cell nesting-level="1" expanded="true">
+                                                <b>{{dateToString(itemsByDate.day)}}</b>
                                             </td>
-                                            <td fd-table-cell>
-                                                <div class="tdSingleLine">
-                                                    {{next.Day.toLocaleDateString("en-US", options)}}</div>
+                                        </tr>
+                                        <tr fd-table-row ng-repeat-end ng-repeat="next in itemsByDate.items"
+                                            hoverable="true" activable="false">
+                                            <td fd-table-cell nesting-level="2">
+                                                <div class="tdSingleLine">{{getTaskName(next.taskId)}}</div>
                                             </td>
                                             <td fd-table-cell>
                                                 <div class="tdSingleLine">{{next.Hours}}</div>
@@ -175,17 +177,17 @@
                                                 <div class="tdSingleLine">
                                                     <fd-button dg-type="transparent" glyph="sap-icon--delete"
                                                         title="Remove" aria-label="Remove"
-                                                        ng-click="removeItem(next.Id)" aria-hidden="true">
+                                                        ng-click="timesheet.removeItem(next.Id)" aria-hidden="true">
                                                     </fd-button>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="!items.length" fd-table-row>
+                                        <tr ng-if="!timesheet.items.length" fd-table-row>
                                             <td fd-table-cell no-data="true">Add some tasks</td>
                                         </tr>
 
                                     </tbody>
-                                    <tfoot fd-table-footer ng-if="items.length">
+                                    <tfoot fd-table-footer ng-if="timesheet.items.length">
                                         <tr fd-table-row>
                                             <td fd-table-cell></td>
                                             <td fd-table-cell>{{getTotalHours()}}</td>

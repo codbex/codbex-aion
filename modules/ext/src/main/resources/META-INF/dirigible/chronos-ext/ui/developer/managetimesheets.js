@@ -13,8 +13,7 @@ let app = angular.module("app", ['ideUI', 'ideView']);
 
 app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames', function ($scope, $http, $q, utilities, classNames) {
 
-    const { TimesheetStatus } = utilities;
-    $scope.options = utilities.options;
+    const { TimesheetStatus, groupTimesheetItemsByDate, dateToString } = utilities;
 
     $scope.projects = [];
     $scope.timesheets = [];
@@ -23,6 +22,7 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
         showDialog: false
     };
     $scope.projectTasks = {};
+    $scope.dateToString = dateToString;
 
     const loadTasks = function (projectId) {
         return new $q((resolve, reject) => {
@@ -57,7 +57,7 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
         if (projectId) {
             $http.get(`/services/v4/js/chronos-ext/services/developer/mytimesheets.js?ProjectId=${projectId}&StatusId=${TimesheetStatus.Opened}&StatusId=${TimesheetStatus.Reopened}&StatusId=${TimesheetStatus.Rejected}`)
                 .then(function (response) {
-                    $scope.timesheets = response.data;
+                    $scope.timesheets = groupTimesheetItemsByDate(response.data);
                 });
         }
     };
@@ -195,13 +195,17 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
 
     $scope.getAddTaskButtonState = function () {
         const { timesheetItem } = $scope.manage;
-        return !timesheetItem.Hours || !timesheetItem.TaskId ? 'disabled' : undefined;
+        return !timesheetItem.Hours || !timesheetItem.TaskId || !timesheetItem.Day ? 'disabled' : undefined;
     }
 
     $scope.showItemDialog = function (e, timesheetId, item) {
         loadTasks($scope.manage.projectId).then(tasks => {
             $scope.manage.tasks = tasks;
-            $scope.manage.timesheetItem = { TimesheetId: timesheetId, ...(item || {}) };
+            $scope.manage.timesheetItem = {
+                ...(item || {}),
+                TimesheetId: timesheetId,
+                Day: item ? new Date(item.Day) : null
+            };
 
             $scope.manage.showDialog = true;
         }).catch(ex => console.log(`Failed to get tasks for project ID ${projectId}. ${ex.message}`));

@@ -24,7 +24,7 @@ app.controller('controller', ['$scope', '$http', 'classNames', function ($scope,
         $scope.projects = response.data;
     });
 
-    $http.get('/services/v4/js/chronos-app/gen/api/Projects/TaskStatus.js').then(function (response) {
+    $http.get('/services/v4/js/chronos-app/gen/api/Configurations/TaskStatus.js').then(function (response) {
         $scope.statuses = response.data;
     });
 

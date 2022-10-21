@@ -13,7 +13,7 @@ let app = angular.module("app", ['ideUI', 'ideView']);
 
 app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, $http, utilities) {
 
-    const { TimesheetStatus } = utilities;
+    const { TimesheetStatus, dateToString, groupTimesheetItemsByDate } = utilities;
 
     $scope.projects = [];
     $scope.timesheets = [];
@@ -23,6 +23,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
         timesheet: {},
         reason: ''
     };
+    $scope.dateToString = dateToString;
 
     const removeTimesheet = function (timesheet) {
         const index = $scope.timesheets.findIndex(x => x.Id === timesheet.Id);
@@ -47,7 +48,7 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
         if (projectId) {
             $http.get(`/services/v4/js/chronos-ext/services/manager/mytimesheets.js?ProjectId=${projectId}&StatusId=${TimesheetStatus.Opened}&StatusId=${TimesheetStatus.Reopened}`)
                 .then(function (response) {
-                    $scope.timesheets = response.data;
+                    $scope.timesheets = groupTimesheetItemsByDate(response.data);
                 });
         }
     };

@@ -2,7 +2,7 @@
   {
     "table": "CHRONOS_PROJECTSTATUS",
     "schema": "PUBLIC",
-    "file": "/chronos-data/data/CHRONOS_PROJECTSTATUS.csv",
+    "file": "/chronos-data/data-h2/CHRONOS_PROJECTSTATUS.csv",
     "header": true,
     "useHeaderNames": true,
     "delimField": ",",
@@ -13,7 +13,7 @@
   {
     "table": "CHRONOS_TASKSTATUS",
     "schema": "PUBLIC",
-    "file": "/chronos-data/data/CHRONOS_TASKSTATUS.csv",
+    "file": "/chronos-data/data-h2/CHRONOS_TASKSTATUS.csv",
     "header": true,
     "useHeaderNames": true,
     "delimField": ",",
@@ -24,7 +24,7 @@
   {
     "table": "CHRONOS_TIMESHEETSTATUS",
     "schema": "PUBLIC",
-    "file": "/chronos-data/data/CHRONOS_TIMESHEETSTATUS.csv",
+    "file": "/chronos-data/data-h2/CHRONOS_TIMESHEETSTATUS.csv",
     "header": true,
     "useHeaderNames": true,
     "delimField": ",",
@@ -35,7 +35,7 @@
   {
     "table": "CHRONOS_ROLE",
     "schema": "PUBLIC",
-    "file": "/chronos-data/data/CHRONOS_ROLE.csv",
+    "file": "/chronos-data/data-h2/CHRONOS_ROLE.csv",
     "header": true,
     "useHeaderNames": true,
     "delimField": ",",

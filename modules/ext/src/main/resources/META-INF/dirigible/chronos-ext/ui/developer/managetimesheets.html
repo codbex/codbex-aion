@@ -88,7 +88,6 @@
                                         <tr fd-table-row>
                                             <th fd-table-header-cell>Name</th>
                                             <th fd-table-header-cell>Description</th>
-                                            <th fd-table-header-cell width="100px">Day</th>
                                             <th fd-table-header-cell width="100px">Hours</th>
                                             <th fd-table-header-cell width="100px"></th>
                                         </tr>
@@ -122,10 +121,16 @@
                                                 </fd-toolbar>
                                             </td>
                                         </tr>
-                                        <tr fd-table-row ng-repeat-end ng-repeat="item in next.items">
-                                            <td fd-table-cell nesting-level="2">{{$index + 1}}. {{item.Name}}</td>
+                                        <tr fd-table-row
+                                            ng-repeat-start="itemsByDate in next.groupedItems | orderBy:'day'">
+                                            <td fd-table-group-cell nesting-level="2" expanded="true">
+                                                <b>{{dateToString(itemsByDate.day)}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr fd-table-row ng-repeat-end
+                                            ng-repeat="item in itemsByDate.items | orderBy:'Id'">
+                                            <td fd-table-cell nesting-level="3">{{item.Name}}</td>
                                             <td fd-table-cell>{{item.Description}}</td>
-                                            <td fd-table-cell>{{item.Day}}</td>
                                             <td fd-table-cell>{{item.Hours}}</td>
                                             <td fd-table-cell width="100px">
                                                 <fd-button dg-type="transparent" glyph="sap-icon--edit" title="Edit"
@@ -137,6 +142,7 @@
                                                 </fd-button>
                                             </td>
                                         </tr>
+                                        <tr ng-repeat-end ng-if="false"></tr>
                                         <tr ng-if="!hasSelectedProject()" fd-table-row>
                                             <td fd-table-cell no-data="true">Please, select a project from the drop-down
                                             </td>
@@ -185,6 +191,13 @@
                                 <fd-option ng-repeat="task in manage.tasks track by task.Id" text="{{ task.Name }}"
                                     value="task.Id"></fd-option>
                             </fd-select>
+                        </fd-form-item>
+                        <fd-form-item>
+                            <fd-form-label for="day" dg-required="true" dg-colon="true">Day
+                            </fd-form-label>
+                            <fd-input id="day" type="date" placeholder="Enter the day"
+                                ng-model="manage.timesheetItem.Day" required="required">
+                            </fd-input>
                         </fd-form-item>
                         <fd-form-item>
                             <fd-form-label for="hours" dg-required="true" dg-colon="true">Hours

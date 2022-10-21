@@ -77,7 +77,6 @@
                                         <tr fd-table-row>
                                             <th fd-table-header-cell>Name</th>
                                             <th fd-table-header-cell>Description</th>
-                                            <th fd-table-header-cell width="100">Day</th>
                                             <th fd-table-header-cell width="100">Hours</th>
                                         </tr>
                                     </thead>
@@ -97,12 +96,19 @@
                                                 </fd-toolbar>
                                             </td>
                                         </tr>
-                                        <tr fd-table-row ng-repeat-end ng-repeat="item in next.items">
-                                            <td fd-table-cell nesting-level="2">{{$index + 1}}. {{item.Name}}</td>
+                                        <tr fd-table-row
+                                            ng-repeat-start="itemsByDate in next.groupedItems | orderBy:'day'">
+                                            <td fd-table-group-cell nesting-level="2" expanded="true">
+                                                <b>{{dateToString(itemsByDate.day)}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr fd-table-row ng-repeat-end
+                                            ng-repeat="item in itemsByDate.items | orderBy:'Id'">
+                                            <td fd-table-cell nesting-level="3">{{item.Name}}</td>
                                             <td fd-table-cell>{{item.Description}}</td>
-                                            <td fd-table-cell>{{item.Day}}</td>
                                             <td fd-table-cell>{{item.Hours}}</td>
                                         </tr>
+                                        <tr ng-repeat-end ng-if="false"></tr>
                                         <tr ng-if="!hasSelectedProject()" fd-table-row>
                                             <td fd-table-cell no-data="true">Please, select a project from the drop-down
                                             </td>
