@@ -15,7 +15,7 @@ app.config(["messageHubProvider", function (messageHubProvider) {
     messageHubProvider.eventIdPrefix = 'chronos-developer-fillouttimesheet';
 }]);
 
-app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, $http, utilities) {
+app.controller('controller', ['$scope', 'utilities', 'api', function ($scope, utilities, api) {
 
     const { TimesheetStatus, settings, dateToString, groupTimesheetItemsByDate } = utilities;
     $scope.options = utilities.options;
@@ -49,29 +49,31 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
     $scope.projects = [];
     $scope.tasks = [];
 
-    $http.get('/services/v4/js/chronos-ext/services/common/myprojects.js').then(function (response) {
-        $scope.projects = response.data;
+    api.getProjects()
+        .then(function (projects) {
+            $scope.projects = projects;
 
-        if ($scope.projects.length == 1) {
-            $scope.timesheet.projectId = $scope.projects[0].Id;
-            $scope.loadTasks();
-        }
-    });
+            if ($scope.projects.length == 1) {
+                $scope.timesheet.projectId = $scope.projects[0].Id;
+                $scope.loadTasks();
+            }
+        });
 
     $scope.loadTasks = function () {
         const { projectId } = $scope.timesheet;
         if (projectId) {
-            $http.get(`/services/v4/js/chronos-ext/services/developer/mytasks.js?ProjectId=${projectId}`)
-                .then(function (response) {
-                    $scope.tasks = response.data;
+            api.getDeveloperProjectTasks(projectId)
+                .then(function (tasks) {
+                    $scope.tasks = tasks;
                     $scope.timesheet.clearItems();
                 });
         }
     };
 
-    $http.get('/services/v4/js/chronos-ext/services/common/myuser.js').then(function (response) {
-        $scope.userid = response.data;
-    });
+    api.getUser()
+        .then(function (userId) {
+            $scope.userid = userId;
+        });
 
     $scope.item = {};
     $scope.item.Id = (new Date()).getTime();
@@ -97,28 +99,30 @@ app.controller('controller', ['$scope', '$http', 'utilities', function ($scope, 
         timesheet.ProjectId = $scope.timesheet.projectId;
         timesheet.Status = TimesheetStatus.Opened;
 
-        $http.post('/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js', JSON.stringify(timesheet))
-            .then(function (data) {
+        api.createTimesheet(timesheet)
+            .then(function (createdTimesheet) {
                 $scope.timesheet.items.forEach(function (item) {
                     let timesheetItem = {};
-                    timesheetItem.TimesheetId = data.data.Id;
+                    timesheetItem.TimesheetId = createdTimesheet.Id;
                     timesheetItem.TaskId = item.taskId;
                     timesheetItem.Day = item.Day;
                     timesheetItem.Hours = item.Hours;
                     timesheetItem.Description = item.Description;
-                    $http.post('/services/v4/js/chronos-app/gen/api/Timesheets/Item.js', JSON.stringify(timesheetItem))
-                        .then(function (data) {
+
+                    api.createTimesheetItem(timesheetItem)
+                        .then(function () {
                             console.log("Item has been stored: " + JSON.stringify(timesheetItem));
-                        }, function (data) {
-                            alert('Error: ' + JSON.stringify(data.data));
+                        }, function (error) {
+                            alert('Error: ' + JSON.stringify(error));
                         });
                 })
+
                 console.log("Timesheet has been stored: " + JSON.stringify(timesheet));
 
                 $scope.gotoNextStep();
 
-            }, function (data) {
-                alert('Error: ' + JSON.stringify(data.data));
+            }, function (error) {
+                alert('Error: ' + JSON.stringify(error));
             });
 
     }

@@ -24,6 +24,18 @@ const utilities = {
         return new Date(d.setDate(diff + 4));
     },
 
+    getFirstDayOfMonth(d) {
+        let date = new Date(d);
+        date.setDate(1);
+        return date;
+    },
+
+    getLastDayOfMonth(d) {
+        let date = new Date(d);
+        date.setMonth(d.getMonth() + 1, 0);
+        return date;
+    },
+
     addDays: function (date, days) {
         var result = new Date(date);
         result.setDate(result.getDate() + days);
@@ -67,6 +79,8 @@ const utilities = {
 if (typeof exports !== 'undefined') {
     exports.getMonday = utilities.getMonday;
     exports.getFriday = utilities.getFriday;
+    exports.getFirstDayOfMonth = utilities.getFirstDayOfMonth;
+    exports.getLastDayOfMonth = utilities.getLastDayOfMonth;
     exports.addDays = utilities.addDays;
     exports.toDate = utilities.toDate;
     exports.dateToString = utilities.dateToString;

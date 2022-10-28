@@ -29,6 +29,12 @@ app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope,
             name: 'Approve Timesheets',
             description: 'Approve timesheets of direct reports for the current week',
             link: 'approvetimesheets.html'
+        },
+        {
+            id: 'genereateReport',
+            name: 'Generate Report',
+            description: 'Generate monthly timesheets report',
+            link: 'generatereport.html'
         }
     ];
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2022 codbex and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v2.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.eclipse.org/legal/epl-v20.html
+  ~ Contributors:
+  ~ codbex - initial API and implementation
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="controller">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
+
+        <script type="text/javascript" src="/services/v4/js/resources-core/services/loader.js?id=ide-view-js"></script>
+
+        <script type="text/javascript" src="generatereport.js"></script>
+        <script type="text/javascript" src="../../services/common/utilities.js"></script>
+        <script type="text/javascript" src="../common/api.js"></script>
+
+        <link type="text/css" rel="stylesheet"
+            href="/services/v4/js/resources-core/services/loader.js?id=ide-view-css" />
+        <theme></theme>
+
+        <link type="text/css" rel="stylesheet" href="style.css" />
+
+    </head>
+
+    <body>
+        <main class="fd-page fd-page--solid">
+            <header>
+                <fd-bar bar-design="header" cozy="true" in-page="true" size="m_l">
+                    <fd-bar-left>
+                        <fd-bar-element>
+                            <a href="index.html" class="fd-button fd-button--transparent">
+                                <i class="sap-icon--navigation-left-arrow"></i>
+                            </a>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <h3 fd-title header-size="3">Chronos / Generate Report</h3>
+                        </fd-bar-element>
+                    </fd-bar-left>
+                    <fd-bar-right>
+                        <fd-bar-element>
+                            <button class="fd-button fd-button--transparent" aria-label="See more">
+                                <i class="sap-icon--grid"></i>
+                            </button>
+                        </fd-bar-element>
+                    </fd-bar-right>
+                </fd-bar>
+            </header>
+            <div class="fd-page__content--m_l dg-page__content-card" role="region">
+                <div class="dg-report-form">
+                    <fd-card card-type="standard">
+                        <fd-card-header interactive="false">
+                            <fd-card-title>Reports</fd-card-title>
+                        </fd-card-header>
+                        <fd-card-content>
+                            <fd-fieldset>
+                                <fd-form-group>
+                                    <fd-form-item>
+                                        <fd-form-label id="projectLabel" dg-required="true" dg-colon="true">Project
+                                        </fd-form-label>
+                                        <fd-select dropdown-fill="true" ng-model="report.projectId"
+                                            label-id="projectLabel">
+                                            <fd-option ng-repeat="project in projects track by project.Id"
+                                                text="{{ project.Name }}" value="project.Id"></fd-option>
+                                        </fd-select>
+                                    </fd-form-item>
+                                    <fd-form-item>
+                                        <fd-form-label for="start" dg-required="true" dg-colon="true">Start
+                                        </fd-form-label>
+                                        <fd-input id="start" type="date" placeholder="Enter start date"
+                                            ng-model="report.Start" ng-change="startDateChanged()" required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+                                    <fd-form-item>
+                                        <fd-form-label for="end" dg-required="true" dg-colon="true">End
+                                        </fd-form-label>
+                                        <fd-input id="end" type="date" placeholder="Enter end date"
+                                            ng-model="report.End" ng-change="endDateChanged()" required="required">
+                                        </fd-input>
+                                    </fd-form-item>
+                                </fd-form-group>
+                            </fd-fieldset>
+                        </fd-card-content>
+                        <div class="fd-card__footer">
+                            <div class="fd-card__footer-actions">
+                                <div class="fd-card__footer-actions-item">
+                                    <fd-link-button
+                                        ng-href="/services/v4/js/chronos-ext/services/manager/generatereport.js?ProjectId={{report.projectId}}&Start={{report.Start.toISOString()}}&End={{report.End.toISOString()}}"
+                                        class="fd-button--positive" dg-label="Generate">
+                                    </fd-link-button>
+                                </div>
+                            </div>
+                        </div>
+                    </fd-card>
+
+                    <br>
+                    <p class="fd-text">The technology platform used for project <b>Chronos</b> is <a
+                            href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
+                        <br>
+                        All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
+                            target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
+                        maintained at <a href="https://github.com/eclipse/dirigible" target="_blank"
+                            class="fd-link">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </body>
+
+</html>

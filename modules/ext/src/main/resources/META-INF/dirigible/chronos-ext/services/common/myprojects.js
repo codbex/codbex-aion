@@ -25,6 +25,7 @@ resultset.forEach(function (row) {
     projects.push(project);
 });
 
+response.setContentType("application/json");
 response.println(JSON.stringify(projects));
 
 response.flush();

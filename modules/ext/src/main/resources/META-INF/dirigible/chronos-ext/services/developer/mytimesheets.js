@@ -49,8 +49,10 @@ if (projectId) {
         if (timesheet.Id != row.TIMESHEET_ID) {
             timesheet = {};
             timesheet.Id = row.TIMESHEET_ID;
+            timesheet.ProjectId = row.TIMESHEET_PROJECTID;
             timesheet.Start = new Date(row.TIMESHEET_START).toLocaleDateString("en-US", options);
             timesheet.End = new Date(row.TIMESHEET_END).toLocaleDateString("en-US", options);
+            timesheet.EmployeeId = row.TIMESHEET_EMPLOYEEID;
             timesheet.EmployeeName = row.EMPLOYEE_NAME;
             timesheet.StatusId = row.TIMESHEET_STATUS;
             timesheet.StatusName = row.TIMESHEETSTATUS_NAME;
@@ -72,6 +74,7 @@ if (projectId) {
         timesheet.Hours += item.Hours;
     });
 
+    response.setContentType("application/json");
     response.println(JSON.stringify(timesheets));
 } else {
     response.println("Parameter ProjectId is missing");

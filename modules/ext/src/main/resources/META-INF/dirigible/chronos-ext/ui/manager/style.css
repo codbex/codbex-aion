@@ -14,3 +14,21 @@
 .ts-dialog {
   z-index: 1000;
 }
+
+.dg-report-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dg-report-form .fd-card {
+  max-width: 600px;
+}
+
+.dg-report-form .fd-card__content {
+  padding: 1rem;
+}
+
+.dg-report-form .fd-text {
+  margin-top: 1rem;
+}

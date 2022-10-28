@@ -11,7 +11,7 @@
  */
 let app = angular.module("app", ['ideUI', 'ideView']);
 
-app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames', function ($scope, $http, $q, utilities, classNames) {
+app.controller('controller', ['$scope', '$q', 'utilities', 'classNames', 'api', function ($scope, $q, utilities, classNames, api) {
 
     const { TimesheetStatus, groupTimesheetItemsByDate, dateToString } = utilities;
 
@@ -30,9 +30,9 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
             if (tasks) {
                 resolve(tasks);
             } else {
-                $http.get(`/services/v4/js/chronos-ext/services/manager/mytasks.js?ProjectId=${projectId}`)
-                    .then(response => {
-                        $scope.projectTasks[projectId] = tasks = response.data;
+                api.getDeveloperProjectTasks(projectId)
+                    .then(projectTasks => {
+                        $scope.projectTasks[projectId] = tasks = projectTasks;
                         resolve(tasks);
                     }).catch(ex => reject(ex));
             }
@@ -55,9 +55,9 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
     $scope.loadTimesheets = function () {
         const { projectId } = $scope.manage;
         if (projectId) {
-            $http.get(`/services/v4/js/chronos-ext/services/developer/mytimesheets.js?ProjectId=${projectId}&StatusId=${TimesheetStatus.Opened}&StatusId=${TimesheetStatus.Reopened}&StatusId=${TimesheetStatus.Rejected}`)
-                .then(function (response) {
-                    $scope.timesheets = groupTimesheetItemsByDate(response.data);
+            api.getDeveloperTimesheets(projectId, [TimesheetStatus.Opened, TimesheetStatus.Reopened, TimesheetStatus.Rejected])
+                .then(function (timesheets) {
+                    $scope.timesheets = groupTimesheetItemsByDate(timesheets);
                 });
         }
     };
@@ -75,14 +75,12 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
             Description: timesheetItem.Description
         };
 
-        $http.post('/services/v4/js/chronos-app/gen/api/Timesheets/Item.js', JSON.stringify(item))
-            .then(function (response) {
-                console.log("Item has been stored: " + JSON.stringify(response.data));
-
+        api.createTimesheetItem(item)
+            .then(function () {
                 $scope.loadTimesheets();
                 $scope.hideItemDialog();
-            }, function (data) {
-                alert('Error: ' + JSON.stringify(data.data));
+            }, function (error) {
+                alert('Error: ' + JSON.stringify(error));
             });
     }
 
@@ -99,26 +97,22 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
             Description: timesheetItem.Description
         };
 
-        $http.put(`/services/v4/js/chronos-app/gen/api/Timesheets/Item.js/${timesheetItem.Id}`, JSON.stringify(item))
-            .then(function (response) {
-                console.log("Item has been stored: " + JSON.stringify(response.data));
-
+        api.updateTimesheetItem(timesheetItem.Id, item)
+            .then(function () {
                 $scope.loadTimesheets();
                 $scope.hideItemDialog();
-            }, function (data) {
-                alert('Error: ' + JSON.stringify(data.data));
+            }, function (error) {
+                alert('Error: ' + JSON.stringify(error));
             });
     }
 
     $scope.deleteTimesheetItem = function (id) {
         if (confirm("Are you sure you want to delete this task")) {
-            $http.delete(`/services/v4/js/chronos-app/gen/api/Timesheets/Item.js/${id}`)
-                .then(function (response) {
-                    console.log("Item has been deleted: " + JSON.stringify(response.data));
-
+            api.deleteTimesheetItem(id)
+                .then(function () {
                     $scope.loadTimesheets();
-                }, function (data) {
-                    alert('Error: ' + JSON.stringify(data.data));
+                }, function (error) {
+                    alert('Error: ' + JSON.stringify(error));
                 });
         }
     }
@@ -127,42 +121,13 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
         e.stopPropagation();
 
         if (confirm("Are you sure you want to delete this timesheet")) {
-            $http.delete(`/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js/${timesheet.Id}`)
-                .then(function (response) {
-                    console.log("Timesheet has been deleted: " + JSON.stringify(response.data));
-
+            api.deleteTimesheet(timesheet.Id)
+                .then(function () {
                     $scope.loadTimesheets();
-                }, function (data) {
-                    alert('Error: ' + JSON.stringify(data.data));
+                }, function (error) {
+                    alert('Error: ' + JSON.stringify(error));
                 });
         }
-
-        // messageHub.showDialogAsync(
-        //     'Delete Timesheet?',
-        //     `Are you sure you want to delete this timesheet.`,
-        //     [{
-        //         id: "delete-btn-yes",
-        //         type: "emphasized",
-        //         label: "Yes",
-        //     },
-        //     {
-        //         id: "delete-btn-no",
-        //         type: "normal",
-        //         label: "No",
-        //     }],
-        // ).then(function (msg) {
-        //     if (msg.data === "delete-btn-yes") {
-        //         $http.delete(`/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js/${timesheet.Id}`)
-        //             .then(function (response) {
-        //                 console.log("Timesheet has been deleted: " + JSON.stringify(response.data));
-
-        //                 $scope.loadTimesheets();
-        //             }, function (data) {
-        //                 alert('Error: ' + JSON.stringify(data.data));
-        //             });
-        //     }
-        // });
-
     }
 
     $scope.reopenTimesheet = function (timesheet, e) {
@@ -174,13 +139,11 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
             Status: TimesheetStatus.Reopened
         };
 
-        $http.put(`/services/v4/js/chronos-app/gen/api/Timesheets/Timesheet.js/${timesheet.Id}`, JSON.stringify(item))
-            .then(function (response) {
-                console.log("Timesheet updated: " + JSON.stringify(response.data));
-
+        api.updateTimesheet(timesheet.Id, item)
+            .then(function () {
                 $scope.loadTimesheets();
-            }, function (data) {
-                alert('Error: ' + JSON.stringify(data.data));
+            }, function (error) {
+                alert('Error: ' + JSON.stringify(error));
             });
 
         e.stopPropagation();
@@ -218,16 +181,19 @@ app.controller('controller', ['$scope', '$http', '$q', 'utilities', 'classNames'
         $scope.manage.timesheetItem = {}
     }
 
-    $http.get('/services/v4/js/chronos-ext/services/common/myprojects.js').then(function (response) {
-        $scope.projects = response.data;
-        if ($scope.projects.length > 0) {
-            $scope.manage.projectId = $scope.projects[0].Id;
-            $scope.loadTimesheets();
-        }
-    });
+    api.getProjects()
+        .then(function (projects) {
+            $scope.projects = projects;
 
-    $http.get('/services/v4/js/chronos-ext/services/common/myuser.js').then(function (response) {
-        $scope.userid = response.data;
-    });
+            if ($scope.projects.length > 0) {
+                $scope.manage.projectId = $scope.projects[0].Id;
+                $scope.loadTimesheets();
+            }
+        });
+
+    api.getUser()
+        .then(function (userId) {
+            $scope.userid = userId;
+        });
 }]);
 

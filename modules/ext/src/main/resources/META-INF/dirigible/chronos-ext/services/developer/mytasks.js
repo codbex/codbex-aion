@@ -28,6 +28,7 @@ if (projectId) {
         tasks.push(task);
     });
 
+    response.setContentType("application/json");
     response.println(JSON.stringify(tasks));
 } else {
     response.println("Parameter ProjectId is missing");
