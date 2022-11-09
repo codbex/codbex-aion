@@ -1,0 +1,5 @@
+{
+    "expression": "0 0 9,16 ? * MON",
+    "handler": "chronos-ext/jobs/sendWeeklyApprovalReminder.js",
+    "description": "Send Weekly Timesheet Approval Reminder Job"
+}

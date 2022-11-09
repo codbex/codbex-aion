@@ -70,9 +70,11 @@ const utilities = {
     options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
 
     TimesheetStatus: { Opened: 1, Reopened: 2, Approved: 3, Rejected: 4 },
+    ProjectStatus: { Active: 1, Finished: 2, Cancelled: 3 },
 
     settings: {
-        maxHoursPerWeek: 40
+        maxHoursPerWeek: 40,
+        mailFrom: 'service@codbex.com'
     }
 };
 
@@ -88,6 +90,8 @@ if (typeof exports !== 'undefined') {
     exports.locale = utilities.locale;
     exports.options = utilities.options;
     exports.TimesheetStatus = utilities.TimesheetStatus;
+    exports.ProjectStatus = utilities.ProjectStatus;
+    exports.settings = utilities.settings
 }
 
 if (typeof angular !== 'undefined') {

@@ -47,6 +47,11 @@ let dao = daoApi.create({
 			name: "Rate",
 			column: "ASSIGNMENT_RATE",
 			type: "DOUBLE",
+		},
+ {
+			name: "Approver",
+			column: "ASSIGNMENT_APPROVER",
+			type: "BOOLEAN",
 		}
 ]
 });
@@ -55,6 +60,7 @@ exports.list = function(settings) {
 	return dao.list(settings).map(function(e) {
 		EntityUtils.setDate(e, "Start");
 		EntityUtils.setDate(e, "End");
+		EntityUtils.setBoolean(e, "Approver");
 		return e;
 	});
 };
@@ -63,12 +69,14 @@ exports.get = function(id) {
 	let entity = dao.find(id);
 	EntityUtils.setDate(entity, "Start");
 	EntityUtils.setDate(entity, "End");
+	EntityUtils.setBoolean(entity, "Approver");
 	return entity;
 };
 
 exports.create = function(entity) {
 	EntityUtils.setLocalDate(entity, "Start");
 	EntityUtils.setLocalDate(entity, "End");
+	EntityUtils.setBoolean(entity, "Approver");
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
 		table: "CHRONOS_ASSIGNMENT",
@@ -84,6 +92,7 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	// EntityUtils.setLocalDate(entity, "Start");
 	// EntityUtils.setLocalDate(entity, "End");
+	EntityUtils.setBoolean(entity, "Approver");
 	dao.update(entity);
 	triggerEvent("Update", {
 		table: "CHRONOS_ASSIGNMENT",

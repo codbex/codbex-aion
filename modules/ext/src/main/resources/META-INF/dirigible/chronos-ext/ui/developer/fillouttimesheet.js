@@ -49,7 +49,7 @@ app.controller('controller', ['$scope', 'utilities', 'api', function ($scope, ut
     $scope.projects = [];
     $scope.tasks = [];
 
-    api.getProjects()
+    api.getDeveloperProjects()
         .then(function (projects) {
             $scope.projects = projects;
 

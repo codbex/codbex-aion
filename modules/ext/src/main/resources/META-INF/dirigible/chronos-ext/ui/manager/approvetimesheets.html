@@ -22,6 +22,7 @@
 
         <script type="text/javascript" src="approvetimesheets.js"></script>
         <script type="text/javascript" src="/services/v4/web/chronos-ext/services/common/utilities.js"></script>
+        <script type="text/javascript" src="../common/api.js"></script>
 
         <link type="text/css" rel="stylesheet"
             href="/services/v4/js/resources-core/services/loader.js?id=ide-view-css" />
@@ -162,7 +163,8 @@
                     <div class="fd-bar__right">
                         <div class="fd-bar__element">
                             <fd-button dg-type="emphasized" class="fd-dialog__decisive-button" compact="true"
-                                dg-label="Reject" ng-click="rejectTimesheet()">
+                                dg-label="Reject" ng-click="rejectTimesheet()"
+                                state="{{ reject.inProgress ? 'disabled' : undefined}}">
                             </fd-button>
                         </div>
                         <div class="fd-bar__element">

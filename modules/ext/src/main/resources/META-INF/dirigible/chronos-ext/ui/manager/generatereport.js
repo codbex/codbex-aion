@@ -24,7 +24,7 @@ app.controller('controller', ['$scope', 'api', 'utilities', function ($scope, ap
         End: utilities.getLastDayOfMonth(now)
     };
 
-    api.getProjects()
+    api.getManagerProjects()
         .then(projects => {
             $scope.projects = projects;
 

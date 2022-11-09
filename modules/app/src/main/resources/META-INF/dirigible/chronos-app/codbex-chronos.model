@@ -312,6 +312,21 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "NUMBER"
+                    },
+                    {
+                        "calculatedPropertyExpression": "",
+                        "dataAutoIncrement": "false",
+                        "dataLength": "20",
+                        "dataName": "ASSIGNMENT_APPROVER",
+                        "dataNullable": "true",
+                        "dataPrimaryKey": "false",
+                        "dataType": "BOOLEAN",
+                        "dataUnique": "false",
+                        "isCalculatedProperty": "false",
+                        "name": "Approver",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetType": "CHECKBOX"
                     }
                 ],
                 "caption": "Manage entity Assignment",

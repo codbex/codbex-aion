@@ -15,7 +15,7 @@ app.config(["messageHubProvider", function (messageHubProvider) {
     messageHubProvider.eventIdPrefix = 'chronos-developer-index';
 }]);
 
-app.controller('controller', ['$scope', '$http', 'messageHub', function ($scope, $http, messageHub) {
+app.controller('controller', ['$scope', function ($scope) {
 
     $scope.activities = [
         {

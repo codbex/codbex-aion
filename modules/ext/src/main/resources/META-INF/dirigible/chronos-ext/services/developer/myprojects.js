@@ -12,10 +12,16 @@
 var query = require("db/v4/query");
 var response = require("http/v4/response");
 var user = require("security/v4/user");
+var { ProjectStatus } = require("chronos-ext/services/common/utilities");
 
 var sql = 'SELECT "PROJECT_ID", "PROJECT_NAME" FROM "CHRONOS_PROJECT", "CHRONOS_ASSIGNMENT", "CHRONOS_EMPLOYEE" '
-    + ' WHERE "EMPLOYEE_EMAIL" = ? AND "ASSIGNMENT_EMPLOYEEID" = "EMPLOYEE_ID" AND "ASSIGNMENT_PROJECTID" = "PROJECT_ID" AND "PROJECT_PROJECTSTATUSID"=1';
-var resultset = query.execute(sql, [user.getName()]);
+    + ' WHERE "EMPLOYEE_EMAIL" = ?'
+    + ' AND "ASSIGNMENT_EMPLOYEEID" = "EMPLOYEE_ID"'
+    + ' AND IFNULL("ASSIGNMENT_APPROVER", false) = false'
+    + ' AND "ASSIGNMENT_PROJECTID" = "PROJECT_ID"'
+    + ' AND "PROJECT_PROJECTSTATUSID" = ?';
+
+var resultset = query.execute(sql, [user.getName(), ProjectStatus.Active]);
 
 let projects = [];
 resultset.forEach(function (row) {

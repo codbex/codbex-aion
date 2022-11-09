@@ -181,7 +181,7 @@ app.controller('controller', ['$scope', '$q', 'utilities', 'classNames', 'api', 
         $scope.manage.timesheetItem = {}
     }
 
-    api.getProjects()
+    api.getDeveloperProjects()
         .then(function (projects) {
             $scope.projects = projects;
 

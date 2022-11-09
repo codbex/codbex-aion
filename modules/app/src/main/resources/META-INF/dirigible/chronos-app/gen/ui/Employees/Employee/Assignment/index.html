@@ -37,6 +37,7 @@
 						<th fd-table-header-cell>Start</th>
 						<th fd-table-header-cell>End</th>
 						<th fd-table-header-cell>Rate</th>
+						<th fd-table-header-cell>Approver</th>
 						<th fd-table-header-cell></th>
 					</tr>
 				</thead>
@@ -59,6 +60,10 @@
 							<fd-input type="date" ng-model="next.End" ng-readonly="true"></fd-input>
 						</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.Rate}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							<fd-checkbox id="idApprover" compact="false" dg-disabled="true" ng-model="next.Approver"></fd-checkbox>
+							<fd-checkbox-label for="idApprover"></fd-checkbox-label>
+						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>
 								<fd-popover-control>

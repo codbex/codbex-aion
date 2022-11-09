@@ -5,7 +5,7 @@
   "title": "Chronos",
   "description": "Timesheet Management Application",
   "projectName": "chronos-app",
-  "workspaceName": "chronos",
+  "workspaceName": "workspace",
   "filePath": "codbex-chronos.model",
   "perspectives": {
     "Employees": {
@@ -618,6 +618,24 @@
           "widgetType": "NUMBER",
           "dataNotNull": false,
           "widgetLabel": "Rate",
+          "inputRule": ""
+        },
+        {
+          "calculatedPropertyExpression": "",
+          "dataAutoIncrement": false,
+          "dataLength": "20",
+          "dataName": "ASSIGNMENT_APPROVER",
+          "dataNullable": true,
+          "dataPrimaryKey": false,
+          "dataType": "BOOLEAN",
+          "dataUnique": false,
+          "isCalculatedProperty": false,
+          "name": "Approver",
+          "widgetIsMajor": true,
+          "widgetLength": "20",
+          "widgetType": "CHECKBOX",
+          "dataNotNull": false,
+          "widgetLabel": "Approver",
           "inputRule": ""
         }
       ],

@@ -106,6 +106,12 @@
                         "length": 20,
                         "nullable": true,
                         "name": "ASSIGNMENT_RATE"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_APPROVER"
                     }
                 ]
             },
