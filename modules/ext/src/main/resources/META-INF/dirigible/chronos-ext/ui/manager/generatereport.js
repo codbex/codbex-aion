@@ -9,13 +9,13 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-let app = angular.module("app", ['ideUI', 'ideView']);
+let app = angular.module("app", ['ideUI', 'ideTheming']);
 
 app.config(["messageHubProvider", function (messageHubProvider) {
     messageHubProvider.eventIdPrefix = 'chronos-developer-generatereport';
 }]);
 
-app.controller('controller', ['$scope', 'api', 'utilities', function ($scope, api, utilities) {
+app.controller('controller', ['$scope', 'api', 'utilities', 'theming', function ($scope, api, utilities, theming) {
     const now = new Date();
 
     $scope.projects = [];

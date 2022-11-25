@@ -9,13 +9,13 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-let app = angular.module("app", ['ideUI', 'ideView']);
+let app = angular.module("app", ['ideUI', 'ideTheming']);
 
 app.config(["messageHubProvider", function (messageHubProvider) {
     messageHubProvider.eventIdPrefix = 'chronos-developer-fillouttimesheet';
 }]);
 
-app.controller('controller', ['$scope', 'utilities', 'api', function ($scope, utilities, api) {
+app.controller('controller', ['$scope', 'utilities', 'api', 'theming', function ($scope, utilities, api, theming) {
 
     const { TimesheetStatus, settings, dateToString, groupTimesheetItemsByDate } = utilities;
     $scope.options = utilities.options;

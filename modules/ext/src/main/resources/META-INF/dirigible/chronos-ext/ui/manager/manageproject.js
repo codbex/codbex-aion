@@ -9,9 +9,9 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-let app = angular.module("app", ['ideUI', 'ideView']);
+let app = angular.module("app", ['ideUI', 'ideTheming']);
 
-app.controller('controller', ['$scope', 'api', 'classNames', function ($scope, api, classNames) {
+app.controller('controller', ['$scope', 'api', 'classNames', 'theming', function ($scope, api, classNames, theming) {
 
     $scope.projects = [];
     $scope.tasks = [];
