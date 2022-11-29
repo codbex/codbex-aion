@@ -33,13 +33,11 @@ jobs:
     - name: Publish package
       run: mvn deploy -P release -DskipTests
       env:
-        MAVEN_USERNAME: ${{ secrets.JIRA_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
     # - name: Set Maven Version
     #   run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
-    # - name: Build codbex - chronos
-    #   run: mvn deploy -P release -DskipTests -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
     - name: Set Chronos Version
       run: echo CHRONOS_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
     - name: Create Release
