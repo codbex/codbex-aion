@@ -57,14 +57,14 @@ jobs:
     - name: Push Chronos
       run: |
         cd releng/chronos-platform
-        docker build . -t ${{secrets.DOCKER_REGISTRY}}/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }}
-        docker push ${{secrets.DOCKER_REGISTRY}}/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }}
+        docker build --load -t ghcr.io/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }} .
+        docker push ghcr.io/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }}
         cd ../../
     - name: Push Chronos - Keycloack
       run: |
         cd releng/chronos-platform-keycloack
-        docker build . -t ${{secrets.DOCKER_REGISTRY}}/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
-        docker push ${{secrets.DOCKER_REGISTRY}}/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
+        docker build --load -t ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }} .
+        docker push ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
         cd ../../
     - name: Create Release
       id: create_release
@@ -85,7 +85,7 @@ jobs:
           ## Model
 
           ![model](images/chronos-model.png)
-          
+
           ## Application
-          
+
           ![model](images/chronos-app.png)
