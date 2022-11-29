@@ -12,6 +12,7 @@ on:
 
 jobs:
   build:
+    if: github.actor == ${{ secrets.user1 }} || github.actor == ${{ secrets.user2 }} || github.actor == ${{ secrets.user3 }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -76,16 +77,23 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          licensing-header.txt
+          LICENSE
         body: |
           ## Codbex Chronos - ${{ env.CHRONOS_VERSION }}
 
           Timesheets Management Application
+    
+    - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
 
-          ## Model
+    - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER }}
+        location: ${{ secrets.GKE_LOCATION }}
+        credentials: ${{ secrets.GKE_SA_KEY }}
 
-          ![model](images/chronos-model.png)
-
-          ## Application
-
-          ![model](images/chronos-app.png)
+    - name: Update deployment
+      run: |
+        kubectl -n ${{ secrets.GKE_NAMESPACE }} set image deployment/${{ secrets.GKE_DEPLOY }} dirigible=ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
