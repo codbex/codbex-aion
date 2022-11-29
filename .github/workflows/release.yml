@@ -81,3 +81,11 @@ jobs:
           ## Codbex Chronos - ${{ env.CHRONOS_VERSION }}
 
           Timesheets Management Application
+
+          ## Model
+
+          ![model](images/chronos-model.png)
+          
+          ## Application
+          
+          ![model](images/chronos-app.png)
