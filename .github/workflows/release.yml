@@ -29,15 +29,14 @@ jobs:
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         gpg-passphrase: GPG_PASSPHRASE
         architecture: x64
-    
+    - name: Set Maven Version
+      run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
     - name: Publish package
       run: mvn deploy -P release -DskipTests
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-    # - name: Set Maven Version
-    #   run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
     - name: Set Chronos Version
       run: echo CHRONOS_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
     - name: Create Release
