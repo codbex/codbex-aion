@@ -6,9 +6,11 @@ on:
       releaseVersion:
         description: Release Version
         required: true
+        default: 1.0.0
       snapshotVersion:
         description: Snapshot Version
         required: true
+        default: 1.0.0-SNAPSHOT
 
 jobs:
   build:
