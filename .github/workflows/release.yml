@@ -107,7 +107,7 @@ jobs:
     - name: "Git: Commit Release Version"
       run: |
         git add .
-        git commit -m "version set to ${{ github.event.inputs.snapshotVersion }} for release"
+        git commit -m "version set to ${{ github.event.inputs.releaseVersion }} for release"
         git push
         git checkout -b ${{ env.CHRONOS_VERSION }}
         git push origin ${{ env.CHRONOS_VERSION }}
