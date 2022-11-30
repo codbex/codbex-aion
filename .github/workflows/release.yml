@@ -23,7 +23,7 @@ jobs:
         token: ${{ secrets.GH_TOKEN }}
         fetch-depth: 0
 
-    - name: Set up JDK 13
+    - name: "Configure JDK 13"
       uses: actions/setup-java@v3
       with:
         distribution: zulu
@@ -34,43 +34,61 @@ jobs:
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         gpg-passphrase: GPG_PASSPHRASE
         architecture: x64
-    - name: Set Maven Version
-      run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
-    - name: Publish package
-      run: mvn deploy -P release -DskipTests
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-    - name: Set Chronos Version
-      run: echo CHRONOS_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
-    - name: Set up QEMU
+
+    - name: "Configure Docker: QEMU"
       uses: docker/setup-qemu-action@v2
       with:
         platforms: amd64,arm64
-    - name: Set up Docker Buildx
+
+    - name: "Configure Docker: Buildx"
       uses: docker/setup-buildx-action@v2
       with:
         install: true
-    - name: Set Multi-Builder Docker Buildx
+
+    - name: "Configure Docker: Multi-Builder Buildx"
       run: docker buildx create --use --name multi-builder --platform linux/arm64,linux/amd64
-    - name: Maven Build
+
+    - name: "Configure Git"
+      run: |
+        git fetch
+        git checkout main
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+    - name: "Set Chronos Version"
+      run: echo CHRONOS_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
+
+    - name: "Maven: Set Release Version"
+      run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
+
+    - name: "Maven: Build"
       run: mvn clean install -Dmaven.javadoc.skip=false
-    - name: Docker Login
+
+    - name: "Docker: Login"
       run: docker login ${{secrets.DOCKER_REGISTRY}} -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-    - name: Push Chronos
+
+    - name: "Docker: Push Chronos"
       run: |
         cd releng/chronos-platform
         docker build --load -t ghcr.io/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }} .
         docker push ghcr.io/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }}
         cd ../../
-    - name: Push Chronos - Keycloack
+
+    - name: "Docker: Push Chronos - Keycloack"
       run: |
         cd releng/chronos-platform-keycloack
         docker build --load -t ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }} .
         docker push ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
         cd ../../
-    - name: Create Release
+
+    - name: "Maven: Publish Package"
+      run: mvn deploy -P release -DskipTests
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+    - name: "Create Release"
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
@@ -86,21 +104,23 @@ jobs:
 
           Timesheets Management Application
 
-    - name: Change snapshot version
+    - name: "Git: Commit Release Version"
       run: |
-        git fetch
-        git checkout main
-        mvn versions:set -DnewVersion=${{ github.event.inputs.snapshotVersion }}
-        git config user.name "$GITHUB_ACTOR"
-        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git add .
-        git commit -m "SNAPSHOT VERSION - ${{ github.event.inputs.snapshotVersion }}"
+        git commit -m "version set to ${{ github.event.inputs.snapshotVersion }} for release"
         git push
-
-    - name: Create GitHub Branch
-      run: |
         git checkout -b ${{ env.CHRONOS_VERSION }}
         git push origin ${{ env.CHRONOS_VERSION }}
+        git checkout main
+
+    - name: "Maven: Set Snapshot Version"
+      run: mvn versions:set -DnewVersion=${{ github.event.inputs.snapshotVersion }}
+
+    - name: "Git: Commit Snapshot Version"
+      run: |
+        git add .
+        git commit -m "version set to ${{ github.event.inputs.snapshotVersion }} for development"
+        git push
 
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
