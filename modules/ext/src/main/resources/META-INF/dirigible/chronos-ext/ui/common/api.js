@@ -20,9 +20,9 @@ angular.module('app')
                 });
             };
 
-            const httpPost = (uri, data = null) => {
+            const httpPost = (uri, data = {}) => {
                 return $q((resolve, reject) => {
-                    return $http.post(uri, data ? JSON.stringify(data) : undefined)
+                    return $http.post(uri, data ? JSON.stringify(data) : "{}")
                         .then(response => resolve(response.data), response => reject(response.data));
                 });
             }
