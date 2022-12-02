@@ -22,7 +22,7 @@ let end = request.getParameter('End');
 if (projectId) {
 
     var projectName = '';
-    var result = query.execute('SELECT PROJECT_NAME FROM CHRONOS_PROJECT WHERE PROJECT_ID = ?', [projectId]);
+    var result = query.execute('SELECT "PROJECT_NAME" FROM "CHRONOS_PROJECT" WHERE "PROJECT_ID" = ?', [projectId]);
     if (result.length > 0)
         projectName = result[0].PROJECT_NAME;
 
