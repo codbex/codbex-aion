@@ -1,0 +1,1 @@
+{"constraints":[{"path":"/chronos-ext/services/developer/","method":"*","roles":["Employee"],"scope":"HTTP"},{"method":"*","scope":"HTTP","path":"/chronos-ext/ui/developer/","roles":["Employee"]}]}
