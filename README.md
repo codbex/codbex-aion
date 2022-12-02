@@ -37,6 +37,7 @@ For local test & development use the following `tomcat-users.xml`:
 The `codbex-chronos` application roles are:
 - Employee
 - Manager
+- Admin
 
 The `Eclipse Dirigible` roles are:
 - Developer
