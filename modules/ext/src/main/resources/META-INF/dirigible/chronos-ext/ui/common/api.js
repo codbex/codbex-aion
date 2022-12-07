@@ -11,6 +11,21 @@
  */
 angular.module('app')
     .provider('api', function Api() {
+        const asUTC = d => {
+            let utcDate = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+            return new Date(utcDate).toISOString();
+        };
+
+        const stringifyReplacer = (key, value) => {
+            if (key === '') {
+                for (const [propName, propValue] of Object.entries(value)) {
+                    if (propValue instanceof Date) {
+                        value[propName] = asUTC(propValue);
+                    }
+                }
+            }
+            return value;
+        }
         this.$get = ['$q', '$http', function ($q, $http) {
 
             const httpGet = uri => {
@@ -22,14 +37,14 @@ angular.module('app')
 
             const httpPost = (uri, data = {}) => {
                 return $q((resolve, reject) => {
-                    return $http.post(uri, data ? JSON.stringify(data) : "{}")
+                    return $http.post(uri, data ? JSON.stringify(data, stringifyReplacer) : "{}")
                         .then(response => resolve(response.data), response => reject(response.data));
                 });
             }
 
             const httpPut = (uri, data) => {
                 return $q((resolve, reject) => {
-                    return $http.put(uri, JSON.stringify(data))
+                    return $http.put(uri, JSON.stringify(data, stringifyReplacer))
                         .then(response => resolve(response.data), response => reject(response.data));
                 });
             }
