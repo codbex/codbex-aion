@@ -28,6 +28,10 @@ jobs:
 
       - name: Docker Login
         run: docker login ${{secrets.DOCKER_REGISTRY}} -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: Registry
+        run: |
+          echo ${{secrets.DOCKER_REGISTRY}}
+          echo ${{secrets.DOCKER_USERNAME}}
       - name: Docker Image
         run: |
           cd releng/chronos-platform
