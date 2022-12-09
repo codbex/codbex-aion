@@ -81,7 +81,7 @@
 		 	<version>${dirigible.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>groupId>org.eclipse.dirigible</groupId>
+					<groupId>org.eclipse.dirigible</groupId>
 					<artifactId>dirigible-ide</artifactId>
 				</exclusion>
 			</exclusions>
