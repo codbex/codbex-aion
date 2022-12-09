@@ -16,6 +16,7 @@
 	<modules>
 		<module>chronos-platform</module>
 		<module>chronos-platform-keycloack</module>
+		<module>chronos-platform-keycloack-runtime</module>
 	</modules>
 
 	<build>
