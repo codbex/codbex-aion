@@ -81,6 +81,13 @@ jobs:
         docker push ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
         cd ../../
 
+    - name: "Docker: Push Chronos - Keycloack - Runtime"
+      run: |
+        cd releng/chronos-platform-keycloack-runtime
+        docker build --load -t ghcr.io/codbex/codbex-chronos-keycloack-runtime:${{ env.CHRONOS_VERSION }} .
+        docker push ghcr.io/codbex/codbex-chronos-keycloack-runtime:${{ env.CHRONOS_VERSION }}
+        cd ../../
+
     - name: "Maven: Publish Package"
       run: mvn deploy -P release -DskipTests
       env:
