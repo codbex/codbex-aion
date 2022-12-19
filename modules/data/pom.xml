@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>com.codbex.chronos</groupId>
 		<artifactId>codbex-chronos-modules-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>0.5.3</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<name>codbex - chronos - modules - data</name>
 	<artifactId>codbex-chronos-modules-data</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>0.5.3</version>
 	<packaging>jar</packaging>
 
 	<properties>
