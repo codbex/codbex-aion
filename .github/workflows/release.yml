@@ -61,6 +61,11 @@ jobs:
     - name: "Maven: Set Release Version"
       run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
 
+    - name: "Git: Commit Release Version"
+      run: |
+        git add .
+        git commit -m "version set to ${{ github.event.inputs.releaseVersion }} for release"
+
     - name: "Maven: Build"
       run: mvn clean install -Dmaven.javadoc.skip=false
 
@@ -111,10 +116,8 @@ jobs:
 
           Timesheets Management Application
 
-    - name: "Git: Commit Release Version"
+    - name: "Git: Push Release Version"
       run: |
-        git add .
-        git commit -m "version set to ${{ github.event.inputs.releaseVersion }} for release"
         git push
         git checkout -b ${{ env.CHRONOS_VERSION }}
         git push origin ${{ env.CHRONOS_VERSION }}
