@@ -55,8 +55,8 @@ jobs:
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-    - name: "Set Chronos Version"
-      run: echo CHRONOS_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
+    - name: "Set Aion Version"
+      run: echo AION_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
 
     - name: "Maven: Set Release Version"
       run: mvn versions:set -DnewVersion=${{ github.event.inputs.releaseVersion }}
@@ -72,25 +72,25 @@ jobs:
     - name: "Docker: Login"
       run: docker login ${{secrets.DOCKER_REGISTRY}} -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
 
-    - name: "Docker: Push Chronos"
+    - name: "Docker: Push Aion"
       run: |
-        cd releng/chronos-platform
-        docker build --load -t ghcr.io/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }} .
-        docker push ghcr.io/codbex/codbex-chronos:${{ env.CHRONOS_VERSION }}
+        cd releng/aion-platform
+        docker build --load -t ghcr.io/codbex/codbex-aion:${{ env.AION_VERSION }} .
+        docker push ghcr.io/codbex/codbex-aion:${{ env.AION_VERSION }}
         cd ../../
 
-    - name: "Docker: Push Chronos - Keycloack"
+    - name: "Docker: Push Aion - Keycloack"
       run: |
-        cd releng/chronos-platform-keycloack
-        docker build --load -t ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }} .
-        docker push ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
+        cd releng/aion-platform-keycloack
+        docker build --load -t ghcr.io/codbex/codbex-aion-keycloack:${{ env.AION_VERSION }} .
+        docker push ghcr.io/codbex/codbex-aion-keycloack:${{ env.AION_VERSION }}
         cd ../../
 
-    - name: "Docker: Push Chronos - Keycloack - Runtime"
+    - name: "Docker: Push Aion - Keycloack - Runtime"
       run: |
-        cd releng/chronos-platform-keycloack-runtime
-        docker build --load -t ghcr.io/codbex/codbex-chronos-keycloack-runtime:${{ env.CHRONOS_VERSION }} .
-        docker push ghcr.io/codbex/codbex-chronos-keycloack-runtime:${{ env.CHRONOS_VERSION }}
+        cd releng/aion-platform-keycloack-runtime
+        docker build --load -t ghcr.io/codbex/codbex-aion-keycloack-runtime:${{ env.AION_VERSION }} .
+        docker push ghcr.io/codbex/codbex-aion-keycloack-runtime:${{ env.AION_VERSION }}
         cd ../../
 
     - name: "Maven: Publish Package"
@@ -105,22 +105,22 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: v${{ env.CHRONOS_VERSION }}
-        name: ${{ env.CHRONOS_VERSION }}
+        tag_name: v${{ env.AION_VERSION }}
+        name: ${{ env.AION_VERSION }}
         draft: false
         prerelease: false
         files: |
           LICENSE
         body: |
-          ## Codbex Chronos - ${{ env.CHRONOS_VERSION }}
+          ## Codbex Aion - ${{ env.AION_VERSION }}
 
           Timesheets Management Application
 
     - name: "Git: Push Release Version"
       run: |
         git push
-        git checkout -b ${{ env.CHRONOS_VERSION }}
-        git push origin ${{ env.CHRONOS_VERSION }}
+        git checkout -b ${{ env.AION_VERSION }}
+        git push origin ${{ env.AION_VERSION }}
         git checkout main
 
     - name: "Maven: Set Snapshot Version"
@@ -143,4 +143,4 @@ jobs:
         location: ${{secrets.GKE_LOCATION}}
 
     - name: "Update Deployment"
-      run: kubectl -n ${{ secrets.GKE_NAMESPACE }} set image deployment/${{ secrets.GKE_DEPLOY }} dirigible=ghcr.io/codbex/codbex-chronos-keycloack:${{ env.CHRONOS_VERSION }}
+      run: kubectl -n ${{ secrets.GKE_NAMESPACE }} set image deployment/${{ secrets.GKE_DEPLOY }} dirigible=ghcr.io/codbex/codbex-aion-keycloack:${{ env.AION_VERSION }}

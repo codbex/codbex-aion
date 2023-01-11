@@ -2,21 +2,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.codbex.chronos</groupId>
-		<artifactId>codbex-chronos-parent</artifactId>
+		<groupId>com.codbex.aion</groupId>
+		<artifactId>codbex-aion-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<name>codbex - chronos - releng - parent</name>
-	<artifactId>codbex-chronos-releng-parent</artifactId>
+	<name>codbex - aion - releng - parent</name>
+	<artifactId>codbex-aion-releng-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>chronos-platform</module>
-		<module>chronos-platform-keycloack</module>
-		<module>chronos-platform-keycloack-runtime</module>
+		<module>aion-platform</module>
+		<module>aion-platform-keycloack</module>
+		<module>aion-platform-keycloack-runtime</module>
 	</modules>
 
 	<build>

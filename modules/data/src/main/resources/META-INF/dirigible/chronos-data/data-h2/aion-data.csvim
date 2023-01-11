@@ -1,0 +1,46 @@
+[
+  {
+    "table": "AION_PROJECTSTATUS",
+    "schema": "PUBLIC",
+    "file": "/aion-data/data-h2/AION_PROJECTSTATUS.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  },
+  {
+    "table": "AION_TASKSTATUS",
+    "schema": "PUBLIC",
+    "file": "/aion-data/data-h2/AION_TASKSTATUS.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  },
+  {
+    "table": "AION_TIMESHEETSTATUS",
+    "schema": "PUBLIC",
+    "file": "/aion-data/data-h2/AION_TIMESHEETSTATUS.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  },
+  {
+    "table": "AION_ROLE",
+    "schema": "PUBLIC",
+    "file": "/aion-data/data-h2/AION_ROLE.csv",
+    "header": true,
+    "useHeaderNames": true,
+    "delimField": ",",
+    "delimEnclosing": "\"",
+    "distinguishEmptyFromNull": true,
+    "keys": []
+  }
+]

@@ -1,0 +1,1 @@
+{"constraints":[{"path":"/aion-ext/services/manager/","method":"*","roles":["Manager"],"scope":"HTTP"},{"method":"*","scope":"HTTP","path":"/aion-ext/ui/manager/","roles":["Manager"]}]}

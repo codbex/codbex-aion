@@ -1,0 +1,427 @@
+{
+    "schema": {
+        "structures": [
+            {
+                "name": "AION_EMPLOYEE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "EMPLOYEE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "name": "EMPLOYEE_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "name": "EMPLOYEE_EMAIL"
+                    }
+                ]
+            },
+            {
+                "name": "AION_PROJECT",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PROJECT_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "name": "PROJECT_NAME"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "PROJECT_EMPLOYEEID"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "PROJECT_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "PROJECT_END"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "PROJECT_PROJECTSTATUSID"
+                    }
+                ]
+            },
+            {
+                "name": "AION_ASSIGNMENT",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "ASSIGNMENT_EMPLOYEEID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "ASSIGNMENT_PROJECTID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "ASSIGNMENT_ROLE"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "ASSIGNMENT_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "ASSIGNMENT_END"
+                    },
+                    {
+                        "type": "DOUBLE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_RATE"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ASSIGNMENT_APPROVER"
+                    }
+                ]
+            },
+            {
+                "name": "AION_TASK",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TASK_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 255,
+                        "name": "TASK_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 255,
+                        "nullable": true,
+                        "name": "TASK_LINK"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "TASK_PROJECTID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "TASK_TASKSTATUSID"
+                    }
+                ]
+            },
+            {
+                "name": "AION_TIMESHEET",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TIMESHEET_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "TIMESHEET_PROJECTID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "TIMESHEET_EMPLOYEEID"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "TIMESHEET_START"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "name": "TIMESHEET_END"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 2000,
+                        "nullable": true,
+                        "name": "TIMESHEET_REASON"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "TIMESHEET_STATUS"
+                    }
+                ]
+            },
+            {
+                "name": "AION_TASKSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TASKSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 50,
+                        "name": "TASKSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "AION_PROJECTSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PROJECTSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 50,
+                        "name": "PROJECTSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "AION_ITEM",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ITEM_ID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "ITEM_TIMESHEETID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "name": "ITEM_TASKID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 2000,
+                        "nullable": true,
+                        "name": "ITEM_DESCRIPTION"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 20,
+                        "name": "ITEM_HOURS"
+                    },
+                    {
+                        "type": "DATE",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ITEM_DAY"
+                    }
+                ]
+            },
+            {
+                "name": "AION_TIMESHEETSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TIMESHEETSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "name": "TIMESHEETSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "AION_ROLE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ROLE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 200,
+                        "name": "ROLE_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "Project_Employee",
+                "type": "foreignKey",
+                "table": "AION_PROJECT",
+                "constraintName": "Project_Employee",
+                "columns": "PROJECT_EMPLOYEEID",
+                "referencedTable": "AION_EMPLOYEE",
+                "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Project_ProjectStatus",
+                "type": "foreignKey",
+                "table": "AION_PROJECT",
+                "constraintName": "Project_ProjectStatus",
+                "columns": "PROJECT_PROJECTSTATUSID",
+                "referencedTable": "AION_PROJECTSTATUS",
+                "referencedColumns": "PROJECTSTATUS_ID"
+            },
+            {
+                "name": "Assignment_Employee",
+                "type": "foreignKey",
+                "table": "AION_ASSIGNMENT",
+                "constraintName": "Assignment_Employee",
+                "columns": "ASSIGNMENT_EMPLOYEEID",
+                "referencedTable": "AION_EMPLOYEE",
+                "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Assignment_Project",
+                "type": "foreignKey",
+                "table": "AION_ASSIGNMENT",
+                "constraintName": "Assignment_Project",
+                "columns": "ASSIGNMENT_PROJECTID",
+                "referencedTable": "AION_PROJECT",
+                "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Assignment_Role",
+                "type": "foreignKey",
+                "table": "AION_ASSIGNMENT",
+                "constraintName": "Assignment_Role",
+                "columns": "ASSIGNMENT_ROLE",
+                "referencedTable": "AION_ROLE",
+                "referencedColumns": "ROLE_ID"
+            },
+            {
+                "name": "Task_Project",
+                "type": "foreignKey",
+                "table": "AION_TASK",
+                "constraintName": "Task_Project",
+                "columns": "TASK_PROJECTID",
+                "referencedTable": "AION_PROJECT",
+                "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Task_TaskStatus",
+                "type": "foreignKey",
+                "table": "AION_TASK",
+                "constraintName": "Task_TaskStatus",
+                "columns": "TASK_TASKSTATUSID",
+                "referencedTable": "AION_TASKSTATUS",
+                "referencedColumns": "TASKSTATUS_ID"
+            },
+            {
+                "name": "Timesheet_Project",
+                "type": "foreignKey",
+                "table": "AION_TIMESHEET",
+                "constraintName": "Timesheet_Project",
+                "columns": "TIMESHEET_PROJECTID",
+                "referencedTable": "AION_PROJECT",
+                "referencedColumns": "PROJECT_ID"
+            },
+            {
+                "name": "Timesheet_Employee",
+                "type": "foreignKey",
+                "table": "AION_TIMESHEET",
+                "constraintName": "Timesheet_Employee",
+                "columns": "TIMESHEET_EMPLOYEEID",
+                "referencedTable": "AION_EMPLOYEE",
+                "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Timesheet_TimesheetStatus",
+                "type": "foreignKey",
+                "table": "AION_TIMESHEET",
+                "constraintName": "Timesheet_TimesheetStatus",
+                "columns": "TIMESHEET_STATUS",
+                "referencedTable": "AION_TIMESHEETSTATUS",
+                "referencedColumns": "TIMESHEETSTATUS_ID"
+            },
+            {
+                "name": "Item_Timesheet",
+                "type": "foreignKey",
+                "table": "AION_ITEM",
+                "constraintName": "Item_Timesheet",
+                "columns": "ITEM_TIMESHEETID",
+                "referencedTable": "AION_TIMESHEET",
+                "referencedColumns": "TIMESHEET_ID"
+            },
+            {
+                "name": "Item_Task",
+                "type": "foreignKey",
+                "table": "AION_ITEM",
+                "constraintName": "Item_Task",
+                "columns": "ITEM_TASKID",
+                "referencedTable": "AION_TASK",
+                "referencedColumns": "TASK_ID"
+            }
+        ]
+    }
+}

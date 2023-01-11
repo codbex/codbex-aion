@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2022 codbex and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v2.0
+  ~ which accompanies this distribution, and is available at
+  ~ http://www.eclipse.org/legal/epl-v20.html
+  ~ Contributors:
+  ~ codbex - initial API and implementation
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="controller">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
+
+        <script type="text/javascript" src="/services/v4/js/resources-core/services/loader.js?id=ide-view-js"></script>
+
+        <script type="text/javascript" src="approvetimesheets.js"></script>
+        <script type="text/javascript" src="/services/v4/web/aion-ext/services/common/utilities.js"></script>
+        <script type="text/javascript" src="../common/api.js"></script>
+
+        <link type="text/css" rel="stylesheet"
+            href="/services/v4/js/resources-core/services/loader.js?id=ide-view-css" />
+        <theme></theme>
+
+        <link type="text/css" rel="stylesheet" href="../common/style.css" />
+
+    </head>
+
+    <body>
+        <main class="fd-page fd-page--solid">
+            <header>
+                <fd-bar bar-design="header" cozy="true" in-page="true" size="m_l">
+                    <fd-bar-left>
+                        <fd-bar-element>
+                            <a href="index.html" class="fd-button fd-button--transparent">
+                                <i class="sap-icon--navigation-left-arrow"></i>
+                            </a>
+                        </fd-bar-element>
+                        <fd-bar-element>
+                            <h3 fd-title header-size="3">Aion / Approve Timesheets</h3>
+                        </fd-bar-element>
+                    </fd-bar-left>
+                    <fd-bar-right>
+                        <fd-bar-element>
+                            <button class="fd-button fd-button--transparent" aria-label="See more">
+                                <i class="sap-icon--grid"></i>
+                            </button>
+                        </fd-bar-element>
+                    </fd-bar-right>
+                </fd-bar>
+            </header>
+            <div class="fd-page__content fd-page__content--m_l" role="region">
+                <div>
+                    <div class="dg-hbox page-container">
+                        <div class="dg-stretch dg-vbox">
+                            <fd-toolbar has-title="false" dg-size="cozy" dg-type="solid">
+                                <h4>Project</h4>
+                                <fd-select dropdown-fill="true" ng-model="manage.projectId" ng-change="loadTimesheets()"
+                                    dg-size="compact" dg-placeholder="Select project ...">
+                                    <fd-option ng-repeat="project in projects track by project.Id"
+                                        text="{{ project.Name }}" value="project.Id"></fd-option>
+                                </fd-select>
+                                <fd-toolbar-spacer></fd-toolbar-spacer>
+                                <fd-button dg-type="transparent" glyph="sap-icon--refresh" aria-label="Refresh"
+                                    ng-click="loadTimesheets()"
+                                    state="{{ hasSelectedProject() ? undefined : 'disabled'}}">
+                                </fd-button>
+                            </fd-toolbar>
+                            <fd-scrollbar class="dg-stretch">
+                                <table fd-table fd-table-group display-mode="standard" sticky="true">
+                                    <thead fd-table-header sticky="true">
+                                        <tr fd-table-row>
+                                            <th fd-table-header-cell>Name</th>
+                                            <th fd-table-header-cell>Description</th>
+                                            <th fd-table-header-cell width="100">Hours</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody fd-table-body>
+                                        <tr fd-table-row ng-repeat-start="next in timesheets">
+                                            <td fd-table-group-cell nesting-level="1" expanded="true">
+                                                <b>{{next.EmployeeName}}</b>:
+                                                {{next.Start}} - {{next.End}} [<b>{{next.Hours}}</b> of 40]
+                                                <fd-toolbar has-title="false" dg-size="cozy" dg-type="transparent"
+                                                    no-bottom-border="true" class="group-cell-toolbar">
+                                                    <fd-button compact="true" dg-type="positive"
+                                                        ng-click="approveTimesheet(next, $event)" dg-label="Approve">
+                                                    </fd-button>
+                                                    <fd-button compact="true" dg-type="negative"
+                                                        ng-click="showRejectDialog(next, $event)" dg-label="Reject">
+                                                    </fd-button>
+                                                </fd-toolbar>
+                                            </td>
+                                        </tr>
+                                        <tr fd-table-row
+                                            ng-repeat-start="itemsByDate in next.groupedItems | orderBy:'day'">
+                                            <td fd-table-group-cell nesting-level="2" expanded="true">
+                                                <b>{{dateToString(itemsByDate.day)}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr fd-table-row ng-repeat-end
+                                            ng-repeat="item in itemsByDate.items | orderBy:'Id'">
+                                            <td fd-table-cell nesting-level="3">{{item.Name}}</td>
+                                            <td fd-table-cell>{{item.Description}}</td>
+                                            <td fd-table-cell>{{item.Hours}}</td>
+                                        </tr>
+                                        <tr ng-repeat-end ng-if="false"></tr>
+                                        <tr ng-if="!hasSelectedProject()" fd-table-row>
+                                            <td fd-table-cell no-data="true">Please, select a project from the drop-down
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="hasSelectedProject() && timesheets.length === 0" fd-table-row>
+                                            <td fd-table-cell no-data="true">No timesheets pending for approval
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </fd-scrollbar>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="fd-text">The technology platform used for project <b>Aion</b> is <a
+                            href="http://www.dirigible.io/" target="_blank" class="fd-link">Eclipse Dirigible</a>
+                        <br>
+                        All the source code is licensed under the <a href="https://www.eclipse.org/legal/epl-v20.html"
+                            target="_blank" class="fd-link">Eclipse Public License - v 2.0</a> and
+                        maintained at <a href="https://github.com/eclipse/dirigible" target="_blank"
+                            class="fd-link">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <section ng-show="reject.showDialog" class="fd-dialog-docs-static fd-dialog fd-dialog--active ts-dialog">
+            <div class="fd-dialog__content fd-dialog__content--draggable-grab fd-dialog__content--s" role="dialog"
+                aria-modal="true" aria-labelledby="dialog-title-7">
+                <header class="fd-dialog__header fd-bar fd-bar--header">
+                    <div class="fd-bar__left">
+                        <div class="fd-bar__element">
+                            <h2 class="fd-title fd-title--h5" id="dialog-title-7">
+                                Reject Timesheet
+                            </h2>
+                        </div>
+                    </div>
+                </header>
+                <div class="fd-dialog__body">
+                    Please, provide a reason for the rejection
+                    <div class="fd-container fd-form-layout-grid-container fd-form-layout-grid-container--vertical">
+                        <div class="fd-row">
+                            <div class="fd-col">
+                                <input class="fd-input" type="text" id="reason" ng-model="reject.reason"
+                                    placeholder="Reason ...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="fd-dialog__footer fd-bar fd-bar--footer">
+                    <div class="fd-bar__right">
+                        <div class="fd-bar__element">
+                            <fd-button dg-type="emphasized" class="fd-dialog__decisive-button" compact="true"
+                                dg-label="Reject" ng-click="rejectTimesheet()"
+                                state="{{ reject.inProgress ? 'disabled' : undefined}}">
+                            </fd-button>
+                        </div>
+                        <div class="fd-bar__element">
+                            <fd-button dg-type="transparent" class="fd-dialog__decisive-button" compact="true"
+                                dg-label="Cancel" ng-click="hideRejectDialog()"></fd-button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+
+    </body>
+
+</html>

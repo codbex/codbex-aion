@@ -1,14 +1,14 @@
-# codbex-chronos
+# codbex-aion
 
 Timesheets Management Application
 
 ## Model
 
-![model](images/chronos-model.png)
+![model](images/aion-model.png)
 
 ## Application
 
-![model](images/chronos-app.png)
+![model](images/aion-app.png)
 
 ## Users & Roles
 
@@ -34,7 +34,7 @@ For local test & development use the following `tomcat-users.xml`:
 </tomcat-users>
 ```
 
-The `codbex-chronos` application roles are:
+The `codbex-aion` application roles are:
 - Employee
 - Manager
 - Admin
