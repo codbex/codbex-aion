@@ -21,7 +21,7 @@ RUN mkdir -p /usr/local/tomcat/target/dirigible/repository/root/registry/public/
 
 FROM gcr.io/distroless/base-debian11
 
-ENV DIRIGIBLE_HOME_URL=/services/v4/web/
+# ENV DIRIGIBLE_HOME_URL=/services/v4/web/
 ENV CATALINA_HOME=/usr/local/tomcat
 
 USER nonroot
