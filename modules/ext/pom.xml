@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>com.codbex.aion</groupId>
 		<artifactId>codbex-aion-modules-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>0.5.7</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<name>codbex - aion - modules - ext</name>
 	<artifactId>codbex-aion-modules-ext</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>0.5.7</version>
 	<packaging>jar</packaging>
 
 	<properties>
