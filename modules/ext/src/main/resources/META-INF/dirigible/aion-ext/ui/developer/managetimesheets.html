@@ -187,7 +187,7 @@
                         <fd-form-item>
                             <fd-form-label id="taskLabel" dg-required="true" dg-colon="true">Task
                             </fd-form-label>
-                            <fd-select dropdown-fill="true" ng-model="manage.timesheetItem.TaskId"
+                            <fd-select dropdown-fill="true" dropdown-fixed="true" ng-model="manage.timesheetItem.TaskId"
                                 dg-placeholder="Select task..." label-id="taskLabel">
                                 <fd-option ng-repeat="task in manage.tasks track by task.Id" text="{{ task.Name }}"
                                     value="task.Id"></fd-option>
