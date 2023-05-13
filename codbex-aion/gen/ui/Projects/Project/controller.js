@@ -151,7 +151,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/codbex-aion/gen/api/Configurations/ProjectStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Settings/ProjectStatus.js").then(function (response) {
 			$scope.optionsProjectStatusId = response.data.map(e => {
 				return {
 					value: e.Id,

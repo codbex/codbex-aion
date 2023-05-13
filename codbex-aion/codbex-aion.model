@@ -169,7 +169,7 @@
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Project_ProjectStatus",
                         "relationshipEntityName": "ProjectStatus",
-                        "relationshipEntityPerspectiveName": "Configurations"
+                        "relationshipEntityPerspectiveName": "Settings"
                     }
                 ],
                 "caption": "Manage entity Project",
@@ -268,7 +268,7 @@
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Assignment_Role",
                         "relationshipEntityName": "Role",
-                        "relationshipEntityPerspectiveName": "Configurations"
+                        "relationshipEntityPerspectiveName": "Settings"
                     },
                     {
                         "calculatedPropertyExpression": "",
@@ -435,7 +435,7 @@
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Task_TaskStatus",
                         "relationshipEntityName": "TaskStatus",
-                        "relationshipEntityPerspectiveName": "Configurations"
+                        "relationshipEntityPerspectiveName": "Settings"
                     }
                 ],
                 "caption": "Manage entity Task",
@@ -581,7 +581,7 @@
                         "widgetType": "DROPDOWN",
                         "relationshipName": "Timesheet_TimesheetStatus",
                         "relationshipEntityName": "TimesheetStatus",
-                        "relationshipEntityPerspectiveName": "Configurations"
+                        "relationshipEntityPerspectiveName": "Settings"
                     }
                 ],
                 "caption": "Manage entity Timesheet",
@@ -647,9 +647,9 @@
                 "menuLabel": "TaskStatus",
                 "name": "TaskStatus",
                 "navigationPath": "/Home",
-                "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-                "perspectiveName": "Configurations",
-                "perspectiveOrder": "100",
+                "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+                "perspectiveName": "Settings",
+                "perspectiveOrder": "999",
                 "title": "TaskStatus",
                 "tooltip": "TaskStatus",
                 "type": "PRIMARY"
@@ -701,9 +701,9 @@
                 "menuLabel": "ProjectStatus",
                 "name": "ProjectStatus",
                 "navigationPath": "/Home",
-                "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-                "perspectiveName": "Configurations",
-                "perspectiveOrder": "100",
+                "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+                "perspectiveName": "Settings",
+                "perspectiveOrder": "999",
                 "title": "Project Status",
                 "tooltip": "ProjectStatus",
                 "type": "PRIMARY"
@@ -874,9 +874,9 @@
                 "menuLabel": "TimesheetStatus",
                 "name": "TimesheetStatus",
                 "navigationPath": "/Home",
-                "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-                "perspectiveName": "Configurations",
-                "perspectiveOrder": "100",
+                "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+                "perspectiveName": "Settings",
+                "perspectiveOrder": "999",
                 "title": "TimesheetStatus",
                 "tooltip": "TimesheetStatus",
                 "type": "PRIMARY"
@@ -926,9 +926,9 @@
                 "menuLabel": "Role",
                 "name": "Role",
                 "navigationPath": "/Home",
-                "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-                "perspectiveName": "Configurations",
-                "perspectiveOrder": "100",
+                "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+                "perspectiveName": "Settings",
+                "perspectiveOrder": "999",
                 "title": "Role",
                 "tooltip": "Role",
                 "type": "PRIMARY"
@@ -958,6 +958,12 @@
                 "label": "Reports",
                 "icon": "/services/web/resources/unicons/chart.svg",
                 "order": "400"
+            },
+            {
+                "name": "Settings",
+                "label": "Settings",
+                "icon": "/services/web/resources/unicons/wrench.svg",
+                "order": "999"
             }
         ],
         "navigations": []

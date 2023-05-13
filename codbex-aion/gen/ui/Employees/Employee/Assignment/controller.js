@@ -169,7 +169,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/codbex-aion/gen/api/Configurations/Role.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Settings/Role.js").then(function (response) {
 			$scope.optionsRole = response.data.map(e => {
 				return {
 					value: e.Id,

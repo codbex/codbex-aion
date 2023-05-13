@@ -3,7 +3,7 @@
   "brand": "codbex",
   "brandUrl": "https://codbex.com",
   "title": "Timesheets Management Application",
-  "description": "Managing employees and their timesheets data",
+  "description": "Managing employees and timesheets data",
   "projectName": "codbex-aion",
   "workspaceName": "workspace",
   "filePath": "codbex-aion.model",
@@ -77,17 +77,17 @@
       "order": "300",
       "icon": "/services/web/resources/unicons/calender.svg"
     },
-    "Configurations": {
+    "Settings": {
       "views": [
         "TaskStatus",
         "ProjectStatus",
         "TimesheetStatus",
         "Role"
       ],
-      "name": "Configurations",
-      "label": "Configurations",
-      "order": "100",
-      "icon": "/services/web/resources/unicons/copy.svg"
+      "name": "Settings",
+      "label": "Settings",
+      "order": "999",
+      "icon": "/services/web/resources/unicons/wrench.svg"
     }
   },
   "models": [
@@ -338,7 +338,7 @@
           "widgetType": "DROPDOWN",
           "relationshipName": "Project_ProjectStatus",
           "relationshipEntityName": "ProjectStatus",
-          "relationshipEntityPerspectiveName": "Configurations",
+          "relationshipEntityPerspectiveName": "Settings",
           "dataNotNull": true,
           "inputRule": ""
         }
@@ -466,7 +466,7 @@
             "widgetType": "DROPDOWN",
             "relationshipName": "Project_ProjectStatus",
             "relationshipEntityName": "ProjectStatus",
-            "relationshipEntityPerspectiveName": "Configurations",
+            "relationshipEntityPerspectiveName": "Settings",
             "dataNotNull": true,
             "inputRule": ""
           }
@@ -561,7 +561,7 @@
           "widgetType": "DROPDOWN",
           "relationshipName": "Assignment_Role",
           "relationshipEntityName": "Role",
-          "relationshipEntityPerspectiveName": "Configurations",
+          "relationshipEntityPerspectiveName": "Settings",
           "dataNotNull": true,
           "widgetLabel": "Role",
           "inputRule": ""
@@ -769,7 +769,7 @@
           "widgetType": "DROPDOWN",
           "relationshipName": "Task_TaskStatus",
           "relationshipEntityName": "TaskStatus",
-          "relationshipEntityPerspectiveName": "Configurations",
+          "relationshipEntityPerspectiveName": "Settings",
           "dataNotNull": true,
           "inputRule": ""
         }
@@ -944,7 +944,7 @@
           "widgetType": "DROPDOWN",
           "relationshipName": "Timesheet_TimesheetStatus",
           "relationshipEntityName": "TimesheetStatus",
-          "relationshipEntityPerspectiveName": "Configurations",
+          "relationshipEntityPerspectiveName": "Settings",
           "dataNotNull": true,
           "inputRule": ""
         }
@@ -1075,7 +1075,7 @@
             "widgetType": "DROPDOWN",
             "relationshipName": "Timesheet_TimesheetStatus",
             "relationshipEntityName": "TimesheetStatus",
-            "relationshipEntityPerspectiveName": "Configurations",
+            "relationshipEntityPerspectiveName": "Settings",
             "dataNotNull": true,
             "inputRule": ""
           }
@@ -1136,9 +1136,9 @@
       "menuLabel": "TaskStatus",
       "name": "TaskStatus",
       "navigationPath": "/Home",
-      "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-      "perspectiveName": "Configurations",
-      "perspectiveOrder": "100",
+      "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+      "perspectiveName": "Settings",
+      "perspectiveOrder": "999",
       "title": "TaskStatus",
       "tooltip": "TaskStatus",
       "type": "PRIMARY",
@@ -1201,9 +1201,9 @@
       "menuLabel": "ProjectStatus",
       "name": "ProjectStatus",
       "navigationPath": "/Home",
-      "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-      "perspectiveName": "Configurations",
-      "perspectiveOrder": "100",
+      "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+      "perspectiveName": "Settings",
+      "perspectiveOrder": "999",
       "title": "Project Status",
       "tooltip": "ProjectStatus",
       "type": "PRIMARY",
@@ -1414,9 +1414,9 @@
       "menuLabel": "TimesheetStatus",
       "name": "TimesheetStatus",
       "navigationPath": "/Home",
-      "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-      "perspectiveName": "Configurations",
-      "perspectiveOrder": "100",
+      "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+      "perspectiveName": "Settings",
+      "perspectiveOrder": "999",
       "title": "TimesheetStatus",
       "tooltip": "TimesheetStatus",
       "type": "PRIMARY",
@@ -1477,9 +1477,9 @@
       "menuLabel": "Role",
       "name": "Role",
       "navigationPath": "/Home",
-      "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-      "perspectiveName": "Configurations",
-      "perspectiveOrder": "100",
+      "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
+      "perspectiveName": "Settings",
+      "perspectiveOrder": "999",
       "title": "Role",
       "tooltip": "Role",
       "type": "PRIMARY",

@@ -133,7 +133,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//----------------Dropdowns-----------------//
 		$scope.optionsTaskStatusId = [];
 
-		$http.get("/services/js/codbex-aion/gen/api/Configurations/TaskStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Settings/TaskStatus.js").then(function (response) {
 			$scope.optionsTaskStatusId = response.data.map(e => {
 				return {
 					value: e.Id,
