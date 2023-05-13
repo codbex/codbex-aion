@@ -1,20 +1,9 @@
-/*
- * Copyright (c) 2022 codbex or an codbex affiliate company and contributors
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
- * SPDX-License-Identifier: EPL-2.0
- */
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion-app.Projects.Task';
+		messageHubProvider.eventIdPrefix = 'aion.Projects.Task';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/v4/js/aion-app/gen/api/Projects/Task.js";
+		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Projects/Task.js";
 	}])
 	.controller('PageController', ['$scope', '$http', '$http', 'messageHub', 'entityApi', function ($scope, $http, $http, messageHub, entityApi) {
 
@@ -26,13 +15,13 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		resetPagination();
 
 		//-----------------Events-------------------//
-		messageHub.onDidReceiveMessage("aion-app.Projects.Project.entitySelected", function (msg) {
+		messageHub.onDidReceiveMessage("aion.Projects.Project.entitySelected", function (msg) {
 			resetPagination();
 			$scope.selectedMainEntityId = msg.data.selectedMainEntityId;
 			$scope.loadPage($scope.dataPage);
 		}, true);
 
-		messageHub.onDidReceiveMessage("aion-app.Projects.Project.clearDetails", function (msg) {
+		messageHub.onDidReceiveMessage("aion.Projects.Project.clearDetails", function (msg) {
 			$scope.$apply(function () {
 				resetPagination();
 				$scope.selectedMainEntityId = null;
@@ -144,7 +133,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//----------------Dropdowns-----------------//
 		$scope.optionsTaskStatusId = [];
 
-		$http.get("/services/v4/js/aion-app/gen/api/Configurations/TaskStatus.js").then(function (response) {
+		$http.get("/services/js/aion/gen/api/Configurations/TaskStatus.js").then(function (response) {
 			$scope.optionsTaskStatusId = response.data.map(e => {
 				return {
 					value: e.Id,

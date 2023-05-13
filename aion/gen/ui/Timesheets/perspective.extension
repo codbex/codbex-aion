@@ -1,1 +1,1 @@
-{"module":"aion-app/gen/ui/Timesheets/perspective.js","extensionPoint":"aion-app","description":"aion-app - Perspective - Timesheets"}
+{"module":"aion/gen/ui/Timesheets/perspective.js","extensionPoint":"aion","description":"aion - Perspective - Timesheets"}

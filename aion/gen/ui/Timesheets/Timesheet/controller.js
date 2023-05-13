@@ -1,20 +1,9 @@
-/*
- * Copyright (c) 2022 codbex or an codbex affiliate company and contributors
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
- * SPDX-License-Identifier: EPL-2.0
- */
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion-app.Timesheets.Timesheet';
+		messageHubProvider.eventIdPrefix = 'aion.Timesheets.Timesheet';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/v4/js/aion-app/gen/api/Timesheets/Timesheet.js";
+		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Timesheets/Timesheet.js";
 	}])
 	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', function ($scope, $http, messageHub, entityApi) {
 
@@ -157,7 +146,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.optionsEmployeeId = [];
 		$scope.optionsStatus = [];
 
-		$http.get("/services/v4/js/aion-app/gen/api/Projects/Project.js").then(function (response) {
+		$http.get("/services/js/aion/gen/api/Projects/Project.js").then(function (response) {
 			$scope.optionsProjectId = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -166,7 +155,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/v4/js/aion-app/gen/api/Employees/Employee.js").then(function (response) {
+		$http.get("/services/js/aion/gen/api/Employees/Employee.js").then(function (response) {
 			$scope.optionsEmployeeId = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -175,7 +164,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/v4/js/aion-app/gen/api/Configurations/TimesheetStatus.js").then(function (response) {
+		$http.get("/services/js/aion/gen/api/Configurations/TimesheetStatus.js").then(function (response) {
 			$scope.optionsStatus = response.data.map(e => {
 				return {
 					value: e.Id,

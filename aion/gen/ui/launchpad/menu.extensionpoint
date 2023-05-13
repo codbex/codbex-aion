@@ -1,4 +1,4 @@
 {
-    "name": "aion-app-menu",
-    "description": "aion-app - Extension Point for the Application Main Menu"
+    "name": "aion-menu",
+    "description": "aion - Extension Point for the Application Main Menu"
 }

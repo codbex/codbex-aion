@@ -1,46 +1,45 @@
-[
-  {
-    "table": "AION_PROJECTSTATUS",
-    "schema": "PUBLIC",
-    "file": "/aion-data/data-h2/AION_PROJECTSTATUS.csv",
-    "header": true,
-    "useHeaderNames": true,
-    "delimField": ",",
-    "delimEnclosing": "\"",
-    "distinguishEmptyFromNull": true,
-    "keys": []
-  },
-  {
-    "table": "AION_TASKSTATUS",
-    "schema": "PUBLIC",
-    "file": "/aion-data/data-h2/AION_TASKSTATUS.csv",
-    "header": true,
-    "useHeaderNames": true,
-    "delimField": ",",
-    "delimEnclosing": "\"",
-    "distinguishEmptyFromNull": true,
-    "keys": []
-  },
-  {
-    "table": "AION_TIMESHEETSTATUS",
-    "schema": "PUBLIC",
-    "file": "/aion-data/data-h2/AION_TIMESHEETSTATUS.csv",
-    "header": true,
-    "useHeaderNames": true,
-    "delimField": ",",
-    "delimEnclosing": "\"",
-    "distinguishEmptyFromNull": true,
-    "keys": []
-  },
-  {
-    "table": "AION_ROLE",
-    "schema": "PUBLIC",
-    "file": "/aion-data/data-h2/AION_ROLE.csv",
-    "header": true,
-    "useHeaderNames": true,
-    "delimField": ",",
-    "delimEnclosing": "\"",
-    "distinguishEmptyFromNull": true,
-    "keys": []
-  }
-]
+
+{
+  "files": [
+    {
+      "table": "CODBEX_PROJECTSTATUS",
+      "schema": "PUBLIC",
+      "file": "/aion-data/data-h2/projectstatus.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true
+    },
+    {
+      "table": "CODBEX_TASKSTATUS",
+      "schema": "PUBLIC",
+      "file": "/aion-data/data-h2/taskstatus.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true
+    },
+    {
+      "table": "CODBEX_TIMESHEETSTATUS",
+      "schema": "PUBLIC",
+      "file": "/aion-data/data-h2/timesheetstatus.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true
+    },
+    {
+      "table": "CODBEX_ROLE",
+      "schema": "PUBLIC",
+      "file": "/aion-data/data-h2/CODBEX_ROLE.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true
+    }
+  ]
+}

@@ -1,1 +1,1 @@
-{"module":"aion-app/gen/ui/Timesheets/Timesheet/Item/dialog-window/view.js","extensionPoint":"aion-app-dialog-window","description":"aion-app - Application Dialog Window"}
+{"module":"aion/gen/ui/Timesheets/Timesheet/Item/dialog-window/view.js","extensionPoint":"aion-dialog-window","description":"aion - Application Dialog Window"}

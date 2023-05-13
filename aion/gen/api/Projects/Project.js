@@ -1,17 +1,6 @@
-/*
- * Copyright (c) 2022 codbex or an codbex affiliate company and contributors
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
- * SPDX-License-Identifier: EPL-2.0
- */
-const rs = require("http/v4/rs");
-const dao = require("aion-app/gen/dao/Projects/Project");
-const http = require("aion-app/gen/api/utils/http");
+const rs = require("http/rs");
+const dao = require("aion/gen/dao/Projects/Project");
+const http = require("aion/gen/api/utils/http");
 
 rs.service()
 	.resource("")
@@ -71,7 +60,7 @@ rs.service()
 		.post(function(ctx, request, response) {
 			let entity = request.getJSON();
 			entity.Id = dao.create(entity);
-			response.setHeader("Content-Location", "/services/v4/js/aion-app/gen/api/Project.js/" + entity.Id);
+			response.setHeader("Content-Location", "/services/js/aion/gen/api/Project.js/" + entity.Id);
 			http.sendResponseCreated(entity);
 		})
 		.produces(["application/json"])

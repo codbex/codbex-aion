@@ -1,1 +1,1 @@
-{"module":"aion-app/gen/ui/Timesheets/Timesheet/Item/view.js","extensionPoint":"aion-app-view","description":"aion-app - Application View - Details"}
+{"module":"aion/gen/ui/Timesheets/Timesheet/Item/view.js","extensionPoint":"aion-view","description":"aion - Application View - Details"}

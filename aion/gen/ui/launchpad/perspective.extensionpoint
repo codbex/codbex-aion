@@ -1,4 +1,4 @@
 {
-    "name": "aion-app-perspective",
-    "description": "aion-app - Extension Point for the Application Perspective Providers"
+    "name": "aion-perspective",
+    "description": "aion - Extension Point for the Application Perspective Providers"
 }

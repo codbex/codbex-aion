@@ -1,20 +1,9 @@
-/*
- * Copyright (c) 2022 codbex or an codbex affiliate company and contributors
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
- * SPDX-License-Identifier: EPL-2.0
- */
-const query = require("db/v4/query");
-const producer = require("messaging/v4/producer");
-const daoApi = require("db/v4/dao");
+const query = require("db/query");
+const producer = require("messaging/producer");
+const daoApi = require("db/dao");
 
 let dao = daoApi.create({
-	table: "AION_EMPLOYEE",
+	table: "CODBEX_EMPLOYEE",
 	properties: [
 		{
 			name: "Id",
@@ -49,7 +38,7 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "AION_EMPLOYEE",
+		table: "CODBEX_EMPLOYEE",
 		key: {
 			name: "Id",
 			column: "EMPLOYEE_ID",
@@ -62,7 +51,7 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "AION_EMPLOYEE",
+		table: "CODBEX_EMPLOYEE",
 		key: {
 			name: "Id",
 			column: "EMPLOYEE_ID",
@@ -74,7 +63,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "AION_EMPLOYEE",
+		table: "CODBEX_EMPLOYEE",
 		key: {
 			name: "Id",
 			column: "EMPLOYEE_ID",
@@ -88,7 +77,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "AION_EMPLOYEE"');
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_EMPLOYEE"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -100,5 +89,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion-app/Employees/Employee/" + operation).send(JSON.stringify(data));
+	producer.queue("aion/Employees/Employee/" + operation).send(JSON.stringify(data));
 }

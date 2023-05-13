@@ -1,21 +1,10 @@
-/*
- * Copyright (c) 2022 codbex or an codbex affiliate company and contributors
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
- * SPDX-License-Identifier: EPL-2.0
- */
-const query = require("db/v4/query");
-const producer = require("messaging/v4/producer");
-const daoApi = require("db/v4/dao");
-const EntityUtils = require("aion-app/gen/dao/utils/EntityUtils");
+const query = require("db/query");
+const producer = require("messaging/producer");
+const daoApi = require("db/dao");
+const EntityUtils = require("aion/gen/dao/utils/EntityUtils");
 
 let dao = daoApi.create({
-	table: "AION_ASSIGNMENT",
+	table: "CODBEX_ASSIGNMENT",
 	properties: [
 		{
 			name: "Id",
@@ -90,7 +79,7 @@ exports.create = function(entity) {
 	EntityUtils.setBoolean(entity, "Approver");
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "AION_ASSIGNMENT",
+		table: "CODBEX_ASSIGNMENT",
 		key: {
 			name: "Id",
 			column: "ASSIGNMENT_ID",
@@ -106,7 +95,7 @@ exports.update = function(entity) {
 	EntityUtils.setBoolean(entity, "Approver");
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "AION_ASSIGNMENT",
+		table: "CODBEX_ASSIGNMENT",
 		key: {
 			name: "Id",
 			column: "ASSIGNMENT_ID",
@@ -118,7 +107,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "AION_ASSIGNMENT",
+		table: "CODBEX_ASSIGNMENT",
 		key: {
 			name: "Id",
 			column: "ASSIGNMENT_ID",
@@ -128,7 +117,7 @@ exports.delete = function(id) {
 };
 
 exports.count = function (EmployeeId) {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "AION_ASSIGNMENT" WHERE "ASSIGNMENT_EMPLOYEEID" = ?', [EmployeeId]);
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_ASSIGNMENT" WHERE "ASSIGNMENT_EMPLOYEEID" = ?', [EmployeeId]);
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -140,7 +129,7 @@ exports.count = function (EmployeeId) {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "AION_ASSIGNMENT"');
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_ASSIGNMENT"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -152,5 +141,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion-app/Employees/Assignment/" + operation).send(JSON.stringify(data));
+	producer.queue("aion/Employees/Assignment/" + operation).send(JSON.stringify(data));
 }

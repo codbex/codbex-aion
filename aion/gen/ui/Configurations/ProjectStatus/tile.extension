@@ -1,1 +1,1 @@
-{"module":"aion-app/gen/ui/Configurations/ProjectStatus/tile.js","extensionPoint":"aion-app-tile","description":"aion-app - Application Tile"}
+{"module":"aion/gen/ui/Configurations/ProjectStatus/tile.js","extensionPoint":"aion-tile","description":"aion - Application Tile"}

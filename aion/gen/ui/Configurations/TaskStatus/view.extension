@@ -1,1 +1,1 @@
-{"module":"aion-app/gen/ui/Configurations/TaskStatus/view.js","extensionPoint":"aion-app-view","description":"aion-app - Application View"}
+{"module":"aion/gen/ui/Configurations/TaskStatus/view.js","extensionPoint":"aion-view","description":"aion - Application View"}

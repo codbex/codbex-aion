@@ -1,20 +1,9 @@
-/*
- * Copyright (c) 2022 codbex or an codbex affiliate company and contributors
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
- *
- * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
- * SPDX-License-Identifier: EPL-2.0
- */
-const query = require("db/v4/query");
-const producer = require("messaging/v4/producer");
-const daoApi = require("db/v4/dao");
+const query = require("db/query");
+const producer = require("messaging/producer");
+const daoApi = require("db/dao");
 
 let dao = daoApi.create({
-	table: "AION_TASK",
+	table: "CODBEX_TASK",
 	properties: [
 		{
 			name: "Id",
@@ -59,7 +48,7 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "AION_TASK",
+		table: "CODBEX_TASK",
 		key: {
 			name: "Id",
 			column: "TASK_ID",
@@ -72,7 +61,7 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "AION_TASK",
+		table: "CODBEX_TASK",
 		key: {
 			name: "Id",
 			column: "TASK_ID",
@@ -84,7 +73,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "AION_TASK",
+		table: "CODBEX_TASK",
 		key: {
 			name: "Id",
 			column: "TASK_ID",
@@ -94,7 +83,7 @@ exports.delete = function(id) {
 };
 
 exports.count = function (ProjectId) {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "AION_TASK" WHERE "TASK_PROJECTID" = ?', [ProjectId]);
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_TASK" WHERE "TASK_PROJECTID" = ?', [ProjectId]);
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -106,7 +95,7 @@ exports.count = function (ProjectId) {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "AION_TASK"');
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_TASK"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -118,5 +107,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion-app/Projects/Task/" + operation).send(JSON.stringify(data));
+	producer.queue("aion/Projects/Task/" + operation).send(JSON.stringify(data));
 }

@@ -1,4 +1,4 @@
 {
-    "name": "aion-app-tile",
-    "description": "aion-app - Extension Point for the Application Tile Providers"
+    "name": "aion-tile",
+    "description": "aion - Extension Point for the Application Tile Providers"
 }
