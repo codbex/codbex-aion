@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Configurations.ProjectStatus';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Configurations.ProjectStatus';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Configurations/ProjectStatus.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Configurations/ProjectStatus.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 

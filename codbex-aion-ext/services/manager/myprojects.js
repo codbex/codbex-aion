@@ -9,10 +9,10 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-var query = require("db/v4/query");
-var response = require("http/v4/response");
-var user = require("security/v4/user");
-var { ProjectStatus } = require("aion-ext/services/common/utilities");
+var query = require("db/query");
+var response = require("http/response");
+var user = require("security/user");
+var { ProjectStatus } = require("codbex-aion-ext/services/common/utilities");
 
 var sql = 'SELECT "PROJECT_ID", "PROJECT_NAME" FROM "AION_PROJECT", "AION_ASSIGNMENT", "AION_EMPLOYEE" '
     + ' WHERE "EMPLOYEE_EMAIL" = ?'

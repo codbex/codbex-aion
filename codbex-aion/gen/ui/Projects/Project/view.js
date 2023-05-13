@@ -8,7 +8,7 @@ const viewData = {
     label: "Project",
     factory: "frame",
     region: "left",
-    link: "/services/web/aion/gen/ui/Projects/Project/index.html",
+    link: "/services/web/codbex-aion/gen/ui/Projects/Project/index.html",
 };
 
 if (typeof exports !== 'undefined') {

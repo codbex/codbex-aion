@@ -1,7 +1,7 @@
 const query = require("db/query");
 const producer = require("messaging/producer");
 const daoApi = require("db/dao");
-const EntityUtils = require("aion/gen/dao/utils/EntityUtils");
+const EntityUtils = require("codbex-aion/gen/dao/utils/EntityUtils");
 
 let dao = daoApi.create({
 	table: "CODBEX_TIMESHEET",
@@ -14,14 +14,14 @@ let dao = daoApi.create({
 			autoIncrement: true,
 		},
  {
-			name: "ProjectId",
-			column: "TIMESHEET_PROJECTID",
+			name: "EmployeeId",
+			column: "TIMESHEET_EMPLOYEEID",
 			type: "INTEGER",
 			required: true
 		},
  {
-			name: "EmployeeId",
-			column: "TIMESHEET_EMPLOYEEID",
+			name: "ProjectId",
+			column: "TIMESHEET_PROJECTID",
 			type: "INTEGER",
 			required: true
 		},
@@ -124,5 +124,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion/Timesheets/Timesheet/" + operation).send(JSON.stringify(data));
+	producer.queue("codbex-aion/Timesheets/Timesheet/" + operation).send(JSON.stringify(data));
 }

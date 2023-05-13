@@ -1,5 +1,7 @@
 {
     "expression": "0 0 9,16 ? * MON",
-    "handler": "aion-ext/jobs/sendWeeklyApprovalReminder.js",
-    "description": "Send Weekly Timesheet Approval Reminder Job"
+    "handler": "codbex-aion-ext/jobs/sendWeeklyApprovalReminder.js",
+    "description": "Send Weekly Timesheet Approval Reminder Job",
+    "parameters": [],
+    "group": "codbex-aion"
 }

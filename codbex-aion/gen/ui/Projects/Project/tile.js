@@ -10,7 +10,7 @@ exports.getTile = function () {
         caption: "Manage entity Project",
         tooltip: "Project",
         // icon: "file-o",
-        location: "/services/web/aion/gen/ui/Projects/index.html",
+        location: "/services/web/codbex-aion/gen/ui/Projects/index.html",
         order: "100",
         groupOrder: "200"
     };

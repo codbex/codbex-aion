@@ -1,1 +1,1 @@
-{"module":"aion/gen/ui/Configurations/ProjectStatus/dialog-window/view.js","extensionPoint":"aion-dialog-window","description":"aion - Application Dialog Window"}
+{"module":"codbex-aion/gen/ui/Configurations/ProjectStatus/dialog-window/view.js","extensionPoint":"codbex-aion-dialog-window","description":"codbex-aion - Application Dialog Window"}

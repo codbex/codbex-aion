@@ -9,11 +9,11 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-var response = require("http/v4/response");
-var request = require("http/v4/request");
-var query = require("db/v4/query");
-var pdfDocuments = require("documents/v4/pdf");
-var { options, getFirstDayOfMonth, getLastDayOfMonth, toDate } = require("aion-ext/services/common/utilities");
+var response = require("http/response");
+var request = require("http/request");
+var query = require("db/query");
+var pdfDocuments = require("documents/pdf");
+var { options, getFirstDayOfMonth, getLastDayOfMonth, toDate } = require("codbex-aion-ext/services/common/utilities");
 
 let projectId = parseInt(request.getParameter('ProjectId'));
 let start = request.getParameter('Start');

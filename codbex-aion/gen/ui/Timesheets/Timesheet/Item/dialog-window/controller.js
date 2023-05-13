@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Timesheets.Item';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Timesheets.Item';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Timesheets/Item.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Timesheets/Item.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 

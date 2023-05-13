@@ -6,7 +6,7 @@
 const viewData = {
     id: "ProjectStatus-details",
     label: "ProjectStatus",
-    link: "/services/web/aion/gen/ui/Configurations/ProjectStatus/dialog-window/index.html"
+    link: "/services/web/codbex-aion/gen/ui/Configurations/ProjectStatus/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

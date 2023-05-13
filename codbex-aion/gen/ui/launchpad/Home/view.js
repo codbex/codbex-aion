@@ -4,11 +4,11 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "aion-home-launchpad",
+    id: "codbex-aion-home-launchpad",
     label: "Home Launchpad",
     factory: "frame",
     region: "center",
-    link: "/services/web/aion/gen/ui/launchpad/Home/index.html",
+    link: "/services/web/codbex-aion/gen/ui/launchpad/Home/index.html",
 };
 
 if (typeof exports !== 'undefined') {

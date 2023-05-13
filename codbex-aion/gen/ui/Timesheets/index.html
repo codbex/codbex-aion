@@ -1,5 +1,5 @@
 <!--
-  The technology platform used for project aion is Eclipse Dirigible (https://www.dirigible.io/).
+  The technology platform used for project codbex-aion is Eclipse Dirigible (https://www.dirigible.io/).
   All the source code is licensed under the Eclipse Public License - v 2.0 (https://www.eclipse.org/legal/epl-v20.html)
   and maintained at GitHub (https://github.com/eclipse/dirigible).
 -->
@@ -22,7 +22,7 @@
     </head>
 
     <body>
-        <ide-header menu-ext-id="aion-menu"></ide-header>
+        <ide-header menu-ext-id="codbex-aion-menu"></ide-header>
         <ide-container>
             <ide-layout views-layout-model="layoutModel"></ide-layout>
         </ide-container>
@@ -31,7 +31,7 @@
         <script type="text/javascript">
             angular.module('app', ['ngResource', 'ideLayout', 'ideUI'])
                 .constant('branding', {
-                    name: 'Timesheet Management Application',
+                    name: 'Timesheets Management Application',
                     brand: 'codbex',
                     brandUrl: 'https://codbex.com',
                     icons: {
@@ -42,9 +42,9 @@
                     logo: '/services/web/resources/images/dirigible.svg',
                 })
                 .constant('extensionPoint', {
-                    perspectives: "aion",
-                    views: "aion-view",
-                    dialogWindows: "aion-dialog-window"
+                    perspectives: "codbex-aion",
+                    views: "codbex-aion-view",
+                    dialogWindows: "codbex-aion-dialog-window"
                 })
                 .controller('ApplicationController', ["$scope", "messageHub", function ($scope, messageHub) {
 

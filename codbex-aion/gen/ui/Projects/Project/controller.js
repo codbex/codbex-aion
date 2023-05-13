@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Projects.Project';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Projects.Project';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Projects/Project.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Projects/Project.js";
 	}])
 	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', function ($scope, $http, messageHub, entityApi) {
 
@@ -142,7 +142,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.optionsEmployeeId = [];
 		$scope.optionsProjectStatusId = [];
 
-		$http.get("/services/js/aion/gen/api/Employees/Employee.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Employees/Employee.js").then(function (response) {
 			$scope.optionsEmployeeId = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -151,7 +151,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/aion/gen/api/Configurations/ProjectStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Configurations/ProjectStatus.js").then(function (response) {
 			$scope.optionsProjectStatusId = response.data.map(e => {
 				return {
 					value: e.Id,

@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Employees.Assignment';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Employees.Assignment';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Employees/Assignment.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Employees/Assignment.js";
 	}])
 	.controller('PageController', ['$scope', '$http', '$http', 'messageHub', 'entityApi', function ($scope, $http, $http, messageHub, entityApi) {
 
@@ -15,13 +15,13 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		resetPagination();
 
 		//-----------------Events-------------------//
-		messageHub.onDidReceiveMessage("aion.Employees.Employee.entitySelected", function (msg) {
+		messageHub.onDidReceiveMessage("codbex-aion.Employees.Employee.entitySelected", function (msg) {
 			resetPagination();
 			$scope.selectedMainEntityId = msg.data.selectedMainEntityId;
 			$scope.loadPage($scope.dataPage);
 		}, true);
 
-		messageHub.onDidReceiveMessage("aion.Employees.Employee.clearDetails", function (msg) {
+		messageHub.onDidReceiveMessage("codbex-aion.Employees.Employee.clearDetails", function (msg) {
 			$scope.$apply(function () {
 				resetPagination();
 				$scope.selectedMainEntityId = null;
@@ -151,7 +151,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.optionsProjectId = [];
 		$scope.optionsRole = [];
 
-		$http.get("/services/js/aion/gen/api/Employees/Employee.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Employees/Employee.js").then(function (response) {
 			$scope.optionsEmployeeId = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -160,7 +160,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/aion/gen/api/Projects/Project.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Projects/Project.js").then(function (response) {
 			$scope.optionsProjectId = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -169,7 +169,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/aion/gen/api/Configurations/Role.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Configurations/Role.js").then(function (response) {
 			$scope.optionsRole = response.data.map(e => {
 				return {
 					value: e.Id,

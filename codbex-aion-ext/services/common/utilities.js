@@ -74,7 +74,7 @@ const utilities = {
 
     settings: {
         maxHoursPerWeek: 40,
-        mailFrom: 'service@codbex.com'
+        mailFrom: 'office@codbex.com'
     }
 };
 

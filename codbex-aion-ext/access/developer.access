@@ -1,1 +1,20 @@
-{"constraints":[{"path":"/aion-ext/services/employee/","method":"*","roles":["Employee"],"scope":"HTTP"},{"method":"*","scope":"HTTP","path":"/aion-ext/ui/employee/","roles":["Employee"]}]}
+{
+    "constraints": [
+        {
+            "path": "/codbex-aion-ext/services/employee/",
+            "method": "*",
+            "roles": [
+                "Employee"
+            ],
+            "scope": "HTTP"
+        },
+        {
+            "method": "*",
+            "scope": "HTTP",
+            "path": "/codbex-aion-ext/ui/employee/",
+            "roles": [
+                "Employee"
+            ]
+        }
+    ]
+}

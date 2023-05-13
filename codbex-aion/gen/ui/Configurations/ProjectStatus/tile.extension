@@ -1,1 +1,1 @@
-{"module":"aion/gen/ui/Configurations/ProjectStatus/tile.js","extensionPoint":"aion-tile","description":"aion - Application Tile"}
+{"module":"codbex-aion/gen/ui/Configurations/ProjectStatus/tile.js","extensionPoint":"codbex-aion-tile","description":"codbex-aion - Application Tile"}

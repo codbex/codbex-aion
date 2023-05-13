@@ -6,7 +6,7 @@
 const viewData = {
     id: "Item-details",
     label: "Item",
-    link: "/services/web/aion/gen/ui/Timesheets/Timesheet/Item/dialog-window/index.html"
+    link: "/services/web/codbex-aion/gen/ui/Timesheets/Timesheet/Item/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

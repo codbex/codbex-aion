@@ -6,7 +6,7 @@
 const viewData = {
     id: "TaskStatus-details",
     label: "TaskStatus",
-    link: "/services/web/aion/gen/ui/Configurations/TaskStatus/dialog-window/index.html"
+    link: "/services/web/codbex-aion/gen/ui/Configurations/TaskStatus/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

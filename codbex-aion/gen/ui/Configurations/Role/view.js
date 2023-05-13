@@ -8,7 +8,7 @@ const viewData = {
     label: "Role",
     factory: "frame",
     region: "center",
-    link: "/services/web/aion/gen/ui/Configurations/Role/index.html",
+    link: "/services/web/codbex-aion/gen/ui/Configurations/Role/index.html",
 };
 
 if (typeof exports !== 'undefined') {

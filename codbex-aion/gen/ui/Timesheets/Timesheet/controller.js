@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Timesheets.Timesheet';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Timesheets.Timesheet';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Timesheets/Timesheet.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Timesheets/Timesheet.js";
 	}])
 	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', function ($scope, $http, messageHub, entityApi) {
 
@@ -83,8 +83,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("entitySelected", {
 				entity: entity,
 				selectedMainEntityId: entity.Id,
-				optionsProjectId: $scope.optionsProjectId,
 				optionsEmployeeId: $scope.optionsEmployeeId,
+				optionsProjectId: $scope.optionsProjectId,
 				optionsStatus: $scope.optionsStatus,
 			});
 		};
@@ -95,8 +95,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 			messageHub.postMessage("createEntity", {
 				entity: {},
-				optionsProjectId: $scope.optionsProjectId,
 				optionsEmployeeId: $scope.optionsEmployeeId,
+				optionsProjectId: $scope.optionsProjectId,
 				optionsStatus: $scope.optionsStatus,
 			});
 		};
@@ -105,8 +105,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.action = "update";
 			messageHub.postMessage("updateEntity", {
 				entity: $scope.selectedEntity,
-				optionsProjectId: $scope.optionsProjectId,
 				optionsEmployeeId: $scope.optionsEmployeeId,
+				optionsProjectId: $scope.optionsProjectId,
 				optionsStatus: $scope.optionsStatus,
 			});
 		};
@@ -142,20 +142,11 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		};
 
 		//----------------Dropdowns-----------------//
-		$scope.optionsProjectId = [];
 		$scope.optionsEmployeeId = [];
+		$scope.optionsProjectId = [];
 		$scope.optionsStatus = [];
 
-		$http.get("/services/js/aion/gen/api/Projects/Project.js").then(function (response) {
-			$scope.optionsProjectId = response.data.map(e => {
-				return {
-					value: e.Id,
-					text: e.Name
-				}
-			});
-		});
-
-		$http.get("/services/js/aion/gen/api/Employees/Employee.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Employees/Employee.js").then(function (response) {
 			$scope.optionsEmployeeId = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -164,7 +155,16 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/aion/gen/api/Configurations/TimesheetStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Projects/Project.js").then(function (response) {
+			$scope.optionsProjectId = response.data.map(e => {
+				return {
+					value: e.Id,
+					text: e.Name
+				}
+			});
+		});
+
+		$http.get("/services/js/codbex-aion/gen/api/Configurations/TimesheetStatus.js").then(function (response) {
 			$scope.optionsStatus = response.data.map(e => {
 				return {
 					value: e.Id,
@@ -172,18 +172,18 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 			});
 		});
-		$scope.optionsProjectIdValue = function (optionKey) {
-			for (let i = 0; i < $scope.optionsProjectId.length; i++) {
-				if ($scope.optionsProjectId[i].value === optionKey) {
-					return $scope.optionsProjectId[i].text;
-				}
-			}
-			return null;
-		};
 		$scope.optionsEmployeeIdValue = function (optionKey) {
 			for (let i = 0; i < $scope.optionsEmployeeId.length; i++) {
 				if ($scope.optionsEmployeeId[i].value === optionKey) {
 					return $scope.optionsEmployeeId[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionsProjectIdValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsProjectId.length; i++) {
+				if ($scope.optionsProjectId[i].value === optionKey) {
+					return $scope.optionsProjectId[i].text;
 				}
 			}
 			return null;

@@ -166,12 +166,12 @@
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "name": "TIMESHEET_PROJECTID"
+                        "name": "TIMESHEET_EMPLOYEEID"
                     },
                     {
                         "type": "INTEGER",
                         "length": 0,
-                        "name": "TIMESHEET_EMPLOYEEID"
+                        "name": "TIMESHEET_PROJECTID"
                     },
                     {
                         "type": "DATE",
@@ -378,15 +378,6 @@
                 "referencedColumns": "TASKSTATUS_ID"
             },
             {
-                "name": "Timesheet_Project",
-                "type": "foreignKey",
-                "table": "CODBEX_TIMESHEET",
-                "constraintName": "Timesheet_Project",
-                "columns": "TIMESHEET_PROJECTID",
-                "referencedTable": "CODBEX_PROJECT",
-                "referencedColumns": "PROJECT_ID"
-            },
-            {
                 "name": "Timesheet_Employee",
                 "type": "foreignKey",
                 "table": "CODBEX_TIMESHEET",
@@ -394,6 +385,15 @@
                 "columns": "TIMESHEET_EMPLOYEEID",
                 "referencedTable": "CODBEX_EMPLOYEE",
                 "referencedColumns": "EMPLOYEE_ID"
+            },
+            {
+                "name": "Timesheet_Project",
+                "type": "foreignKey",
+                "table": "CODBEX_TIMESHEET",
+                "constraintName": "Timesheet_Project",
+                "columns": "TIMESHEET_PROJECTID",
+                "referencedTable": "CODBEX_PROJECT",
+                "referencedColumns": "PROJECT_ID"
             },
             {
                 "name": "Timesheet_TimesheetStatus",

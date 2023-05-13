@@ -6,7 +6,7 @@ if (user.isInRole("Employee")) {
 } else if (user.isInRole("Manager") || user.isInRole("Developer")) {
     response.sendRedirect("/services/v4/web/aion-ext/ui/manager/");
 } else if (user.isInRole("Admin") || user.isInRole("Developer")) {
-    response.sendRedirect("/services/v4/web/aion-app/gen/");
+    response.sendRedirect("/services/v4/web/aion/gen/");
 } else if (user.isInRole("Developer") || user.isInRole("Operator")) {
     response.sendRedirect("/services/v4/web/ide/");
 } else {

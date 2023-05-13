@@ -58,63 +58,63 @@ angular.module('app')
 
             return {
                 getUser: function () {
-                    return httpGet('/services/v4/js/aion-ext/services/common/myuser.js');
+                    return httpGet('/services/js/codbex-aion-ext/services/common/myuser.js');
                 },
                 getEmployeeProjects: function () {
-                    return httpGet('/services/v4/js/aion-ext/services/employee/myprojects.js');
+                    return httpGet('/services/js/codbex-aion-ext/services/employee/myprojects.js');
                 },
                 getEmployeeProjectTasks: function (projectId) {
-                    return httpGet(`/services/v4/js/aion-ext/services/employee/mytasks.js?ProjectId=${projectId}`);
+                    return httpGet(`/services/js/codbex-aion-ext/services/employee/mytasks.js?ProjectId=${projectId}`);
                 },
                 getEmployeeTimesheets: function (projectId, statusIds = []) {
                     const statusParams = statusIds.map(x => `&StatusId=${x}`).join('');
-                    return httpGet(`/services/v4/js/aion-ext/services/employee/mytimesheets.js?ProjectId=${projectId}${statusParams}`);
+                    return httpGet(`/services/js/codbex-aion-ext/services/employee/mytimesheets.js?ProjectId=${projectId}${statusParams}`);
                 },
                 getManagerProjects: function () {
-                    return httpGet('/services/v4/js/aion-ext/services/manager/myprojects.js');
+                    return httpGet('/services/js/codbex-aion-ext/services/manager/myprojects.js');
                 },
                 getManagerProjectTasks: function (projectId) {
-                    return httpGet(`/services/v4/js/aion-ext/services/manager/mytasks.js?ProjectId=${projectId}`);
+                    return httpGet(`/services/js/codbex-aion-ext/services/manager/mytasks.js?ProjectId=${projectId}`);
                 },
                 createProjectTask: function (task) {
-                    return httpPost('/services/v4/js/aion-app/gen/api/Projects/Task.js', task);
+                    return httpPost('/services/js/codbex-aion/gen/api/Projects/Task.js', task);
                 },
                 updateProjectTask: function (id, task) {
-                    return httpPut(`/services/v4/js/aion-app/gen/api/Projects/Task.js/${id}`, task);
+                    return httpPut(`/services/js/codbex-aion/gen/api/Projects/Task.js/${id}`, task);
                 },
                 deleteProjectTask: function (id) {
-                    return httpDelete(`/services/v4/js/aion-app/gen/api/Projects/Task.js/${id}`);
+                    return httpDelete(`/services/js/codbex-aion/gen/api/Projects/Task.js/${id}`);
                 },
                 getManagerTimesheets: function (projectId, statusIds = []) {
                     const statusParams = statusIds.map(x => `&StatusId=${x}`).join('');
-                    return httpGet(`/services/v4/js/aion-ext/services/manager/mytimesheets.js?ProjectId=${projectId}${statusParams}`);
+                    return httpGet(`/services/js/codbex-aion-ext/services/manager/mytimesheets.js?ProjectId=${projectId}${statusParams}`);
                 },
                 createTimesheet: function (timesheet) {
-                    return httpPost('/services/v4/js/aion-app/gen/api/Timesheets/Timesheet.js', timesheet);
+                    return httpPost('/services/js/codbex-aion/gen/api/Timesheets/Timesheet.js', timesheet);
                 },
                 updateTimesheet: function (id, timesheet) {
-                    return httpPut(`/services/v4/js/aion-app/gen/api/Timesheets/Timesheet.js/${id}`, timesheet);
+                    return httpPut(`/services/js/codbex-aion/gen/api/Timesheets/Timesheet.js/${id}`, timesheet);
                 },
                 deleteTimesheet: function (id) {
-                    return httpDelete(`/services/v4/js/aion-app/gen/api/Timesheets/Timesheet.js/${id}`);
+                    return httpDelete(`/services/js/codbex-aion-app/gen/api/Timesheets/Timesheet.js/${id}`);
                 },
                 createTimesheetItem: function (timesheetItem) {
-                    return httpPost('/services/v4/js/aion-app/gen/api/Timesheets/Item.js', timesheetItem);
+                    return httpPost('/services/js/codbex-aion/gen/api/Timesheets/Item.js', timesheetItem);
                 },
                 updateTimesheetItem: function (id, timesheetItem) {
-                    return httpPut(`/services/v4/js/aion-app/gen/api/Timesheets/Item.js/${id}`, timesheetItem);
+                    return httpPut(`/services/js/codbex-aion/gen/api/Timesheets/Item.js/${id}`, timesheetItem);
                 },
                 deleteTimesheetItem: function (id) {
-                    return httpDelete(`/services/v4/js/aion-app/gen/api/Timesheets/Item.js/${id}`);
+                    return httpDelete(`/services/js/codbex-aion/gen/api/Timesheets/Item.js/${id}`);
                 },
                 approveTimesheet: function (id) {
-                    return httpPost(`/services/v4/js/aion-ext/services/manager/approvetimesheet.js/${id}`);
+                    return httpPost(`/services/js/codbex-aion-ext/services/manager/approvetimesheet.js/${id}`);
                 },
                 rejectTimesheet: function (id, reason) {
-                    return httpPost(`/services/v4/js/aion-ext/services/manager/rejecttimesheet.js/${id}`, { reason });
+                    return httpPost(`/services/js/codbex-aion-ext/services/manager/rejecttimesheet.js/${id}`, { reason });
                 },
                 getTaskStatuses: function () {
-                    return httpGet('/services/v4/js/aion-app/gen/api/Configurations/TaskStatus.js');
+                    return httpGet('/services/js/codbex-aion/gen/api/Configurations/TaskStatus.js');
                 }
             }
         }]

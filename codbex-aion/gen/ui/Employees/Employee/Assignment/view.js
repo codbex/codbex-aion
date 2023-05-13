@@ -8,7 +8,7 @@ const viewData = {
     label: "Assignment",
     factory: "frame",
     region: "bottom",
-    link: "/services/web/aion/gen/ui/Employees/Employee/Assignment/index.html",
+    link: "/services/web/codbex-aion/gen/ui/Employees/Employee/Assignment/index.html",
 };
 
 if (typeof exports !== 'undefined') {

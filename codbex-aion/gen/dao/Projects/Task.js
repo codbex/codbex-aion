@@ -107,5 +107,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion/Projects/Task/" + operation).send(JSON.stringify(data));
+	producer.queue("codbex-aion/Projects/Task/" + operation).send(JSON.stringify(data));
 }

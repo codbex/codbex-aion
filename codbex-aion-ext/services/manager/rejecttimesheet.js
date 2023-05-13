@@ -9,12 +9,12 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-var rs = require("http/v4/rs");
-var dao = require("aion-app/gen/dao/Timesheets/Timesheet");
-var http = require("aion-app/gen/api/utils/http");
-var query = require("db/v4/query");
-var mail = require("mail/v4/client");
-const { settings, dateToString, TimesheetStatus } = require("aion-ext/services/common/utilities");
+var rs = require("http/rs");
+var dao = require("codbex-aion/gen/dao/Timesheets/Timesheet");
+var http = require("codbex-aion/gen/api/utils/http");
+var query = require("db/query");
+var mail = require("mail/client");
+const { settings, dateToString, TimesheetStatus } = require("codbex-aion-ext/services/common/utilities");
 
 rs.service()
     .resource("")

@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Configurations.Role';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Configurations.Role';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Configurations/Role.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Configurations/Role.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 

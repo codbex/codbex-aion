@@ -10,7 +10,7 @@ exports.getTile = function () {
         caption: "Manage entity TimesheetStatus",
         tooltip: "TimesheetStatus",
         // icon: "file-o",
-        location: "/services/web/aion/gen/ui/Configurations/index.html",
+        location: "/services/web/codbex-aion/gen/ui/Configurations/index.html",
         order: "100",
         groupOrder: "100"
     };

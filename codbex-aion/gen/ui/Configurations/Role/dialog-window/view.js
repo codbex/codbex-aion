@@ -6,7 +6,7 @@
 const viewData = {
     id: "Role-details",
     label: "Role",
-    link: "/services/web/aion/gen/ui/Configurations/Role/dialog-window/index.html"
+    link: "/services/web/codbex-aion/gen/ui/Configurations/Role/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

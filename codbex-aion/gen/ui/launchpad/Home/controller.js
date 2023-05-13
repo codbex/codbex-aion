@@ -5,10 +5,10 @@
  */
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.launchpad.Home';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.launchpad.Home';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/ui/launchpad/Home/tiles.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/ui/launchpad/Home/tiles.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 

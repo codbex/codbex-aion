@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: "Employees",
 	name: "Employees",
-	link: "/services/web/aion/gen/ui/Employees/index.html",
+	link: "/services/web/codbex-aion/gen/ui/Employees/index.html",
 	order: "100",
 	icon: "/services/web/resources/unicons/user.svg",
 };

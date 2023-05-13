@@ -1,1 +1,1 @@
-{"module":"aion/gen/ui/Configurations/ProjectStatus/view.js","extensionPoint":"aion-view","description":"aion - Application View"}
+{"module":"codbex-aion/gen/ui/Configurations/ProjectStatus/view.js","extensionPoint":"codbex-aion-view","description":"codbex-aion - Application View"}

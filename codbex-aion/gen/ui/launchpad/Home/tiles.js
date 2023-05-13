@@ -8,7 +8,7 @@ const extensions = require("extensions/extensions");
 
 let tiles = {};
 
-let tileExtensions = extensions.getExtensions("aion-tile");
+let tileExtensions = extensions.getExtensions("codbex-aion-tile");
 for (let i = 0; tileExtensions !== null && i < tileExtensions.length; i++) {
     let tileExtension = require(tileExtensions[i]);
     let tile = tileExtension.getTile();

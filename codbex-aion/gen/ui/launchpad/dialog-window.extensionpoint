@@ -1,4 +1,4 @@
 {
-    "name": "aion-dialog-window",
-    "description": "aion - Extension Point for the Application Dialog Window Providers"
+    "name": "codbex-aion-dialog-window",
+    "description": "codbex-aion - Extension Point for the Application Dialog Window Providers"
 }

@@ -1,7 +1,7 @@
 const query = require("db/query");
 const producer = require("messaging/producer");
 const daoApi = require("db/dao");
-const EntityUtils = require("aion/gen/dao/utils/EntityUtils");
+const EntityUtils = require("codbex-aion/gen/dao/utils/EntityUtils");
 
 let dao = daoApi.create({
 	table: "CODBEX_PROJECT",
@@ -119,5 +119,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion/Projects/Project/" + operation).send(JSON.stringify(data));
+	producer.queue("codbex-aion/Projects/Project/" + operation).send(JSON.stringify(data));
 }

@@ -1,5 +1,7 @@
 {
     "expression": "0 0 9,16 ? * FRI",
-    "handler": "aion-ext/jobs/sendWeeklyReminder.js",
-    "description": "Send Weekly Timesheet Reminder Job"
+    "handler": "codbex-aion-ext/jobs/sendWeeklyReminder.js",
+    "description": "Send Weekly Timesheet Reminder Job",
+    "parameters": [],
+    "group": "codbex-aion"
 }

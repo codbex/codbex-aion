@@ -36,9 +36,9 @@
 						navigated="next.Id === selectedEntity.Id"
 						ng-click="action == 'select' ? selectEntity(next) : ''">
 						<fd-list-content
-							item-title="{{optionsProjectIdValue(next.ProjectId)}}">
+							item-title="{{optionsEmployeeIdValue(next.EmployeeId)}}">
 							<fd-list-byline dg-align="left">
-								{{optionsEmployeeIdValue(next.EmployeeId)}} |
+								{{optionsProjectIdValue(next.ProjectId)}} |
 								{{next.Start | date: "dd/MMM/yyyy"}} |
 								{{next.End | date: "dd/MMM/yyyy"}} |
 								{{optionsStatusValue(next.Status)}}

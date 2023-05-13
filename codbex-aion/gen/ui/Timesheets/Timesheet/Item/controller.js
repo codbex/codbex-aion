@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Timesheets.Item';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Timesheets.Item';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Timesheets/Item.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Timesheets/Item.js";
 	}])
 	.controller('PageController', ['$scope', '$http', '$http', 'messageHub', 'entityApi', function ($scope, $http, $http, messageHub, entityApi) {
 
@@ -15,13 +15,13 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		resetPagination();
 
 		//-----------------Events-------------------//
-		messageHub.onDidReceiveMessage("aion.Timesheets.Timesheet.entitySelected", function (msg) {
+		messageHub.onDidReceiveMessage("codbex-aion.Timesheets.Timesheet.entitySelected", function (msg) {
 			resetPagination();
 			$scope.selectedMainEntityId = msg.data.selectedMainEntityId;
 			$scope.loadPage($scope.dataPage);
 		}, true);
 
-		messageHub.onDidReceiveMessage("aion.Timesheets.Timesheet.clearDetails", function (msg) {
+		messageHub.onDidReceiveMessage("codbex-aion.Timesheets.Timesheet.clearDetails", function (msg) {
 			$scope.$apply(function () {
 				resetPagination();
 				$scope.selectedMainEntityId = null;
@@ -140,7 +140,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//----------------Dropdowns-----------------//
 		$scope.optionsTaskId = [];
 
-		$http.get("/services/js/aion/gen/api/Projects/Task.js").then(function (response) {
+		$http.get("/services/js/codbex-aion/gen/api/Projects/Task.js").then(function (response) {
 			$scope.optionsTaskId = response.data.map(e => {
 				return {
 					value: e.Id,

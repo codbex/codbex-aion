@@ -9,10 +9,10 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-var query = require("db/v4/query");
-var request = require("http/v4/request");
-var response = require("http/v4/response");
-var user = require("security/v4/user");
+var query = require("db/query");
+var request = require("http/request");
+var response = require("http/response");
+var user = require("security/user");
 
 var sql = 'SELECT "TASK_ID", "TASK_NAME" FROM "AION_TASK" WHERE "TASK_PROJECTID" = ? AND "TASK_TASKSTATUSID" = 1';
 

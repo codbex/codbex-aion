@@ -9,9 +9,9 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-var query = require("db/v4/query");
-var response = require("http/v4/response");
-var user = require("security/v4/user");
+var query = require("db/query");
+var response = require("http/response");
+var user = require("security/user");
 
 var sql = 'SELECT "EMPLOYEE_ID", "EMPLOYEE_NAME", "EMPLOYEE_EMAIL" FROM "AION_EMPLOYEE" WHERE "EMPLOYEE_EMAIL" = ?';
 var resultset = query.execute(sql, [user.getName()]);

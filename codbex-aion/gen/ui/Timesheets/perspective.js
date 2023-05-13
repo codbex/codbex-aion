@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: "Timesheets",
 	name: "Timesheets",
-	link: "/services/web/aion/gen/ui/Timesheets/index.html",
+	link: "/services/web/codbex-aion/gen/ui/Timesheets/index.html",
 	order: "300",
 	icon: "/services/web/resources/unicons/calender.svg",
 };

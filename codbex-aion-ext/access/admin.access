@@ -1,1 +1,20 @@
-{"constraints":[{"path":"/aion-app/gen/index.html","method":"*","roles":["Admin"],"scope":"HTTP"},{"method":"*","scope":"HTTP","path":"/aion-app/gen/ui/","roles":["Admin"]}]}
+{
+    "constraints": [
+        {
+            "path": "/codbex-aion/gen/index.html",
+            "method": "*",
+            "roles": [
+                "Admin"
+            ],
+            "scope": "HTTP"
+        },
+        {
+            "method": "*",
+            "scope": "HTTP",
+            "path": "/codbex-aion-ext/ui/employee/",
+            "roles": [
+                "Employee"
+            ]
+        }
+    ]
+}

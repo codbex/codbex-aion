@@ -1,6 +1,6 @@
 const rs = require("http/rs");
-const dao = require("aion/gen/dao/Timesheets/Timesheet");
-const http = require("aion/gen/api/utils/http");
+const dao = require("codbex-aion/gen/dao/Timesheets/Timesheet");
+const http = require("codbex-aion/gen/api/utils/http");
 
 rs.service()
 	.resource("")
@@ -60,7 +60,7 @@ rs.service()
 		.post(function(ctx, request, response) {
 			let entity = request.getJSON();
 			entity.Id = dao.create(entity);
-			response.setHeader("Content-Location", "/services/js/aion/gen/api/Timesheet.js/" + entity.Id);
+			response.setHeader("Content-Location", "/services/js/codbex-aion/gen/api/Timesheet.js/" + entity.Id);
 			http.sendResponseCreated(entity);
 		})
 		.produces(["application/json"])

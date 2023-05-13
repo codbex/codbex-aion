@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: "Configurations",
 	name: "Configurations",
-	link: "/services/web/aion/gen/ui/Configurations/index.html",
+	link: "/services/web/codbex-aion/gen/ui/Configurations/index.html",
 	order: "100",
 	icon: "/services/web/resources/unicons/copy.svg",
 };

@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'aion.Timesheets.Timesheet';
+		messageHubProvider.eventIdPrefix = 'codbex-aion.Timesheets.Timesheet';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/aion/gen/api/Timesheets/Timesheet.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-aion/gen/api/Timesheets/Timesheet.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 
@@ -21,8 +21,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.$apply(function () {
 				$scope.entity = {};
 				$scope.formErrors = {};
-				$scope.optionsProjectId = [];
 				$scope.optionsEmployeeId = [];
+				$scope.optionsProjectId = [];
 				$scope.optionsStatus = [];
 				$scope.action = 'select';
 			});
@@ -37,8 +37,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 					msg.data.entity.End = new Date(msg.data.entity.End);
 				}
 				$scope.entity = msg.data.entity;
-				$scope.optionsProjectId = msg.data.optionsProjectId;
 				$scope.optionsEmployeeId = msg.data.optionsEmployeeId;
+				$scope.optionsProjectId = msg.data.optionsProjectId;
 				$scope.optionsStatus = msg.data.optionsStatus;
 				$scope.action = 'select';
 			});
@@ -47,14 +47,14 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("createEntity", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
-				$scope.optionsProjectId = msg.data.optionsProjectId;
 				$scope.optionsEmployeeId = msg.data.optionsEmployeeId;
+				$scope.optionsProjectId = msg.data.optionsProjectId;
 				$scope.optionsStatus = msg.data.optionsStatus;
 				$scope.action = 'create';
 				// Set Errors for required fields only
 				$scope.formErrors = {
-					ProjectId: true,
 					EmployeeId: true,
+					ProjectId: true,
 					Start: true,
 					End: true,
 					Status: true,
@@ -71,8 +71,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 					msg.data.entity.End = new Date(msg.data.entity.End);
 				}
 				$scope.entity = msg.data.entity;
-				$scope.optionsProjectId = msg.data.optionsProjectId;
 				$scope.optionsEmployeeId = msg.data.optionsEmployeeId;
+				$scope.optionsProjectId = msg.data.optionsProjectId;
 				$scope.optionsStatus = msg.data.optionsStatus;
 				$scope.action = 'update';
 			});

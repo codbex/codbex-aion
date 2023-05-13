@@ -8,7 +8,7 @@ const viewData = {
     label: "Timesheet",
     factory: "frame",
     region: "center",
-    link: "/services/web/aion/gen/ui/Timesheets/Timesheet/main-details/index.html",
+    link: "/services/web/codbex-aion/gen/ui/Timesheets/Timesheet/main-details/index.html",
 };
 
 if (typeof exports !== 'undefined') {

@@ -1,1 +1,1 @@
-{"module":"aion/gen/ui/launchpad/menu-help.js","extensionPoint":"aion-menu","description":"aion - Application Menu"}
+{"module":"codbex-aion/gen/ui/launchpad/menu-help.js","extensionPoint":"codbex-aion-menu","description":"codbex-aion - Application Menu"}

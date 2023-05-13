@@ -1,4 +1,4 @@
 {
-    "name": "aion-tile",
-    "description": "aion - Extension Point for the Application Tile Providers"
+    "name": "codbex-aion-tile",
+    "description": "codbex-aion - Extension Point for the Application Tile Providers"
 }

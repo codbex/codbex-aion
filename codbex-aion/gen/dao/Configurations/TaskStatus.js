@@ -83,5 +83,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("aion/Configurations/TaskStatus/" + operation).send(JSON.stringify(data));
+	producer.queue("codbex-aion/Configurations/TaskStatus/" + operation).send(JSON.stringify(data));
 }

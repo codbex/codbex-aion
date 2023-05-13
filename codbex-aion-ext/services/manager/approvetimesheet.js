@@ -9,10 +9,10 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-let rs = require("http/v4/rs");
-let dao = require("aion-app/gen/dao/Timesheets/Timesheet");
-let http = require("aion-app/gen/api/utils/http");
-let { TimesheetStatus } = require("aion-ext/services/common/utilities");
+let rs = require("http/rs");
+let dao = require("codbex-aion/gen/dao/Timesheets/Timesheet");
+let http = require("codbex-aion/gen/api/utils/http");
+let { TimesheetStatus } = require("codbex-aion-ext/services/common/utilities");
 
 rs.service()
     .resource("")
