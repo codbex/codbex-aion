@@ -6,7 +6,7 @@ Timesheets Management Application
 
 ![model](images/aion-model.png)
 
-## Administration Application
+## Administrative Application
 
 ![admin](images/aion-admin.png)
 
