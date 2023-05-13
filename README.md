@@ -6,9 +6,25 @@ Timesheets Management Application
 
 ![model](images/aion-model.png)
 
-## Application
+## Administration Application
 
-![model](images/aion-app.png)
+![admin](images/aion-admin.png)
+
+## Employee Portal
+
+![employee](images/aion-employee.png)
+
+## Employee Fill-out Timesheet
+
+![timesheet](images/aion-employee-timesheet.png)
+
+## Manager Portal
+
+![manager](images/aion-manager.png)
+
+## Manager Generate Report
+
+![report](images/aion-generate-report.png)
 
 ## Users & Roles
 
