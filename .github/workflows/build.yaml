@@ -14,11 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
-#-----------------Publish Docker Images-------------------#
-
-      - name: Docker Login
-        run: docker login ${{secrets.DOCKER_REGISTRY}} -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-      - name: Docker Image
+      - name: Build and Push Docker Image
         run: |
-          docker build . -t ${{secrets.DOCKER_REGISTRY}}/codbex/codbex-aion:latest
-          docker push ${{secrets.DOCKER_REGISTRY}}/codbex/codbex-aion:latest
+          docker buildx create --name codbex-builder
+          docker buildx use codbex-builder
+          docker buildx build --tag codbex-aion -o type=image --platform=linux/arm64,linux/amd64 .
+          docker login ghcr.io -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+          docker buildx build --push --tag ghcr.io/codbex/codbex-aion:latest -o type=image --platform=linux/arm64,linux/amd64 .
