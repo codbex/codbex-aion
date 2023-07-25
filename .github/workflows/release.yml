@@ -39,7 +39,7 @@ jobs:
         files: |
           LICENSE
         body: |
-          ## Codbex Aion - ${{ github.event.inputs.releaseVersion }}
+          ## codbex-aion - ${{ github.event.inputs.releaseVersion }}
 
           Timesheets Management Application
           
