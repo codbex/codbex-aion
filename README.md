@@ -2,6 +2,13 @@
 
 Timesheets Management Application
 
+## Access Points
+
+- [{host}/services/web/ide/](http://localhost:8080/services/web/ide/) - Web IDE
+- [{host}/services/web/codbex-aion/gen/](http://localhost:8080/services/web/codbex-aion/gen/) - Admin Panel
+- [{host}/services/web/codbex-aion-ext/ui/employee/](http://localhost:8080/services/web/codbex-aion-ext/ui/employee/) - Employee Dashboard
+- [{host}/services/web/codbex-aion-ext/ui/manager/](http://localhost:8080/services/web/codbex-aion-ext/ui/manager/) - Manager Dashboard
+
 ## Model
 
 ![model](images/aion-model.png)
