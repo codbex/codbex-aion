@@ -24,7 +24,7 @@ jobs:
         docker buildx create --name codbex-builder
         docker buildx use codbex-builder
         docker buildx build --tag codbex-aion -o type=image --platform=linux/arm64,linux/amd64 .
-        docker login ghcr.io -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+        docker login ghcr.io -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
         docker buildx build --push --tag ghcr.io/codbex/codbex-aion:${{ github.event.inputs.releaseVersion }} -o type=image --platform=linux/arm64,linux/amd64 .
 
     - name: "Create Release"
