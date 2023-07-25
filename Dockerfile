@@ -5,6 +5,6 @@ FROM ghcr.io/codbex/codbex-gaia:latest
 
 COPY codbex-aion target/dirigible/repository/root/registry/public/codbex-aion
 COPY codbex-aion-data target/dirigible/repository/root/registry/public/codbex-aion-data
-COPY codbex-ext target/dirigible/repository/root/registry/public/codbex-ext
+COPY codbex-aion-ext target/dirigible/repository/root/registry/public/codbex-aion-ext
 
 ENV DIRIGIBLE_HOME_URL=/services/web/codbex-aion/gen/index.html
