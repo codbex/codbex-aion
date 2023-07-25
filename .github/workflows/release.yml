@@ -58,16 +58,3 @@ jobs:
           ## Codbex Aion - ${{ env.AION_VERSION }}
 
           Timesheets Management Application
-
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: ${{ secrets.GKE_SA_KEY }}
-
-    - uses: google-github-actions/get-gke-credentials@v1
-      with:
-        cluster_name: ${{ secrets.GKE_CLUSTER }}
-        location: ${{secrets.GKE_LOCATION}}
-
-    - name: "Update Deployment"
-      run: kubectl -n ${{ secrets.GKE_NAMESPACE }} set image deployment/${{ secrets.GKE_DEPLOY }} dirigible=ghcr.io/codbex/codbex-aion-keycloack:${{ env.AION_VERSION }}
