@@ -14,47 +14,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v3
       with:
-        token: ${{ secrets.GH_TOKEN }}
         fetch-depth: 0
 
-    - name: "Configure Docker: QEMU"
-      uses: docker/setup-qemu-action@v2
-      with:
-        platforms: amd64,arm64
-
-    - name: "Configure Docker: Buildx"
-      uses: docker/setup-buildx-action@v2
-      with:
-        install: true
-
-    - name: "Configure Docker: Multi-Builder Buildx"
-      run: docker buildx create --use --name multi-builder --platform linux/arm64,linux/amd64
-
-    - name: "Set Aion Version"
-      run: echo AION_VERSION=${{ github.event.inputs.releaseVersion }}  >> $GITHUB_ENV
-
-    - name: "Docker: Login"
-      run: docker login ${{secrets.DOCKER_REGISTRY}} -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-
-    - name: "Docker: Push Aion"
+    - name: Build and Push Docker Image
       run: |
-        docker build --load -t ghcr.io/codbex/codbex-aion:${{ env.AION_VERSION }} .
-        docker push ghcr.io/codbex/codbex-aion:${{ env.AION_VERSION }}
+        docker buildx create --name codbex-builder
+        docker buildx use codbex-builder
+        docker buildx build --tag codbex-aion -o type=image --platform=linux/arm64,linux/amd64 .
+        docker login ghcr.io -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+        docker buildx build --push --tag ghcr.io/codbex/codbex-aion:${{ github.event.inputs.releaseVersion }} -o type=image --platform=linux/arm64,linux/amd64 .
 
     - name: "Create Release"
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: v${{ env.AION_VERSION }}
-        name: ${{ env.AION_VERSION }}
+        tag_name: v${{ github.event.inputs.releaseVersion }}
+        name: ${{ github.event.inputs.releaseVersion }}
         draft: false
         prerelease: false
         files: |
           LICENSE
         body: |
-          ## Codbex Aion - ${{ env.AION_VERSION }}
+          ## Codbex Aion - ${{ github.event.inputs.releaseVersion }}
 
           Timesheets Management Application
+          
+          ```
+          docker run --name codbex-aion \
+          --rm -p 8080:8080 -p 8081:8081 \
+          ghcr.io/codbex/codbex-aion:${{ github.event.inputs.releaseVersion }}
+          ```
