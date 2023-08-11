@@ -10,6 +10,4 @@ jobs:
     uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
     with:
       application-name: codbex-aion
-      docker-user: ${{ secrets.DOCKER_USERNAME }}
-      docker-password: ${{ secrets.DOCKER_PASSWORD }}
     secrets: inherit
