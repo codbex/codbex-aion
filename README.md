@@ -58,9 +58,9 @@ For local test & development use the following `tomcat-users.xml`:
 ```
 
 The `codbex-aion` application roles are:
-- Employee
-- Manager
-- Admin
+- `Employee`
+- `Manager`
+- `Admin`
 
 The `Eclipse Dirigible` roles are:
 - Developer
