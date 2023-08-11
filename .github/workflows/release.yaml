@@ -17,7 +17,7 @@ jobs:
       application-name: codbex-aion
       release-version: ${{ inputs.release-version }}
       release-content: |
-        ## codbex-aion - ${{ github.event.inputs.release-version }}
+        ## codbex-aion - ${{ inputs.release-version }}
   
         Timesheets Management Application
   
