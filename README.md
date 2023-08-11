@@ -57,13 +57,13 @@ For local test & development use the following `tomcat-users.xml`:
 </tomcat-users>
 ```
 
-The `codbex-aion` application roles are:
+The **codbex-aion** application roles are:
 - `Employee`
 - `Manager`
 - `Admin`
 
-The `Eclipse Dirigible` roles are:
-- Developer
-- Operator
+The **Eclipse Dirigible** roles are:
+- `Developer`
+- `Operator`
 
 The `Everyone` role should be assigned to each user.
