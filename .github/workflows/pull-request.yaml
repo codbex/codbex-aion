@@ -7,7 +7,7 @@ on:
 
 jobs:
   main:
-    uses: codbex/codbex-infra/.github/workflows/pull-request.yaml@main
+    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@main
     with:
       application-name: codbex-aion
     secrets: inherit
